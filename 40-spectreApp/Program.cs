@@ -16,7 +16,6 @@ var table = new Table();
 table.AddColumn("Nome");
 table.AddColumn("Soprannome");
 table.AddColumn("Cognome");
-
 table.AddColumn("Anno di nascita");
 
 
@@ -27,7 +26,7 @@ var partecipanti = new Dictionary<(string, string), (string, int)>{   // Diction
 };
 
 foreach(var partecipante in partecipanti){
-    table.AddRow(partecipante.Key.Item1,partecipante.Key.Item2, partecipante.Value.Item1, partecipante.Value.Item2.ToString());
+    table.AddRow(partecipante.Key.Item1, partecipante.Key.Item2, partecipante.Value.Item1, partecipante.Value.Item2.ToString());
 }
 
 AnsiConsole.Write(table);
