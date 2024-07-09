@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "primaEsercitazione", "prima
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "secondaEsercitazione", "secondaEsercitazione\secondaEsercitazione.csproj", "{85BD3D9E-29D9-4F4E-9A50-5AD84AD4BDE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "40-spectreApp", "40-spectreApp\40-spectreApp.csproj", "{B9C2FBD1-7399-4048-BEF9-1707A09A1715}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{85BD3D9E-29D9-4F4E-9A50-5AD84AD4BDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85BD3D9E-29D9-4F4E-9A50-5AD84AD4BDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85BD3D9E-29D9-4F4E-9A50-5AD84AD4BDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C2FBD1-7399-4048-BEF9-1707A09A1715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C2FBD1-7399-4048-BEF9-1707A09A1715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C2FBD1-7399-4048-BEF9-1707A09A1715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C2FBD1-7399-4048-BEF9-1707A09A1715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
