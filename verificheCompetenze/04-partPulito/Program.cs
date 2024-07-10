@@ -17,10 +17,12 @@ do
     Console.WriteLine("8. Esci");
     Console.Write("Scelta: ");
 
-    scelta = Convert.ToInt32(Console.ReadLine());
-
-    //sceltaC = Console.ReadKey();
-
+    try{
+        scelta = Convert.ToInt32(Console.ReadLine());
+    }catch{
+        Console.WriteLine("La scelta non è valida");
+        break;
+    }
     
 
     switch (scelta)
