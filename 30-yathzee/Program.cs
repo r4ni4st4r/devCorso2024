@@ -8,12 +8,14 @@
 - [ ] creare la logica di assegnazione del punteggio e visualizzarlo
 
 */
+
 string nome;
 int[] lancio = new int[5];
-//List<int> points = new List<int>();
 int points=0;
 
 Random dado = new Random();
+
+Console.Clear();
 
 void StampaLancio(){
     for(int i=0; i<5; i++)
@@ -52,8 +54,8 @@ for (int i=0; i<5; i++) {
         }
     }
 
-    if(pointsTemp>points)
+    if(pointsTemp>=points)
         points = pointsTemp;
 }
 
-Console.WriteLine($"I tuoi punti sono {points}");
+Console.WriteLine($"I tuoi punti sono {points-1}");
