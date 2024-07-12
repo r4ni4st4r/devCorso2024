@@ -37,24 +37,23 @@ for(int i=0; i<5; i++){
     if(nome !="y"){
         lancio[i] = dado.Next(1,7);
     }
-    if(nome =="x"){
+    if(nome == "x"){
         break;
     }
 }
 
 StampaLancio();
 
-
 for (int i=0; i<5; i++) {
-    int pointsTemp=0;
+    int pointsTemp = 0;
 
     for(int j=0; j<5; j++){
-        if(lancio[i]==lancio[j]){
+        if(lancio[i] == lancio[j]){
             pointsTemp++;
         }
     }
 
-    if(pointsTemp>=points)
+    if(pointsTemp >= points)
         points = pointsTemp;
 }
 

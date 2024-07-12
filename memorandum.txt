@@ -3,3 +3,5 @@ https://mermaid.js.org/
 https://www.jetbrains.com/lp/devecosystem-2023/
 
 https://www.nuget.org/
+
+https://spectreconsole.net/
