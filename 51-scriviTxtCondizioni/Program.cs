@@ -9,6 +9,6 @@ string temp = lines[random.Next(lines.Length)];
 Console.WriteLine(temp);
 
 if (!File.Exists(secondPath))
-    File.Create(secondPath);
+    File.Create(secondPath).Close();
 
 File.AppendAllText(secondPath, temp + "\n");

@@ -13,8 +13,9 @@ if (!File.Exists(secondPath)){
     File.AppendAllText(secondPath, temp + "\n");
 }else{
     string[] secondLines = File.ReadAllLines(secondPath);
+
     if(!secondLines.Contains<string>(temp))
         File.AppendAllText(secondPath, temp + "\n");
+    else
+        Console.WriteLine("Il file contiene già questo nome!");
 }
-
-

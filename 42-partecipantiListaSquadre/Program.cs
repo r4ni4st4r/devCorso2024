@@ -1,4 +1,4 @@
-﻿﻿// versione con console clear in modo da mantenere il menu nella stessa posizione dopo ogni scelta 
+﻿// versione con console clear in modo da mantenere il menu nella stessa posizione dopo ogni scelta 
 
 List<string> partecipanti = new List<string>();
 
@@ -25,6 +25,8 @@ do
     //squadra1.clear();
     //squadra2.clear();
 
+    int ciao;
+
     scelta = Convert.ToInt32(Console.ReadLine());
 
     switch (scelta)
@@ -34,7 +36,7 @@ do
             nome = Console.ReadLine();
             partecipanti.Add(nome);
             break;
-        case 2:
+        case 2: 
             Console.WriteLine("Elenco partecipanti:");
             foreach (string partecipante in partecipanti)
             {
@@ -140,12 +142,14 @@ do
             }
 
             Console.WriteLine("Elenco squadra 1:");
+
             foreach (string s1 in squadra1)
             {
                 Console.WriteLine(s1);
             }
 
             Console.WriteLine("Elenco squadra 2:");
+
             foreach (string s2 in squadra2)
             {
                 Console.WriteLine(s2);
@@ -179,24 +183,30 @@ do
             while(partecipanti.Count > 0){
                 int index = random.Next(partecipanti.Count);
                 string partecipante = partecipanti[index];
+
                 partecipanti.RemoveAt(index);
+
                 if(squadra1Random.Count<squadra2Random.Count){
                     squadra1Random.Add(partecipante);
                 }else{
                     squadra2Random.Add(partecipante);
                 }
             }
+
             Console.WriteLine("Elenco squadra 1:");
+
             foreach (string s1 in squadra1Random)
             {
                 Console.WriteLine(s1);
             }
 
             Console.WriteLine("Elenco squadra 2:");
+
             foreach (string s2 in squadra2Random)
             {
                 Console.WriteLine(s2);
             }
+            
             partecipanti.Clear();
             break;
 

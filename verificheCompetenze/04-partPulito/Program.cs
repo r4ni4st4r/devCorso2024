@@ -1,4 +1,4 @@
-﻿﻿// versione con console clear in modo da mantenere il menu nella stessa posizione dopo ogni scelta 
+﻿// versione con console clear in modo da mantenere il menu nella stessa posizione dopo ogni scelta 
 
 List<string> partecipanti = new List<string>();
 string nome;
@@ -16,15 +16,9 @@ do
     Console.WriteLine("7. Numero partecipanti");
     Console.WriteLine("8. Esci");
     Console.Write("Scelta: ");
-
-    try{
-        scelta = Convert.ToInt32(Console.ReadLine());
-    }catch{
-        Console.WriteLine("La scelta non è valida");
-        break;
-    }
     
-
+    scelta = Convert.ToInt32(Console.ReadLine);
+    
     switch (scelta)
     {
         case 1:

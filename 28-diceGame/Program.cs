@@ -1,4 +1,4 @@
-﻿﻿int puntiUmano = 100; // Entrambi i giocatori iniziano con 100 punti
+﻿int puntiUmano = 100; // Entrambi i giocatori iniziano con 100 punti
 int puntiPc = 100;
 Random random = new Random();
 

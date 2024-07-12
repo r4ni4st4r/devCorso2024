@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "51-scriviTxtCondizioni", "5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "52-scriviTxtCondizioniPro", "52-scriviTxtCondizioniPro\52-scriviTxtCondizioniPro.csproj", "{E5B4DE90-0E91-4D59-8996-64E905B6927F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "53-diceGameProMermaidSpectre", "53-diceGameProMermaidSpectre\53-diceGameProMermaidSpectre.csproj", "{DB3D3669-0BF9-44DA-A328-0625097434C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{E5B4DE90-0E91-4D59-8996-64E905B6927F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5B4DE90-0E91-4D59-8996-64E905B6927F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5B4DE90-0E91-4D59-8996-64E905B6927F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
