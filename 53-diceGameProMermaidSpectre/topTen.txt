@@ -1,1 +1,10 @@
-1 Posizione - Umano ->  20
+24,human
+10,human
+15,human
+9,human
+33,cpu
+11,human
+8,human
+7,human
+11,human
+25,human
