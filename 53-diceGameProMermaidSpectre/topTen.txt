@@ -1,4 +1,4 @@
-24,human
+2,cpu
 10,human
 15,human
 9,human

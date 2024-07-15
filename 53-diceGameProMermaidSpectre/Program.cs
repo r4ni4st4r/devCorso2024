@@ -109,7 +109,8 @@ void SalvaStampaPunteggi(bool human, int deltaPunti){ //uman win = TRUE
         
     }
     */
-    topTable.AddColumn("ULTIME 10 PARTITE");
+    
+    topTable.AddColumn("[blue]ULTIME 10 PARTITE[/]");
 
     for(int i=topTenList.Count-1;i>=0;i--){
         if(topTenList[i].Split(',').Last()=="human")
@@ -117,7 +118,7 @@ void SalvaStampaPunteggi(bool human, int deltaPunti){ //uman win = TRUE
         else
             topTable.AddRow("Ha vinto il computer con " + topTenList[i].Split(',').First()+ " di scarto");
     }
-
+    Console.Clear();
     AnsiConsole.Write(topTable);
     
     //Console.WriteLine(Convert.ToInt32(topTenList[0].Split(',').First()));
@@ -135,10 +136,10 @@ while (puntiUmano > 0 && puntiPc > 0){
 
     var table = new Table();
 
-    table.AddColumn("Azione");
-    table.AddColumn("Punti Umano");
-    table.AddColumn("Punti PC");
-    table.AddColumn("Situazione");
+    table.AddColumn("[blue]Azione[/]");
+    table.AddColumn("[green]Punti Umano[/]");
+    table.AddColumn("[red]Punti PC[/]");
+    table.AddColumn("[blue]Situazione[/]");
 
 
     // Lancio dadi umano
@@ -160,14 +161,14 @@ while (puntiUmano > 0 && puntiPc > 0){
     
     
     if(puntiUmano>puntiPc)
-        table.AddRow($"Umano lancia i dadi: {dado1Umano} e {dado2Umano} (Totale: {sommaUmano})\nPC lancia i dadi: {dado1Pc} e {dado2Pc} (Totale: {sommaPc})",
-                    $"{puntiUmano}", $"{puntiPc}",$"L'umano è in vantaggio di {puntiUmano-puntiPc}");
+        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/] (Totale: [green]{sommaUmano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
+                    $"[green]{puntiUmano}[/]", $"[red]{puntiPc}[/]",$"L'umano è in vantaggio di [green]{puntiUmano-puntiPc}[/]");
     else if(puntiUmano<puntiPc)
-        table.AddRow($"Umano lancia i dadi: {dado1Umano} e {dado2Umano} (Totale: {sommaUmano})\nPC lancia i dadi: {dado1Pc} e {dado2Pc} (Totale: {sommaPc})",
-                    $"{puntiUmano}", $"{puntiPc}",$"Il PC è in vantaggio di {puntiPc-puntiUmano}");
+        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
+                    $"[green]{puntiUmano}[/]", $"[red]{puntiPc}[/]",$"Il PC è in vantaggio di [red]{puntiPc-puntiUmano}[/]");
     else
-        table.AddRow($"Umano lancia i dadi: {dado1Umano} e {dado2Umano} (Totale: {sommaUmano})\nPC lancia i dadi: {dado1Pc} e {dado2Pc} (Totale: {sommaPc})",
-                    $"{puntiUmano}", $"{puntiPc}","La situazione è in parità");
+        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
+                    $"[green]{puntiUmano}[/]", $"[red]{puntiPc}[/]","La situazione è in parità");
 
     AnsiConsole.Write(table);
 
@@ -179,11 +180,11 @@ while (puntiUmano > 0 && puntiPc > 0){
 }
 
 if (puntiUmano <= 0){
-    Console.WriteLine("L'umano ha perso!");
+    AnsiConsole.MarkupLine("L'umano ha perso!:abacus:");
 
     SalvaStampaPunteggi(false, puntiPc-puntiUmano);
 }else{
-    Console.WriteLine("Il PC ha perso!");
+    AnsiConsole.MarkupLine("Il PC ha perso!:abacus:");
 
     SalvaStampaPunteggi(true, puntiUmano-puntiPc);
 }
