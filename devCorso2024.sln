@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "52-scriviTxtCondizioniPro",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "53-diceGameProMermaidSpectre", "53-diceGameProMermaidSpectre\53-diceGameProMermaidSpectre.csproj", "{DB3D3669-0BF9-44DA-A328-0625097434C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "54-sorteggiaPartecipantiPersistenza", "54-sorteggiaPartecipantiPersistenza\54-sorteggiaPartecipantiPersistenza.csproj", "{126630E8-F57C-46F6-931B-7F1DD8DF6218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB3D3669-0BF9-44DA-A328-0625097434C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,50 +1,65 @@
-﻿using System.Runtime.Serialization.Formatters;
-using Spectre.Console;
+﻿using Spectre.Console;
 
 Table topTable = new Table();
 int puntiUmano = 50; // Entrambi i giocatori iniziano con 100 punti
 int puntiPc = 50;
+string path=@"topTen.txt";
 
 Random random = new Random();
-/*
-List<string>  OrderList(List<string> listToOrder){
-    List<string> orderedList = new List<string>();
-    int bigger = 0;
-    int id=150; 
 
-    for(int i=0; i<listToOrder.Count(); i++){
-        for(int j=0; j<listToOrder.Count(); j++){
-            if (i!=j){
-                if(Convert.ToInt32(listToOrder[i].Split(',').First())>=Convert.ToInt32(listToOrder[j].Split(',').First())){
-                    bigger = Convert.ToInt32(listToOrder[i].Split(',').First());
-                }
+void  PrintBestTen(List<string> listToOrder, Table topTen){
+    List<string> orderedList = new List<string>();
+    int biggest = Convert.ToInt32(listToOrder[0].Split(',').First());
+    int id=0;
+    int index = 1; 
+
+    topTable.AddColumn("[blue]TOP 10 SCORES!!![/]");
+
+    while(listToOrder.Count!=0){
+        for(int i = 1;i < listToOrder.Count;++i){
+            if(Convert.ToInt32(listToOrder[i].Split(',').First()) > biggest){
+                    biggest = Convert.ToInt32(listToOrder[i].Split(',').First());
+                    id = i;
             }
         }
-
-        if(bigger != 150){
-            orderedList.Add(listToOrder[i]);
-            listToOrder.Remove(listToOrder[i]);
+                
+        if(index<11){
+            if(listToOrder[id].Split(',').Last()=="human")
+                topTable.AddRow("[green]Ha vinto il giocatore con " + listToOrder[id].Split(',').First()+ " punti di scarto[/]");
+            else
+                topTable.AddRow("[red]Ha vinto il computer con " + listToOrder[id].Split(',').First()+ " punti di scarto[/]");
         }
+
+        if(index == 1){
+            using (StreamWriter sw = File.CreateText(path)){
+                sw.WriteLine(listToOrder[id]);
+            }
+            index++;	
+        }else if(index<11){
+            using (StreamWriter sw = File.AppendText(path)){
+                sw.WriteLine(listToOrder[id]);
+            }	
+            index++;
+        }
+
+        listToOrder.Remove(listToOrder[id]);
+
+        if(listToOrder.Count!=0){
+            biggest = Convert.ToInt32(listToOrder[0].Split(',').First());
+            id=0; 
+        }else
+            break;
     }
-    return orderedList;
-}*/
+
+    Console.Clear();
+    AnsiConsole.Write(topTable);
+
+}
 
 
 void SalvaStampaPunteggi(bool human, int deltaPunti){ //uman win = TRUE
-    string path=@"topTen.txt";
-    //Dictionary<int, (int,string)> topTenDictionary = new Dictionary<int, (int,string)>();
+    
     List<string> topTenList = new List<string>();  
-    /*
-    int index = 1;
-
-    foreach (string line in File.ReadAllLines(path)){
-        if(index<11){
-            if (line.Contains(","))
-                topTenList.Add(line);
-                //topTenDictionary.Add(index, (Convert.ToInt32(line.Split(',').First()), line.Split(',').Last()));
-        }
-        index++; 
-    }*/
 
     using (StreamReader sr = new StreamReader(path)){
         string line;
@@ -55,16 +70,12 @@ void SalvaStampaPunteggi(bool human, int deltaPunti){ //uman win = TRUE
 
     if(human)
         topTenList.Add(deltaPunti.ToString()+","+"human");
-        //topTenDictionary.Add(11,(deltaPunti,"human"));
     else
         topTenList.Add(deltaPunti.ToString()+","+"cpu");
-        //topTenDictionary.Add(11,(deltaPunti,"cpu"));
+
+    PrintBestTen(topTenList, topTable);
 
     int index=1;
-
-    //List<string> orderedList = OrderList(topTenList);
-    //topTenList.Sort();
-    //Console.WriteLine(topTenList.Count);
     
     for(int i=topTenList.Count-1;i>=0;i--){
         if(index<=10){
@@ -81,48 +92,6 @@ void SalvaStampaPunteggi(bool human, int deltaPunti){ //uman win = TRUE
             break;
         index++;
     }
-
-
-    Table topTable = new Table();
-    
-/*
-    for(int i=0; i<lines.Length && i<maxLines; i++){
-        
-        var result = lines[i].Substring(lines[i].Length - 3).Trim();
-
-        int tmp = Int32.Parse(result);
-
-        //Console.WriteLine($"{tmp}");
- 
-        if(deltaPunti >= tmp){
-            int j=i;
-            while(j<lines.Length && j<maxLines){
-                lines[j+1] = lines[j];
-            }
-            if(umanOrPc){
-                lines[i] = $"{i-1} Posizione - Umano ->  {deltaPunti}";
-            }else{
-                lines[i] = $"{i-1} Posizione - PC ->  {deltaPunti}";
-            }
-        }
-        
-        
-    }
-    */
-    
-    topTable.AddColumn("[blue]ULTIME 10 PARTITE[/]");
-
-    for(int i=topTenList.Count-1;i>=0;i--){
-        if(topTenList[i].Split(',').Last()=="human")
-            topTable.AddRow("Ha vinto il giocatore con " + topTenList[i].Split(',').First()+ " di scarto");
-        else
-            topTable.AddRow("Ha vinto il computer con " + topTenList[i].Split(',').First()+ " di scarto");
-    }
-    Console.Clear();
-    AnsiConsole.Write(topTable);
-    
-    //Console.WriteLine(Convert.ToInt32(topTenList[0].Split(',').First()));
-    
 }
 
 int dado1Umano;
@@ -164,10 +133,10 @@ while (puntiUmano > 0 && puntiPc > 0){
         table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/] (Totale: [green]{sommaUmano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
                     $"[green]{puntiUmano}[/]", $"[red]{puntiPc}[/]",$"L'umano è in vantaggio di [green]{puntiUmano-puntiPc}[/]");
     else if(puntiUmano<puntiPc)
-        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
+        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/] (Totale: [green]{sommaUmano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
                     $"[green]{puntiUmano}[/]", $"[red]{puntiPc}[/]",$"Il PC è in vantaggio di [red]{puntiPc-puntiUmano}[/]");
     else
-        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
+        table.AddRow($"Umano lancia i dadi: [green]{dado1Umano}[/] e [green]{dado2Umano}[/] (Totale: [green]{sommaUmano}[/])\nPC lancia i dadi: [red]{dado1Pc}[/] e [red]{dado2Pc}[/] (Totale: [red]{sommaPc}[/])",
                     $"[green]{puntiUmano}[/]", $"[red]{puntiPc}[/]","La situazione è in parità");
 
     AnsiConsole.Write(table);
@@ -181,10 +150,8 @@ while (puntiUmano > 0 && puntiPc > 0){
 
 if (puntiUmano <= 0){
     AnsiConsole.MarkupLine("L'umano ha perso!:abacus:");
-
     SalvaStampaPunteggi(false, puntiPc-puntiUmano);
 }else{
     AnsiConsole.MarkupLine("Il PC ha perso!:abacus:");
-
     SalvaStampaPunteggi(true, puntiUmano-puntiPc);
 }
