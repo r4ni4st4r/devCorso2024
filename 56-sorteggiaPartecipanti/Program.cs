@@ -119,6 +119,7 @@ public class Program{
                 }
             }
         }else{
+            File.Create(PATH);
             AnsiConsole.WriteLine("[red]Nessun file di salvataggio trovato[/]\n\nPremere un tasto...");
             Console.ReadKey();
         }
@@ -142,6 +143,8 @@ public class Program{
 
     private static void VisualizzaPartecipanti(){
         
+        partecipantiTable.Rows.Clear();
+
         foreach (string partecipante in partecipanti)
             partecipantiTable.AddRow(partecipante);
         
@@ -242,7 +245,7 @@ public class Program{
             for(int i = 0;i<numberRow;i++){
                 if(i>=squadra1.Count){
                     squadreTable.AddRow("",squadra2[i]);
-                }else if(i>=squadra1.Count){
+                }else if(i>=squadra2.Count){
                     squadreTable.AddRow(squadra1[i],"");
                 }else
                     squadreTable.AddRow(squadra1[i],squadra2[i]);
