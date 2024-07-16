@@ -19,6 +19,9 @@ if(File.Exists(path)){
             partecipanti.Add(line);
         }
     }
+}else{
+    AnsiConsole.WriteLine("[red]Nessun file di salvataggio trovato[/]\n\nPremere un tasto...");
+    Console.ReadKey();
 }
 
 do
@@ -61,6 +64,7 @@ do
             }
             if(partecipanti.Count == 0)
                 Console.WriteLine("Lista vuota");
+
             Console.WriteLine("Premere un tasto...");
             Console.ReadLine(); 
             break;
@@ -89,11 +93,11 @@ do
             Console.Write("Nome partecipante: ");
             nome = Console.ReadLine();
             if (partecipanti.Contains(nome)){
-                Console.WriteLine("Il partecipante è presente nella lista\nPremere un tasto...");
+                Console.WriteLine("Il partecipante è già presente nella lista\n\nPremere un tasto...");
                 Console.ReadLine();
             }
             else if (nome == ""){
-                Console.WriteLine("Il nome cercato non è valido\nPremere un tasto...");
+                Console.WriteLine("Il nome cercato non è valido\n\nPremere un tasto...");
                 Console.ReadLine();
             }else{
                 Console.WriteLine("Il partecipante non è presente nella lista\nPremere un tasto...");
@@ -107,13 +111,13 @@ do
             
             if (partecipanti.Contains(nome)){
                 partecipanti.Remove(nome);
-                Console.WriteLine("Il partecipante è stato rimosso dalla lista\nPremere un tasto...");
+                Console.WriteLine("Il partecipante è stato rimosso dalla lista\n\nPremere un tasto...");
                 Console.ReadLine();
             }else if (nome == ""){
-                Console.WriteLine("Il nome cercato non è valido\nPremere un tasto...");
+                Console.WriteLine("Il nome cercato non è valido\n\nPremere un tasto...");
                 Console.ReadLine();
             }else{
-                Console.WriteLine("Il partecipante non è presente nella lista\nPremere un tasto...");
+                Console.WriteLine("Il partecipante non è presente nella lista\n\nPremere un tasto...");
                 Console.ReadLine();
             }                
             break;
@@ -121,7 +125,7 @@ do
             Console.Write("Nome partecipante: ");
             nome = Console.ReadLine();
             if(nome==""){
-                Console.WriteLine("Il nome cercato non è valido\nPremere un tasto...");
+                Console.WriteLine("Il nome cercato non è valido\n\nPremere un tasto...");
                 Console.ReadLine();
             }else if (partecipanti.Contains(nome)){
                 Console.Write("Nuovo nome: ");
@@ -185,7 +189,12 @@ do
                     numberRow = squadra2.Count;
 
                 for(int i = 0;i<numberRow;i++){
-                    squadreTable.AddRow(squadra1[i],squadra2[i]);
+                    if(i>=squadra1.Count){
+                        squadreTable.AddRow("",squadra2[i]);
+                    }else if(i>=squadra1.Count){
+                        squadreTable.AddRow(squadra1[i],"");
+                    }else
+                        squadreTable.AddRow(squadra1[i],squadra2[i]);
                 }
 
                 AnsiConsole.Write(squadreTable);
@@ -199,60 +208,63 @@ do
 
         case "Divisione in squadre manuale":
             if(partecipanti.Count<2){
-                Console.WriteLine("Non ci sono abbastanza partecipanti per creare due squadre\nPremere un tasto");
+                Console.WriteLine("Non ci sono abbastanza partecipanti per creare due squadre\n\nPremere un tasto");
                 Console.ReadLine();
             }else{
-                do{
+                squadra1.Clear();
+                squadra2.Clear();
 
-                }while(partecipanti.Count>0);
+                foreach(string s in partecipanti){
+                    Console.Clear();
+                    Console.WriteLine("In che squadra vuoi mettere "+s+"?\n");
+
+                    string sele = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("\nSelezione squadre")
+                        .PageSize(3)
+                        .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                        .AddChoices(new string[] {
+                        "Squadra 1","Squadra 2",
+                    }));
+                    
+
+                    switch (sele){
+                        case "Squadra 1":
+                            squadra1.Add(s);
+                        break;
+                        case "Squadra 2":
+                            squadra2.Add(s);
+                        break;         
+                    }
+                }
+                Table squadreManualTable = new Table();
+                squadreManualTable.AddColumn("[blue]SQUADRA 1[/]");
+                squadreManualTable.AddColumn("[red]SQUADRA 2[/]");
+                int numberRow = 0;
+
+                if(squadra1.Count>squadra2.Count)
+                    numberRow = squadra1.Count;
+                else    
+                    numberRow = squadra2.Count;
+
+                for(int i = 0;i<numberRow;i++){
+                    if(i>=squadra1.Count){
+                        squadreManualTable.AddRow("",squadra2[i]);
+                    }else if(i>=squadra2.Count){
+                        squadreManualTable.AddRow(squadra1[i],"");
+                    }else
+                        squadreManualTable.AddRow(squadra1[i],squadra2[i]);
+                }
+
+                AnsiConsole.Write(squadreManualTable);
+
+                AnsiConsole.WriteLine("Premi un tasto per continuare...");
+
+                Console.ReadKey();
             }
-
-            Console.WriteLine("Squadra 1:");
-
-            foreach(string s in squadra1)
-                Console.WriteLine(s);
-
-            Console.WriteLine("Squadra 2:");
-
-            foreach(string s in squadra2)
-                Console.WriteLine(s);
-
             break;
 /////////////////////////////////////////////////////////////////
-            //crea le due squadre
-            split = partecipanti.Count/2;
-            List<string> squadra1Random = partecipanti.GetRange(0, split);
-            List<string> squadra2Random = partecipanti.GetRange(split, partecipanti.Count - split);
-            
-            while(partecipanti.Count > 0){
-                int index = random.Next(partecipanti.Count);
-                string partecipante = partecipanti[index];
 
-                partecipanti.RemoveAt(index);
-
-                if(squadra1Random.Count<squadra2Random.Count){
-                    squadra1Random.Add(partecipante);
-                }else{
-                    squadra2Random.Add(partecipante);
-                }
-            }
-
-            Console.WriteLine("Elenco squadra 1:");
-
-            foreach (string s1 in squadra1Random)
-            {
-                Console.WriteLine(s1);
-            }
-
-            Console.WriteLine("Elenco squadra 2:");
-
-            foreach (string s2 in squadra2Random)
-            {
-                Console.WriteLine(s2);
-            }
-            
-            partecipanti.Clear();
-            break;
 ////////////////////////////////////////////////////////////////////////
         case "Gestione dati":
             sel = AnsiConsole.Prompt(
@@ -273,6 +285,26 @@ do
                             Console.ReadLine();    
                         }else{
                             Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
+                            Console.ReadLine();
+                        }
+                        if(squadra1.Count != 0){
+                            sw.WriteLine("######");
+                            for(int i = 0;i<squadra1.Count;i++)
+                                sw.WriteLine(squadra1[i]);
+                            Console.WriteLine("Squadra 1 salvata\n\nPremere un tasto...");
+                            Console.ReadLine();    
+                        }else{
+                            Console.WriteLine("La squadra 1 è vuota...\nPremere un tasto...");
+                            Console.ReadLine();
+                        }
+                        if(squadra2.Count != 0){
+                            sw.WriteLine("######");
+                            for(int i = 0;i<squadra2.Count;i++)
+                                sw.WriteLine(squadra2[i]);
+                            Console.WriteLine("Squadra 2 salvata\n\nPremere un tasto...");
+                            Console.ReadLine();    
+                        }else{
+                            Console.WriteLine("La squadra 2 è vuota...\nPremere un tasto...");
                             Console.ReadLine();
                         }
                     }
@@ -302,11 +334,11 @@ do
                         if(partecipanti.Count != 0){
                             for(int i = 0;i<partecipanti.Count;i++)
                                 sw.WriteLine(partecipanti[i]); 
-                    }else{
-                        Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
-                        Console.ReadLine();
+                        }else{
+                            Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
+                            Console.ReadLine();
+                        }
                     }
-            }
                     break;
                 case "No":
                     break;          

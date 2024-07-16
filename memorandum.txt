@@ -5,3 +5,9 @@ https://www.jetbrains.com/lp/devecosystem-2023/
 https://www.nuget.org/
 
 https://spectreconsole.net/
+
+https://learn.microsoft.com/it-it/dotnet/csharp/language-reference/operators/lambda-expressions
+
+funzioni anonime
+
+funzioni ricorsive

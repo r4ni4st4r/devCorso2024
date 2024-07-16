@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "53-diceGameProMermaidSpectr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "54-sorteggiaPartecipantiPersistenza", "54-sorteggiaPartecipantiPersistenza\54-sorteggiaPartecipantiPersistenza.csproj", "{126630E8-F57C-46F6-931B-7F1DD8DF6218}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "55-funzioni", "55-funzioni\55-funzioni.csproj", "{12562167-78B4-4437-8FB6-699540BAC5FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "56-sorteggiaPartecipanti", "56-sorteggiaPartecipanti\56-sorteggiaPartecipanti.csproj", "{1AC8E3A8-F946-472A-9DFA-478B7B70DEC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +117,14 @@ Global
 		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{126630E8-F57C-46F6-931B-7F1DD8DF6218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12562167-78B4-4437-8FB6-699540BAC5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12562167-78B4-4437-8FB6-699540BAC5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12562167-78B4-4437-8FB6-699540BAC5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12562167-78B4-4437-8FB6-699540BAC5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC8E3A8-F946-472A-9DFA-478B7B70DEC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC8E3A8-F946-472A-9DFA-478B7B70DEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC8E3A8-F946-472A-9DFA-478B7B70DEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC8E3A8-F946-472A-9DFA-478B7B70DEC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
