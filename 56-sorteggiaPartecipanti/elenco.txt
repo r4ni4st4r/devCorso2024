@@ -6,13 +6,4 @@ francesc
 daria
 camillo
 camilla
-######
-sara
-francesc
-daria
-camilla
-######
-ippopotamo
-lori
-gianni
-camillo
+pollo

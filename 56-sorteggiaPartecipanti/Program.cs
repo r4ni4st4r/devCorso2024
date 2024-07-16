@@ -23,7 +23,7 @@ public class Program{
         squadreTable.AddColumn("[red]SQUADRA 2[/]");
         partecipantiTable.AddColumn("[Fuchsia]ELENCO[/]");
         
-        VerificaFileCaricaLista();
+        VerificaFileCaricaListaSquadre();
 
         do
         {
@@ -63,44 +63,16 @@ public class Program{
 
                     break;
                 case "Elimina partecipante":
-                    Console.Write("Nome partecipante: ");
 
-                    nome = Console.ReadLine();
-                    
-                    if (partecipanti.Contains(nome)){
-                        partecipanti.Remove(nome);
-                        Console.WriteLine("Il partecipante è stato rimosso dalla lista\n\nPremere un tasto...");
-                        Console.ReadLine();
-                    }else if (nome == ""){
-                        Console.WriteLine("Il nome cercato non è valido\n\nPremere un tasto...");
-                        Console.ReadLine();
-                    }else{
-                        Console.WriteLine("Il partecipante non è presente nella lista\n\nPremere un tasto...");
-                        Console.ReadLine();
-                    }                
+                    EliminaPartecipante();
+                                
                     break;
                 case "Modifica partecipante":
-                    Console.Write("Nome partecipante: ");
-                    nome = Console.ReadLine();
-                    if(nome==""){
-                        Console.WriteLine("Il nome cercato non è valido\n\nPremere un tasto...");
-                        Console.ReadLine();
-                    }else if (partecipanti.Contains(nome)){
-                        Console.Write("Nuovo nome: ");
-                        string nuovoNome = Console.ReadLine();
-                        if (nuovoNome!=""){
-                            partecipanti[partecipanti.IndexOf(nome)] = nuovoNome;
-                            Console.WriteLine("Il partecipante è stato modificato\nPremere un tasto...");
-                            Console.ReadLine();
-                        }else{
-                            Console.WriteLine("Il nome cercato non è valido\nPremere un tasto...");
-                            Console.ReadLine();
-                        }
-                    }else{
-                        Console.WriteLine("Il partecipante non è presente nella lista\nPremere un tasto...");
-                        Console.ReadLine();
-                    }
+                    
+                    ModificaPartecipanti();
+                    
                     break;
+
                 case "Divisione in squadre random":
                     
                     DivisioneSquadreRandom();
@@ -112,99 +84,38 @@ public class Program{
                     DivisioneSquadreManuale();
 
                     break;
-        /////////////////////////////////////////////////////////////////
 
-        ////////////////////////////////////////////////////////////////////////
                 case "Gestione dati":
-                    string sel = AnsiConsole.Prompt(
-                        new SelectionPrompt<string>()
-                        .Title("\nAccedi al filesystem")
-                        .PageSize(4)
-                        .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
-                        .AddChoices(new string[] {
-                        "Salva", "Formatta File Salvato","Indietro"
-                    }));
-                    switch (sel){
-                        case "Salva":
-                            using (StreamWriter sw = File.CreateText(PATH)){
-                                if(partecipanti.Count != 0){
-                                    for(int i = 0;i<partecipanti.Count;i++)
-                                        sw.WriteLine(partecipanti[i]);
-                                    Console.WriteLine("Lista salvata\nPremere un tasto...");
-                                    Console.ReadLine();    
-                                }else{
-                                    Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
-                                    Console.ReadLine();
-                                }
-                                if(squadra1.Count != 0){
-                                    sw.WriteLine("######");
-                                    for(int i = 0;i<squadra1.Count;i++)
-                                        sw.WriteLine(squadra1[i]);
-                                    Console.WriteLine("Squadra 1 salvata\n\nPremere un tasto...");
-                                    Console.ReadLine();    
-                                }else{
-                                    Console.WriteLine("La squadra 1 è vuota...\nPremere un tasto...");
-                                    Console.ReadLine();
-                                }
-                                if(squadra2.Count != 0){
-                                    sw.WriteLine("######");
-                                    for(int i = 0;i<squadra2.Count;i++)
-                                        sw.WriteLine(squadra2[i]);
-                                    Console.WriteLine("Squadra 2 salvata\n\nPremere un tasto...");
-                                    Console.ReadLine();    
-                                }else{
-                                    Console.WriteLine("La squadra 2 è vuota...\nPremere un tasto...");
-                                    Console.ReadLine();
-                                }
-                            }
-                            break;
-                        case "Formatta File Salvato":
-                            using (StreamWriter sw = File.CreateText(PATH)){
-                                Console.WriteLine("Il file di salvataggio è stato formattato...\nPremere un tasto...");
-                                Console.ReadLine();
-                            }
-                            break;
-                        case "Indietro":
-                            break;          
-                    }
+
+                    GestioneDati();
+                    
                     break;
                 case "Esci":
-                    sel = AnsiConsole.Prompt(
-                        new SelectionPrompt<string>()
-                        .Title("\nVuoi salvare la lista e le squadre?")
-                        .PageSize(3)
-                        .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
-                        .AddChoices(new string[] {
-                        "Si","No",
-                    }));
-                    switch (sel){
-                        case "Si":
-                            using (StreamWriter sw = File.CreateText(PATH)){
-                                if(partecipanti.Count != 0){
-                                    for(int i = 0;i<partecipanti.Count;i++)
-                                        sw.WriteLine(partecipanti[i]); 
-                                }else{
-                                    Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
-                                    Console.ReadLine();
-                                }
-                            }
-                            break;
-                        case "No":
-                            break;          
-                    }
-                    Console.WriteLine("Arrivederci!");
+                    UscireSalvare();
                     break;
             }
         } while (selection != "Esci");
-
     }
 
-    private static void VerificaFileCaricaLista(){
+
+    private static void VerificaFileCaricaListaSquadre(){
         if(File.Exists(PATH)){
             using (StreamReader sr = new StreamReader(PATH)){
                 string line;
                 while ((line = sr.ReadLine()) != null){
+                    if(line=="######")
+                        break;
                     partecipanti.Add(line);
+                }
+                while ((line = sr.ReadLine()) != null){
+                    if(line=="######")
+                        break;
+                    squadra1.Add(line);
+                }
+                while ((line = sr.ReadLine()) != null){
+                    if(line=="######")
+                        break;
+                    squadra2.Add(line);
                 }
             }
         }else{
@@ -231,12 +142,10 @@ public class Program{
 
     private static void VisualizzaPartecipanti(){
         
-        foreach (string partecipante in partecipanti){
-            if(partecipante!="######")
-                partecipantiTable.AddRow(partecipante);
-            else
-                break;
-        }
+        foreach (string partecipante in partecipanti)
+            partecipantiTable.AddRow(partecipante);
+        
+
         if(partecipanti.Count == 0)
             Console.WriteLine("Lista vuota");
 
@@ -280,16 +189,20 @@ public class Program{
             Console.WriteLine("Il nome cercato non è valido\n\nPremere un tasto...");
             Console.ReadKey();
         }else{
-                        Console.WriteLine("Il partecipante non è presente nella lista\nPremere un tasto...");
+            Console.WriteLine("Il partecipante non è presente nella lista\n\nPremere un tasto...");
             Console.ReadKey();
         }  
     }
 
     private static void DivisioneSquadreRandom(){
         if (partecipanti.Count<2){
-            Console.WriteLine("Non ci sono abbastanza partecipanti per creare due squadre\nPremere un tasto");
+            Console.WriteLine("Non ci sono abbastanza partecipanti per creare due squadre\n\nPremere un tasto");
             Console.ReadKey();
         }else{
+            squadra1.Clear();
+            squadra2.Clear();
+            squadreTable.Rows.Clear();
+
             foreach (string s in partecipanti){
 
                 if(random.Next(0, 2) == 0){
@@ -400,6 +313,154 @@ public class Program{
             Console.ReadKey();
         }
     }
+
+    static void EliminaPartecipante(){
+
+        string sele = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("\nSeleziona partecipante\nda rimuovere")
+            .PageSize(partecipanti.Count)
+            .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+            .AddChoices(partecipanti));
+                   
+        partecipanti.Remove(sele);
+        Console.WriteLine($"\nL'utente {sele} è stato rimosso\n\nPremere un tasto per continuare...");
+        Console.ReadKey();        
+    }
+
+    static void GestioneDati(){
+        string sel = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("\nAccedi al filesystem")
+            .PageSize(4)
+            .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+            .AddChoices(new string[] {
+            "Salva", "Formatta File Salvato","Indietro",
+        }));
+        switch (sel){
+            case "Salva":
+                using (StreamWriter sw = File.CreateText(PATH)){
+                    if(partecipanti.Count != 0){
+                        for(int i = 0;i<partecipanti.Count;i++)
+                                sw.WriteLine(partecipanti[i]);
+                            Console.WriteLine("Lista salvata\nPremere un tasto...");
+                            Console.ReadKey(); 
+                        }else{
+                            Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
+                            Console.ReadKey();
+                        }
+                    if(squadra1.Count != 0){
+                        sw.WriteLine("######");
+                        for(int i = 0;i<squadra1.Count;i++)
+                            sw.WriteLine(squadra1[i]);
+                        Console.WriteLine("Squadra 1 salvata\n\nPremere un tasto...");
+                        Console.ReadKey();    
+                    }else{
+                        Console.WriteLine("La squadra 1 è vuota...\nPremere un tasto...");
+                        Console.ReadKey();
+                    }
+                    if(squadra2.Count != 0){
+                        sw.WriteLine("######");
+                        for(int i = 0;i<squadra2.Count;i++)
+                            sw.WriteLine(squadra2[i]);
+                        Console.WriteLine("Squadra 2 salvata\n\nPremere un tasto...");
+                        Console.ReadKey();    
+                    }else{
+                        Console.WriteLine("La squadra 2 è vuota...\nPremere un tasto...");
+                        Console.ReadKey();
+                    }
+                }
+                break;
+                case "Formatta File Salvato":
+                    using (StreamWriter sw = File.CreateText(PATH)){
+                        Console.WriteLine("Il file di salvataggio è stato formattato...\nPremere un tasto...");
+                        Console.ReadKey();
+                    }
+                    break;
+                case "Indietro":
+                    break;          
+        }
+    }
+
+    static void UscireSalvare(){
+        string sel = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("\nVuoi salvare la lista e le squadre?")
+                        .PageSize(3)
+                        .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                        .AddChoices(new string[] {
+                        "Si","No",
+                    }));
+        switch (sel){
+            case "Si":
+                using (StreamWriter sw = File.CreateText(PATH)){
+                    if(partecipanti.Count != 0){
+                        for(int i = 0;i<partecipanti.Count;i++)
+                            sw.WriteLine(partecipanti[i]); 
+                    }else{
+                        Console.WriteLine("La lista dei partecipanti è vuota...\nPremere un tasto...");
+                        Console.ReadLine();
+                    }
+                    if(squadra1.Count != 0){
+                        sw.WriteLine("######");
+                        for(int i = 0;i<squadra1.Count;i++)
+                            sw.WriteLine(squadra1[i]);
+                        Console.WriteLine("Squadra 1 salvata\n\nPremere un tasto...");
+                        Console.ReadKey();    
+                    }else{
+                        Console.WriteLine("La squadra 1 è vuota...\nPremere un tasto...");
+                        Console.ReadKey();
+                    }
+                    if(squadra2.Count != 0){
+                        sw.WriteLine("######");
+                        for(int i = 0;i<squadra2.Count;i++)
+                            sw.WriteLine(squadra2[i]);
+                        Console.WriteLine("Squadra 2 salvata\n\nPremere un tasto...");
+                        Console.ReadKey();    
+                    }else{
+                        Console.WriteLine("La squadra 2 è vuota...\nPremere un tasto...");
+                        Console.ReadKey();
+                    }
+                }
+                break;
+            case "No":
+                break;          
+        }
+        Console.WriteLine("Arrivederci!");
+    }
+
+    static void ModificaPartecipanti(){
+        List<string> tempList = new List<string>();
+
+            foreach(string s in partecipanti){
+                if(s!="######")
+                    tempList.Add(s);
+                else
+                    break;
+            }
+
+            string sele = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("\nSeleziona partecipante\nda modificare")
+                .PageSize(tempList.Count)
+                .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                .AddChoices(tempList));
+        
+        Console.WriteLine("Inserire il nome modificato: \n");
+
+        string nuovoNome = Console.ReadLine();
+
+        if(nuovoNome!=""){
+            partecipanti[partecipanti.IndexOf(sele)] = nuovoNome;
+            AnsiConsole.Markup($"\nL'utente [blue]{sele}[/] è stato modificato in [red]{nuovoNome}[/]\n\nPremere un tasto per continuare...");
+            Console.ReadKey();
+        }else{
+            Console.WriteLine("\nIl nome inserito non è valido...\n\nPremere un tasto per continuare...");
+            Console.ReadKey();
+        }
+
+    }
+    
 }
 
 
