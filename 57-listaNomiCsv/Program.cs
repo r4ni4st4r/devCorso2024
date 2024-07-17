@@ -7,6 +7,7 @@ class Program{
 
         while(true){
             Console.WriteLine("Inserisci nome cognome ed età");
+
             string nome = Console.ReadLine();
             string cognome = Console.ReadLine();
             string eta = Console.ReadLine();
@@ -14,8 +15,9 @@ class Program{
                 sw.WriteLine(nome + "," + cognome + "," + eta + "\n");
             }
             Console.WriteLine("Vuoi inserire un altro nome? (s/n)");
-            char risposta =  Convert.ToChar(Console.ReadKey());
-            if(risposta == 'n'){
+            string risposta =  Console.ReadLine();
+            
+            if(risposta == "n"){
                 break;
             }
         }

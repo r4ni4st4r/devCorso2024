@@ -81,10 +81,8 @@ class Program{
                     break;
             }
             
-
-            
-
             Console.WriteLine("Vuoi inserire un altro nome? (s/n)");
+
             string risposta =  Console.ReadLine();
             
             if(risposta == "n"){
