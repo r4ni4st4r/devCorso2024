@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿﻿using Newtonsoft.Json;
 
 class Program{
     static void Main(string[]args ){
@@ -25,5 +25,3 @@ class Program{
         File.AppendAllText(path,"\n]");
     }
 }
-
-
