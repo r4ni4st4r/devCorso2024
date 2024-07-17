@@ -1,0 +1,20 @@
+[
+    {
+        "nome":"antonio",
+        "cognome": "rossi",
+        "eta": 20,
+        "indirizzo": {
+            "via": "via roma",
+            "citta": "roma"
+        }
+    },
+    {
+        "nome":"marco",
+        "cognome": "verdi",
+        "eta": 26,
+        "indirizzo": {
+            "via": "via milano",
+            "citta": "milano"
+        }
+    }
+]
