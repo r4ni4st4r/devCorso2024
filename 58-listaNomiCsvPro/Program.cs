@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Spectre.Console;
+﻿using Spectre.Console;
 
 class Program{
     static void Main(string[] args){

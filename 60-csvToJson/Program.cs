@@ -11,11 +11,11 @@ class Program{
         }
 
         for(int i = 0; i< prodotti.Length; i++){
-            //if(i!=0){
-                string path2 = @""+prodotti[i+1][0]+".json";
+            if(i!=0){
+                string path2 = @""+prodotti[i][0]+".json";
                 File.Create(path2).Close();
                 File.AppendAllText(path2, JsonConvert.SerializeObject(new{nome = prodotti[i][0], prezzo = prodotti[i][1]}));
-            //}
+            }
         }
     }
 }

@@ -1,31 +1,34 @@
 ﻿using Newtonsoft.Json;
 
 class Program{
-    static void Main(string[]args ){
+    static void Main(string[] args){
         string path =@"test.json";
         if(!File.Exists(path)){
             File.Create(path).Close();
-            File.AppendAllText(path, "[\n");
+            File.WriteAllText(path, "[\n");
+        }else{
+            File.WriteAllText(path, "[\n");
         }
 
         while(true){
             Console.WriteLine("Inserisci nome e prezzo");
             string nome = Console.ReadLine().Trim();
-            int prezzo;
 
-            File.AppendAllText(path, JsonConvert.SerializeObject(new { nome, prezzo }));
+            //File.AppendAllText(path, JsonConvert.SerializeObject(new { nome, prezzo }));
 
-            Console.WriteLine("Vuoi inserire un altro prodotto? (s/n)");
+            
             if(decimal.TryParse(Console.ReadLine(), out decimal prezzo)){
-                File.AppendAllText(path, JsonConvert.SerializeObject(new {nome, prezzo = prezzo.ToString()})+ "\n");
-                if(Console.ReadLine().Trim().ToLower() != "s"){
-                    break;
-                }
+                File.AppendAllText(path, JsonConvert.SerializeObject(new {nome, prezzo}));
+                
             }else{
                 Console.WriteLine("Prezzo non valido, riprova...\nPremi un tasto...");
                 Console.ReadKey();
             }
 
+            Console.WriteLine("Vuoi inserire un altro prodotto? (s/n)");
+            if(Console.ReadLine().Trim().ToLower() == "n"){
+                break;
+            }
             File.AppendAllText(path, ",\n");
         }
 
