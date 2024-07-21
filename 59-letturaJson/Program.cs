@@ -15,7 +15,7 @@ class Program{
 
         File.AppendAllText(PATHCSV, "nome,cognome,eta,citta,via\n");
         
-        for(int i=0; i<obj.Count; i++){
+        for(int i=0; i < obj.Count; i++){
             File.AppendAllText(PATHCSV,$"{obj[i].nome},{obj[i].cognome},{obj[i].eta},{obj[i].indirizzo.citta},{obj[i].indirizzo.via}\n");
         }
         //Console.WriteLine($"nome: {obj[0].nome} cognome: {obj[0].cognome} eta: {obj[0].eta} citta: {obj[0].indirizzo.citta} via: {obj[0].indirizzo.via}");

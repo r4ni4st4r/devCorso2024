@@ -28,7 +28,7 @@ lista prodotti -> cpu - video card - mother board - ram
 cpu -> brand , model , Mhz
 video card -> brand, model, ram
 mother board -> brand, model, socket
-ram -> size, type, Mhz 
+ram -> brand, size, type, Mhz 
 
 
 
