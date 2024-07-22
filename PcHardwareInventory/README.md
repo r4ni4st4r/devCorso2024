@@ -12,16 +12,17 @@
 -   [ ] Capacità di inserire, rimuovere e modificare prodotti manualmente
 -   [ ] Gestire la persistenza dei dati tramite cartelle e singoli file .json
 -   [ ] Possibilità di caricare prodotti tramite file .csv
--   [ ] All'aggiunta della categoria modificare i campi del .csv
+-   [ ] All'aggiunta della categoria modificare i campi del .csv (Non so se è possibile)
 -   [ ] I possibili utilizzatori saranno tutti i gestori di store (fisici/online)
 
 ## Pianificazione e Design dell'Architettura:
 
--  [ ] Scegli un'architettura adatta (ad es., MVC, MVP, MVVM).
--  [ ] Definisci i modelli di dati e le relazioni tra di essi.
 -  [x] Progetta l'interfaccia utente e l'esperienza utente (UI/UX).
+    L'interfaccia è stata implementata usando Spectre Console sfruttando le funzionalità dei menù a scelta multipla e le tabelle.
 
 ## Appunti durante la scrittura del codice:
+
+Inizialmente l'applicazione prevederà a gestire 4 categorie di prodotti
 
 lista prodotti -> cpu - video card - mother board - ram 
 
@@ -78,11 +79,11 @@ Se il giocatore indovina tutte le lettere della parola prima di esaurire i tenta
 
 Prima di iniziare a scrivere il codice, dobbiamo definire gli obiettivi dell'applicazione e le funzionalità chiave.
 In questo caso, l'obiettivo è creare un'applicazione console che consenta a un giocatore di giocare al gioco del indovina numero.
-- [x] L'applicazione deve consentire al giocatore di inserire una lettera per volta.
-- [x] L'applicazione deve mostrare un messaggio di errore se il giocatore inserisce più di una lettera alla volta.
-- [x] L'applicazione deve mostrare un messaggio di errore se il giocatore inserisce una lettera che ha già indovinato.
-- [x] L'applicazione deve mostrare un messaggio di errore se il giocatore inserisce una lettera che non è presente nella parola.
-- [x] L'applicazione deve mostrare un messaggio di errore se il giocatore inserisce un carattere non valido.
+- [x] L'applicazione deve .
+- [x] L'applicazione deve .
+- [x] L'applicazione deve .
+- [x] L'applicazione deve .
+- [x] L'applicazione deve .
 
 ## PIANIFICAZIONE E DESIGN DELL'ARCHITETTURA
 

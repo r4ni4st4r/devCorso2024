@@ -13,7 +13,13 @@ class Program{
         string json = File.ReadAllText(PATHJSON);
         dynamic obj = JsonConvert.DeserializeObject(json);
 
+        Console.WriteLine(json);
+        Console.ReadKey();
+
         File.AppendAllText(PATHCSV, "nome,cognome,eta,citta,via\n");
+
+        Console.WriteLine(obj.Count.ToString());
+        Console.ReadKey();
         
         for(int i=0; i < obj.Count; i++){
             File.AppendAllText(PATHCSV,$"{obj[i].nome},{obj[i].cognome},{obj[i].eta},{obj[i].indirizzo.citta},{obj[i].indirizzo.via}\n");

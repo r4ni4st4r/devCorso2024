@@ -1,0 +1,5 @@
+product,brand,prop1,prop2,prop3
+cpu,intel,model:i7,mhz:9000,
+cpu,amd,model:i9,mhz:8000,
+mother board,asrock,model:x78,socket:8,
+mother board,asus,model:z98,socket:9,
