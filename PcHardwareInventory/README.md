@@ -26,10 +26,10 @@ Inizialmente l'applicazione prevederà a gestire 4 categorie di prodotti
 
 lista prodotti -> cpu - video card - mother board - ram 
 
-cpu -> brand , model , Mhz
-video card -> brand, model, ram
-mother board -> brand, model, socket
-ram -> brand, size, type, Mhz 
+cpu -> *brand , *model , *mhz
+video card -> *brand, *model, *ram
+mother board -> *brand, *model, socket
+ram -> *brand, *size, type, *mhz 
 
 
 
