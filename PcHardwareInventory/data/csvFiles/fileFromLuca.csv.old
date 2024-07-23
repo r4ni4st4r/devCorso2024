@@ -4,4 +4,3 @@ cpu,intel,model:i3,mhz:8500,
 mother board,gigabyte,model:h8,socket:7,
 mother board,samsung,model:z9,socket:6,
 ram,adata, size:16, type:ddr5, mhz:7500 
-ram,vdata, size:8, type:ddr5, mhz:6500 

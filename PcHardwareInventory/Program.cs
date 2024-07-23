@@ -11,7 +11,6 @@ class Program{
     const string CSVPATH = @".\data\csvFiles";
     const string CATPATH = @".\data\productsCategories"; 
     const string PROPERTIESFILE = "data.txt";
-    const string JSONFILENAMEPATH = @".\data\fileName.txt";
     static List<string> propertiesDataType = new List<string>();
     static int cpuFileName = GetFileName(Path.Combine(CATPATH, "cpu")); 
     static int videoCardFileName = GetFileName(Path.Combine(CATPATH, "video card"));
@@ -610,8 +609,6 @@ class Program{
 
                         string jsonCpuPath = Path.Combine(CATPATH, prodotti[i][0], cpuFileName.ToString() + ".json");
 
-                        File.Create(path).Close();
-
                         using (StreamWriter sw = new StreamWriter(jsonCpuPath)){ 
                             sw.Write(JsonConvert.SerializeObject(new {brand, model, mhz}, Formatting.Indented));
                         }
@@ -644,8 +641,6 @@ class Program{
 
                         string jsonMbPath = Path.Combine(CATPATH, prodotti[i][0], mbFileName.ToString() + ".json");
 
-                        File.Create(path).Close();
-
                         using (StreamWriter sw = new StreamWriter(jsonMbPath)){ 
                             sw.Write(JsonConvert.SerializeObject(new {brand, model, socket}, Formatting.Indented));
                         }
@@ -672,11 +667,27 @@ class Program{
                 Console.ReadKey();
             break;
             case "No":
+                bool ok = true;
+                string newFile;
+                while(ok){
+                    Console.Clear();
+                    Console.WriteLine("Please enter a filename to archive the .csv: ");
+                    newFile= Console.ReadLine();
 
-                File.Move(Path.Combine(CSVPATH, file),Path.Combine(CSVPATH, file)+".old");
+                    try{
+                        File.Move(Path.Combine(CSVPATH, file),Path.Combine(CSVPATH, newFile) + ".csv.old", false);
 
-                Console.WriteLine($"{file} is been renamed in {file}.old\n\nPress a key...");
-                Console.ReadKey();
+                        Console.WriteLine($"File successfully archived as {newFile}.csv.old");
+                        Console.ReadKey();
+                        ok = false;
+
+                    }catch(Exception e){
+                        Console.WriteLine("\nThere was a problem...\n");
+                        Console.WriteLine($"ERROR --> {e.Message}\nPress a key...");
+                        Console.ReadKey();
+                    }
+
+                }
             break;
         }
     }
