@@ -36,7 +36,7 @@ class Program{
             Console.Clear();
             selection = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("\nManage Warehouse")
+                .Title("\n[red]Manage Warehouse[/]")
                 .PageSize(manageWarehouseSelection.Count() + 1)
                 .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                 .AddChoices(manageWarehouseSelection));
@@ -47,7 +47,7 @@ class Program{
                         categories.Add("Back");
                         selection = AnsiConsole.Prompt(
                             new SelectionPrompt<string>()
-                            .Title("\nSelect a category to visualize")
+                            .Title("\n[red]Select a category to visualize[/]")
                             .PageSize(categories.Count + 1)
                             .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                             .AddChoices(categories));
@@ -70,7 +70,7 @@ class Program{
                 case "Add Product":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title("\nProduct insertion")
+                        .Title("\n[red]Product insertion[/]")
                         .PageSize(addProductSelection.Length + 1)
                         .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                         .AddChoices(addProductSelection));
@@ -81,7 +81,7 @@ class Program{
                                 categories.Add("Back");
                                 selection = AnsiConsole.Prompt(
                                     new SelectionPrompt<string>()
-                                    .Title("\nSelect Product Category")
+                                    .Title("\n[red]Select Product Category[/]")
                                     .PageSize(categories.Count + 1)
                                     .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                                     .AddChoices(categories));
@@ -100,11 +100,32 @@ class Program{
                             categories.Remove("Back");
                             break; 
                         case "Insert from .csv file":
-                            
-                            break; 
-                        case "Back":
 
-                            break; 
+                            List<string> CsvList = GetCsvList(CSVPATH);
+                            
+                            if(CsvList.Count > 0){
+                                CsvList.Add("Back");
+
+                                selection = AnsiConsole.Prompt(
+                                                new SelectionPrompt<string>()
+                                                .Title("\n[red]Select .csv file to load[/]")
+                                                .PageSize(CsvList.Count + 1)
+                                                .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                                .AddChoices(CsvList));
+
+                                switch(selection){
+                                    default:
+                                        InsertProductCsv(selection);
+                                        break; 
+                                    case "Back":
+
+                                        break; 
+                                }
+                            }else{
+                                Console.WriteLine("There aren't .csv to load!\n\nPress e key...");
+                                Console.ReadKey();
+                            }
+                            break;
                     }
 
                     break;
@@ -114,7 +135,7 @@ class Program{
                         categories.Add("Back");
                         selection = AnsiConsole.Prompt(
                             new SelectionPrompt<string>()
-                            .Title("\nSelect a product to remove")
+                            .Title("\n[red]Select a product to remove[/]")
                             .PageSize(categories.Count + 1)
                             .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                             .AddChoices(categories));
@@ -450,7 +471,7 @@ class Program{
                     menuList.Add("Back");
                     string selection = AnsiConsole.Prompt(
                                         new SelectionPrompt<string>()
-                                        .Title("\nSelect Product Category")
+                                        .Title("\n[red]Select Product to remove[/]")
                                         .PageSize(menuList.Count + 1)
                                         .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                                         .AddChoices(menuList));
@@ -466,7 +487,7 @@ class Program{
                             break;
                     }
                 }else{
-                    Console.WriteLine("You have to add a Product Category\n\nPress a key...");
+                    Console.WriteLine("CPU category is empty!!!\n\nPress a key...");
                     Console.ReadKey();
                 }
                 menuList.Remove("Back");
@@ -502,7 +523,7 @@ class Program{
                     menuList.Add("Back");
                     string selection = AnsiConsole.Prompt(
                                         new SelectionPrompt<string>()
-                                        .Title("\nSelect a product to delete")
+                                        .Title("\n[red]Select a product to delete[/]")
                                         .PageSize(menuList.Count + 1)
                                         .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                                         .AddChoices(menuList));
@@ -536,6 +557,127 @@ class Program{
                 AnsiConsole.WriteLine("Not implemented yet...");
                 Console.ReadKey();
                 break;
+        }
+    }
+
+    private static List<string> GetCsvList(string path){
+        List<string> csvFiles = new List<string>(); 
+
+        foreach(string s in Directory.GetFiles(path)){
+            if(s.EndsWith(".csv"))
+                csvFiles.Add(Path.GetFileName(s));
+        }
+
+        return csvFiles;
+    }
+
+    private static void InsertProductCsv(string file){
+        bool success;
+
+        string path = Path.Combine(CSVPATH, file);
+        
+        string[] lines = File.ReadAllLines(path); 
+        string[][] prodotti = new string [lines.Length][];
+
+        for(int i = 0; i < lines.Length; i++){
+            prodotti[i] = lines[i].Split(",");
+        }
+
+        for(int i = 0; i< prodotti.Length; i++){
+            if(i!=0){
+                switch(prodotti[i][0]){
+                    case "cpu":
+                        mhz = new int();
+                        brand = "";
+                        model = "";
+
+                        cpuFileName = GetFileName(Path.Combine(CATPATH, prodotti[i][0]));
+
+                        for(int j = 1; j < prodotti[i].Length; j++){
+                            brand = prodotti[i][1];
+
+                            if(prodotti[i][j].Contains("model")){
+                                
+                                model = prodotti[i][j].Split(":").Last();
+
+                            }else if(prodotti[i][j].Contains("mhz")){
+
+                                int.TryParse(prodotti[i][j].Split(":").Last(), out int result);
+                        
+                                mhz = result;
+                            }
+                        }
+
+                        string jsonCpuPath = Path.Combine(CATPATH, prodotti[i][0], cpuFileName.ToString() + ".json");
+
+                        File.Create(path).Close();
+
+                        using (StreamWriter sw = new StreamWriter(jsonCpuPath)){ 
+                            sw.Write(JsonConvert.SerializeObject(new {brand, model, mhz}, Formatting.Indented));
+                        }
+
+                        File.WriteAllText(Path.Combine(CATPATH, prodotti[i][0], "fileName.txt"), (cpuFileName+1).ToString());
+
+                    break;
+
+                    case "mother board":
+                        socket = new int();
+                        brand = "";
+                        model = "";
+
+                        mbFileName = GetFileName(Path.Combine(CATPATH, prodotti[i][0]));
+
+                        for(int j = 1; j < prodotti[i].Length; j++){
+                            brand = prodotti[i][1];
+
+                            if(prodotti[i][j].Contains("model")){
+                                
+                                model = prodotti[i][j].Split(":").Last();
+
+                            }else if(prodotti[i][j].Contains("socket")){
+
+                                int.TryParse(prodotti[i][j].Split(":").Last(), out int result);
+                        
+                                socket = result;
+                            }
+                        }
+
+                        string jsonMbPath = Path.Combine(CATPATH, prodotti[i][0], mbFileName.ToString() + ".json");
+
+                        File.Create(path).Close();
+
+                        using (StreamWriter sw = new StreamWriter(jsonMbPath)){ 
+                            sw.Write(JsonConvert.SerializeObject(new {brand, model, socket}, Formatting.Indented));
+                        }
+
+                        File.WriteAllText(Path.Combine(CATPATH, prodotti[i][0], "fileName.txt"), (mbFileName+1).ToString());
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        string question = AnsiConsole.Prompt(
+                                new SelectionPrompt<string>()
+                                .Title("\n[red]Do you want to delete the loaded file?[/]\n")
+                                .PageSize(3)
+                                .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                .AddChoices(new []{"Yes","No"}));
+
+        switch(question){
+            case "Yes":
+                File.Delete(Path.Combine(CSVPATH, file));
+
+                Console.WriteLine($"{file} is been deleted\n\nPress a key...");
+                Console.ReadKey();
+            break;
+            case "No":
+
+                File.Move(Path.Combine(CSVPATH, file),Path.Combine(CSVPATH, file)+".old");
+
+                Console.WriteLine($"{file} is been renamed in {file}.old\n\nPress a key...");
+                Console.ReadKey();
+            break;
         }
     }
 }
