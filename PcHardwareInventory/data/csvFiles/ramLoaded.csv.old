@@ -1,0 +1,3 @@
+product,brand,prop1,prop2,prop3
+ram,adata, size:16, type:ddr5, mhz:7500 
+ram,vdata, size:8, type:ddr5, mhz:6500 

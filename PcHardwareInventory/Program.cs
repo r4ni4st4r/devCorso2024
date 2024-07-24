@@ -6,30 +6,35 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.VisualBasic.FileIO;
 
 class Program{
-    const string CSVPATH = @".\data\csvFiles";
-    const string CATPATH = @".\data\productsCategories"; 
-    const string PROPERTIESFILE = "data.txt";
-    static List<string> propertiesDataType = new List<string>();
-    static int cpuFileName = GetFileName(Path.Combine(CATPATH, "cpu")); 
-    static int videoCardFileName = GetFileName(Path.Combine(CATPATH, "video card"));
-    static int ramFileName = GetFileName(Path.Combine(CATPATH, "ram"));
-    static int mbFileName = GetFileName(Path.Combine(CATPATH, "mother board"));
+    const string CSVPATH = @".\data\csvFiles";                                      // Path per i files .csv da importare
+    const string CATPATH = @".\data\productsCategories";                            //  Path per le cartelle corrispondenti alle varie categorie di prodotto
+                                                                                    //  cpu - mother board - video card - ram
+    const string PROPERTIESFILE = "data.txt";                                       // file all'interno di ogni cartella categoria con le coppie proprietà/tipo di dato 
+    static List<string> propertiesDataType = new List<string>();                    // Lista per i tipi di dati delle categorie
+    static int cpuFileName = GetFileName(Path.Combine(CATPATH, "cpu"));             // File intero con il successivo nome file per la categoria cpu
+    static int videoCardFileName = GetFileName(Path.Combine(CATPATH, "video card"));// File intero con il successivo nome file per la categoria video card
+    static int ramFileName = GetFileName(Path.Combine(CATPATH, "ram"));             // File intero con il successivo nome file per la categoria ram
+    static int mbFileName = GetFileName(Path.Combine(CATPATH, "mother board"));     // File intero con il successivo nome file per la categoria mother board
+
+    // variabile di tutte le proprietà delle varie categorie
     static string brand = "";
     static string model = "";
+    static string type = "";
     static int mhz = new int();
     static int socket = new int();
-
+    static int size = new int();
+    static int ram = new int();
+    //******************************************************
 
     static void Main(string[] args){
         string selection = "";
         List<string> categories = CategoryOrPropertiesList();
-        List<string> csvFiles = CsvFilesList(CSVPATH);
         
-        string[] addProductSelection = new string[] {"Insert manually", "Insert from .csv file", "Back",};
-        string[] manageWarehouseSelection = new string[] {"View Products", "Add Product", "Remove Product", /* "Add Product Category",
-                                                "Remove Product Category",*/ "Exit",};
+        string[] addProductSelection = new string[] {"Insert manually", "Insert from .csv file", "Back",};              //array di tringhe con le parti fisse dei menu
+        string[] manageWarehouseSelection = new string[] {"View Products", "Add Product", "Remove Product", "Exit",};   //array di tringhe con le parti fisse dei menu
 
         while(true){
             Console.Clear();
@@ -41,8 +46,8 @@ class Program{
                 .AddChoices(manageWarehouseSelection));
             
             switch(selection){
-                case "View Products":
-                    if(categories.Count > 0){
+                case "View Products":                                           // Selezione che permette di visualizzare i vari prodotti di ogni categoria
+                    if(categories.Count > 0){                                   // all'interno di una tabella di Spertre.Console
                         categories.Add("Back");
                         selection = AnsiConsole.Prompt(
                             new SelectionPrompt<string>()
@@ -66,8 +71,8 @@ class Program{
                     categories.Remove("Back");
                     break;
 
-                case "Add Product":
-                    selection = AnsiConsole.Prompt(
+                case "Add Product":                                         // Selezione che permette di inserire un prodotto manualmente selezionando la categoria
+                    selection = AnsiConsole.Prompt(                         // o tramite la lettura di un file .csv
                     new SelectionPrompt<string>()
                         .Title("\n[red]Product insertion[/]")
                         .PageSize(addProductSelection.Length + 1)
@@ -100,17 +105,17 @@ class Program{
                             break; 
                         case "Insert from .csv file":
 
-                            List<string> CsvList = GetCsvList(CSVPATH);
+                            List<string> csvList = GetCsvList(CSVPATH); // lista di file .csv all'interno di una cartella predefinita
                             
-                            if(CsvList.Count > 0){
-                                CsvList.Add("Back");
+                            if(csvList.Count > 0){
+                                csvList.Add("Back");
 
                                 selection = AnsiConsole.Prompt(
                                                 new SelectionPrompt<string>()
                                                 .Title("\n[red]Select .csv file to load[/]")
-                                                .PageSize(CsvList.Count + 1)
+                                                .PageSize(csvList.Count + 1)
                                                 .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
-                                                .AddChoices(CsvList));
+                                                .AddChoices(csvList));
 
                                 switch(selection){
                                     default:
@@ -129,7 +134,7 @@ class Program{
 
                     break;
 
-                case "Remove Product":
+                case "Remove Product":           // Selezione che permette di rimuovere un prodotto selezionandolo all'interno della sua categoria
                     if(categories.Count > 0){
                         categories.Add("Back");
                         selection = AnsiConsole.Prompt(
@@ -143,7 +148,7 @@ class Program{
                             case "Back":
                                 break;
                             default:
-                                RemoveProduct(selection);
+                                BuildDeleteMenu(selection);
                                 break;
                         }
                     }else{
@@ -172,8 +177,8 @@ class Program{
             return new List<string>();
     }
 
-    private static List<string> CategoryOrPropertiesList([Optional] string category){
-        if(category == null){
+    private static List<string> CategoryOrPropertiesList([Optional] string category){   // funzione che restituisce una lista di categorie se non è presente
+        if(category == null){                                                           // il parametro o la liste delle proprietà se è presente il parametro category 
 
             List<string> productsCategories = new List<string>(Directory.GetDirectories(CATPATH)); 
 
@@ -201,9 +206,9 @@ class Program{
         }
     }
 
-    private static void InsertProductManually(List<string> properties, string item){
-        bool success;
-        
+    private static void InsertProductManually(List<string> properties, string item){    // Funzione che prende la lista delle proprietà del prodotto e la categoria 
+        bool success;                                                                   // e permette l'inserimento dei campi e salva un nuovo file .json nella cartella
+                                                                                        // corretta
         switch(item){
             case "cpu":
                 cpuFileName = GetFileName(Path.Combine(CATPATH, item));
@@ -267,8 +272,8 @@ class Program{
 
                 File.Create(path).Close();
 
-                using (StreamWriter sw = new StreamWriter(path)){ 
-                    sw.Write(JsonConvert.SerializeObject(new {brand, model, mhz}, Formatting.Indented));
+                using (StreamWriter sw = new StreamWriter(path)){                                           // creazione del file .json e generazione di unome file
+                    sw.Write(JsonConvert.SerializeObject(new {brand, model, mhz}, Formatting.Indented));    //  numerico progressivo e univoco
                 }
 
                 File.WriteAllText(Path.Combine(CATPATH, item, "fileName.txt"), (cpuFileName+1).ToString());
@@ -343,10 +348,161 @@ class Program{
                 File.WriteAllText(Path.Combine(CATPATH, item, "fileName.txt"), (mbFileName+1).ToString());
 
                 break;
+            case "video card":
+                success = true;
+                videoCardFileName = GetFileName(Path.Combine(CATPATH, item));
+
+                brand = "";
+                model = "";
+                ram = new int();
+
+                for(int i = 0;i < properties.Count; i++){
+                    if(properties[i] == "brand"){
+                        do{
+                            success = true;
+                            Console.Clear();
+                            Console.WriteLine($"Insert a value for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            brand = Console.ReadLine();
+                            if(brand == ""){
+                                success = false;
+                                Console.WriteLine("Please enter a valid string\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }else if(properties[i] == "model"){
+                        do{
+                            success = true;
+                            Console.Clear();
+                            Console.WriteLine($"Insert a value for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            model = Console.ReadLine();
+                            if(model == ""){
+                                success = false;
+                                Console.WriteLine("Please enter a valid string\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }else if(properties[i] == "mhz"){
+                         do{
+                            Console.Clear();
+                            Console.WriteLine($"Insert an integer number for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            success = int.TryParse(Console.ReadLine(), out int result);
+                        
+                            if(success){
+                                mhz = result;
+                            }else{
+                                Console.WriteLine("Please enter a valid integer\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }
+                }
+
+                string videoCardFile = videoCardFileName.ToString();
+
+                string videoCardPath = Path.Combine(CATPATH, item, videoCardFile + ".json");
+
+                File.Create(videoCardPath).Close();
+
+                using (StreamWriter sw = new StreamWriter(videoCardPath)){ 
+                    sw.Write(JsonConvert.SerializeObject(new {brand, model, ram}, Formatting.Indented));
+                }
+
+                File.WriteAllText(Path.Combine(CATPATH, item, "fileName.txt"), (videoCardFileName + 1).ToString());
+
+                break;
+            case "ram":
+                success = true;
+                ramFileName = GetFileName(Path.Combine(CATPATH, item));
+
+                brand = "";
+                size = new int();
+                type = "";
+                mhz = new int();
+
+                for(int i = 0;i < properties.Count; i++){
+                    if(properties[i] == "brand"){
+                        do{
+                            success = true;
+                            Console.Clear();
+                            Console.WriteLine($"Insert a value for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            brand = Console.ReadLine();
+                            if(brand == ""){
+                                success = false;
+                                Console.WriteLine("Please enter a valid string\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }else if(properties[i] == "size"){
+                        do{
+                            Console.Clear();
+                            Console.WriteLine($"Insert an integer number for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            success = int.TryParse(Console.ReadLine(), out int result);
+                        
+                            if(success){
+                                size = result;
+                            }else{
+                                Console.WriteLine("Please enter a valid integer\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }else if(properties[i] == "type"){
+                         do{
+                            Console.Clear();
+                            Console.WriteLine($"Insert an integer number for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            type = Console.ReadLine();
+                        
+                            if(type == ""){
+                                success = false;
+                                Console.WriteLine("Please enter a valid string\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }else if(properties[i] == "mhz"){
+                         do{
+                            Console.Clear();
+                            Console.WriteLine($"Insert an integer number for the {properties[i]} property: \n");
+                            Console.Write($"{properties[i]} --> ");
+                            success = int.TryParse(Console.ReadLine(), out int result);
+                        
+                            if(success){
+                                mhz = result;
+                            }else{
+                                Console.WriteLine("Please enter a valid integer\n\nPress a key...");
+                                Console.ReadKey();
+                            }
+                        }while(!success);
+
+                    }
+                }
+
+                string ramFile = ramFileName.ToString();
+
+                string ramPath = Path.Combine(CATPATH, item, ramFile + ".json");
+
+                File.Create(ramPath).Close();
+
+                using (StreamWriter sw = new StreamWriter(ramPath)){ 
+                    sw.Write(JsonConvert.SerializeObject(new {brand, model, ram}, Formatting.Indented));
+                }
+
+                File.WriteAllText(Path.Combine(CATPATH, item, "fileName.txt"), (ramFileName + 1).ToString());
+                break;
         }
     }
 
-    private static void ViewProducts(string category){
+    private static void ViewProducts(string category){ // deserializzazione dei file .json -> popolamentio di una tabella Spectre.Console e visualizzazione
         Table viewTable = new Table();
         
         List<string> filesList = new List<string>(Directory.GetFiles(Path.Combine(CATPATH, category)));
@@ -358,21 +514,17 @@ class Program{
 
                     foreach(string s in filesList){
 
-                        string tmp = Path.GetFileName(s);
-                        Console.WriteLine("check string --->" + tmp);
-                        Console.ReadKey();
-
                         if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
 
                             string json = File.ReadAllText(s);
 
                             dynamic obj = JsonConvert.DeserializeObject(json);
 
-                            string s1 = obj.brand;
-                            string s2 = obj.model;
-                            string s3 = obj.mhz.ToString();
+                            string brand = obj.brand;
+                            string model = obj.model;
+                            string mhz = obj.mhz.ToString();
         
-                            viewTable.AddRow(s1,s2,s3);
+                            viewTable.AddRow(brand, model, mhz);
                         }
                     }
 
@@ -392,21 +544,17 @@ class Program{
 
                     foreach(string s in filesList){
 
-                        string tmp = Path.GetFileName(s);
-                        Console.WriteLine("check string --->" + tmp);
-                        Console.ReadKey();
-
                         if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
 
                             string json = File.ReadAllText(s);
 
                             dynamic obj = JsonConvert.DeserializeObject(json);
 
-                            string s1 = obj.brand;
-                            string s2 = obj.model;
-                            string s3 = obj.socket;
+                            string brand = obj.brand;
+                            string model = obj.model;
+                            string socket = obj.socket.ToString();
         
-                            viewTable.AddRow(s1,s2,s3);
+                            viewTable.AddRow(brand, model, socket);
                         }
                     }
 
@@ -422,25 +570,78 @@ class Program{
                 break;
 
             case "ram":
-                AnsiConsole.WriteLine("Not implemented yet...");
-                Console.ReadKey();
+                if(filesList.Count>2){
+                    viewTable.AddColumns("Brand", "Size", "Type", "Mhz");  
+
+                    foreach(string s in filesList){
+
+                        if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
+
+                            string json = File.ReadAllText(s);
+
+                            dynamic obj = JsonConvert.DeserializeObject(json);
+
+                            string brand = obj.brand;
+                            string size = obj.size.ToString();
+                            string type = obj.type;
+                            string mhz = obj.mhz.ToString();
+        
+                            viewTable.AddRow(brand, size + " Gb", type, mhz);//brand, *size, type, *mhz
+                        }
+                    }
+
+                    AnsiConsole.Write(viewTable);
+
+                    AnsiConsole.WriteLine("Press a key to continue...");
+
+                    Console.ReadKey();
+                }else{
+                    Console.WriteLine("There aren't Products to visualize!!!\n\n");
+                    Console.ReadKey();
+                }
                 break;
             case "video card":
-                AnsiConsole.WriteLine("Not implemented yet...");
-                Console.ReadKey();
+                if(filesList.Count > 2){
+                    viewTable.AddColumns("Brand", "Model", "Ram");  
+
+                    foreach(string s in filesList){
+
+                        if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
+
+                            string json = File.ReadAllText(s);
+
+                            dynamic obj = JsonConvert.DeserializeObject(json);
+
+                            string brand = obj.brand;
+                            string model = obj.model;
+                            string ram = obj.ram.ToString();
+        
+                            viewTable.AddRow(brand, model, ram.ToString() + " Gb");
+                        }
+                    }
+
+                    AnsiConsole.Write(viewTable);
+
+                    AnsiConsole.WriteLine("Press a key to continue...");
+
+                    Console.ReadKey();
+                }else{
+                    Console.WriteLine("There aren't Products to visualize!!!\n\n");
+                    Console.ReadKey();
+                }
                 break;
         }
     }
 
-    private static int GetFileName(string path) {
+    private static int GetFileName(string path) {  //legge il nome del file da un .txt e lo ritorna in intero
 
         string tmp = File.ReadAllText(Path.Combine(path, "fileName.txt"));
 
         return Convert.ToInt32(tmp);
     }
 
-    private static void RemoveProduct(string category){
-        List<string> filesList = new List<string>(Directory.GetFiles(Path.Combine(CATPATH, category)));
+    private static void BuildDeleteMenu(string category){                                               // deserializza i files .json e popola un menu di stringhe leggibile per selezionare il
+        List<string> filesList = new List<string>(Directory.GetFiles(Path.Combine(CATPATH, category))); // il prodotto/file da cancellare
         List<string> menuList = new List<string>();
 
         switch(category){
@@ -457,8 +658,10 @@ class Program{
 
                         string s1 = obj.brand;
                         tmp += " Brand: "+s1;
+
                         string s2 = obj.model;
                         tmp += " Model: "+s2;
+                        
                         string s3 = obj.mhz.ToString();
                         tmp += " Mhz: "+s3;
 
@@ -471,7 +674,7 @@ class Program{
                     string selection = AnsiConsole.Prompt(
                                         new SelectionPrompt<string>()
                                         .Title("\n[red]Select Product to remove[/]")
-                                        .PageSize(menuList.Count + 1)
+                                        .PageSize(menuList.Count + 4)
                                         .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                                         .AddChoices(menuList));
 
@@ -479,9 +682,7 @@ class Program{
                         case "Back":
                             break;
                         default:
-                            string tmp = selection.Remove(9,selection.Length-9).TrimEnd();
-                            
-                            File.Delete(Path.Combine(CATPATH, category, tmp));
+                            DeleteFile(selection, category);
 
                             break;
                     }
@@ -490,13 +691,8 @@ class Program{
                     Console.ReadKey();
                 }
                 menuList.Remove("Back");
-
-
-                AnsiConsole.WriteLine("Premi un tasto per continuare...");
-
-                Console.ReadKey();
-
                 break;
+
             case "mother board":
                 foreach(string s in filesList){
 
@@ -509,10 +705,106 @@ class Program{
 
                         string s1 = obj.brand;
                         tmp += " Brand: "+s1;
+                        
                         string s2 = obj.model;
                         tmp += " Model: "+s2;
+                        
                         string s3 = obj.socket.ToString();
                         tmp += " Socket: "+s3;
+
+                        menuList.Add(tmp);
+
+                    }
+                }
+                if(menuList.Count > 0){
+                    menuList.Add("Back");
+                    string selection = AnsiConsole.Prompt(
+                                        new SelectionPrompt<string>()
+                                        .Title("\n[red]Select a product to delete[/]")
+                                        .PageSize(menuList.Count + 4)
+                                        .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                        .AddChoices(menuList));
+
+                    switch(selection){
+                        case "Back":
+                            break;
+                        default:
+                            DeleteFile(selection, category);
+                            break;
+                    }
+                }else{
+                    Console.WriteLine("Motherboard category is empty!!!\n\nPress a key...");
+                    Console.ReadKey();
+                }
+                menuList.Remove("Back");
+                break;
+            case "ram":
+                foreach(string s in filesList){
+
+                    if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
+
+                        string tmp = Path.GetFileName(s) + "   ->  ";
+                        string json = File.ReadAllText(s);
+
+                        dynamic obj = JsonConvert.DeserializeObject(json);
+
+                        string s1 = obj.brand;
+                        tmp += " Brand: "+s1;
+                        
+                        string s2 = obj.size.ToString();
+                        tmp += " Size: "+s2+"Gb";           
+                        
+                        string s3 = obj.type;
+                        tmp += " Type: "+s3;
+
+                        string s4 = obj.mhz.ToString();
+                        tmp += " Mhz: "+s4;
+
+                        menuList.Add(tmp);
+
+                    }
+                }
+                if(menuList.Count > 0){
+                    menuList.Add("Back");
+                    string selection = AnsiConsole.Prompt(
+                                        new SelectionPrompt<string>()
+                                        .Title("\n[red]Select a product to delete[/]")
+                                        .PageSize(menuList.Count + 4)
+                                        .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                        .AddChoices(menuList));
+
+                    switch(selection){
+                        case "Back":
+                            break;
+                        default:
+                            DeleteFile(selection, category);
+                            break;
+                    }
+                }else{
+                    Console.WriteLine("Ram category is empty!!!\n\nPress a key...");
+                    Console.ReadKey();
+                }
+
+                menuList.Remove("Back");
+                break;
+            case "video card":
+                foreach(string s in filesList){
+
+                    if(!s.Contains("data.txt") && !s.Contains("fileName.txt")){
+
+                        string tmp = Path.GetFileName(s) + "   ->  ";
+                        string json = File.ReadAllText(s);
+
+                        dynamic obj = JsonConvert.DeserializeObject(json);
+
+                        string s1 = obj.brand;
+                        tmp += " Brand: "+s1;
+                        
+                        string s2 = obj.model;
+                        tmp += " Model: "+s2;           
+                        
+                        string s3 = obj.ram;
+                        tmp += " Ram: "+s3.ToString()+"Gb";
 
                         menuList.Add(tmp);
 
@@ -531,35 +823,20 @@ class Program{
                         case "Back":
                             break;
                         default:
-                            string tmp = selection.Remove(9,selection.Length-9).TrimEnd();
-                            
-                            File.Delete(Path.Combine(CATPATH, category, tmp));
-
+                            DeleteFile(selection, category);
                             break;
                     }
                 }else{
-                    Console.WriteLine("Motherboard category is empty!!!\n\nPress a key...");
+                    Console.WriteLine("Video Card category is empty!!!\n\nPress a key...");
                     Console.ReadKey();
                 }
+                
                 menuList.Remove("Back");
-
-
-                AnsiConsole.WriteLine("Premi un tasto per continuare...");
-
-                Console.ReadKey();
-                break;
-            case "ram":
-                AnsiConsole.WriteLine("Not implemented yet...");
-                Console.ReadKey();
-                break;
-            case "video card":
-                AnsiConsole.WriteLine("Not implemented yet...");
-                Console.ReadKey();
                 break;
         }
     }
 
-    private static List<string> GetCsvList(string path){
+    private static List<string> GetCsvList(string path){    // Ritorna solo i files .csv all'interno di una cartella
         List<string> csvFiles = new List<string>(); 
 
         foreach(string s in Directory.GetFiles(path)){
@@ -570,9 +847,20 @@ class Program{
         return csvFiles;
     }
 
-    private static void InsertProductCsv(string file){
-        bool success;
+    private static void DeleteFile(string selection, string category){  // Rimuove il file selezionato
+                                                                        // e verifica che non ci siano errori
+        string tmp = selection.Remove(9,selection.Length-9).TrimEnd();
 
+        try{
+            File.Delete(Path.Combine(CATPATH, category, tmp));
+        }catch(Exception e){
+            Console.WriteLine($"ERROR: {e.Message}\nPress a key...");
+            Console.ReadKey();
+        }
+    }
+
+    private static void InsertProductCsv(string file){          // Legge un file .csv e iserisce tutti i prodotti all'interno
+                                                                // creando per ognuno un file .json
         string path = Path.Combine(CSVPATH, file);
         
         string[] lines = File.ReadAllLines(path); 
@@ -647,6 +935,76 @@ class Program{
 
                         File.WriteAllText(Path.Combine(CATPATH, prodotti[i][0], "fileName.txt"), (mbFileName+1).ToString());
                     break;
+
+                case "ram":
+                    brand = "";
+                    size = new int();
+                    type = "";
+                    mhz = new int();                    
+
+                    ramFileName = GetFileName(Path.Combine(CATPATH, prodotti[i][0]));
+
+                    for(int j = 1; j < prodotti[i].Length; j++){
+                        brand = prodotti[i][1];
+
+                        if(prodotti[i][j].Contains("type")){
+                            
+                            type = prodotti[i][j].Split(":").Last();
+
+                        }else if(prodotti[i][j].Contains("mhz")){
+
+                            int.TryParse(prodotti[i][j].Split(":").Last(), out int result);
+                        
+                            mhz = result;
+
+                        }else if(prodotti[i][j].Contains("size")){
+
+                            int.TryParse(prodotti[i][j].Split(":").Last(), out int result);
+                        
+                            size = result;
+                        }
+                    }
+
+                    string jsonRamPath = Path.Combine(CATPATH, prodotti[i][0], ramFileName.ToString() + ".json");
+
+                    using (StreamWriter sw = new StreamWriter(jsonRamPath)){ 
+                        sw.Write(JsonConvert.SerializeObject(new {brand, size, type, mhz}, Formatting.Indented));
+                    }
+
+                    File.WriteAllText(Path.Combine(CATPATH, prodotti[i][0], "fileName.txt"), (ramFileName + 1).ToString());
+
+                    break;
+                case "video card":
+
+                    brand = "";
+                    model = "";
+                    ram = new int();
+                    
+                    videoCardFileName = GetFileName(Path.Combine(CATPATH, prodotti[i][0]));
+
+                    for(int j = 1; j < prodotti[i].Length; j++){
+                        brand = prodotti[i][1];
+
+                        if(prodotti[i][j].Contains("model")){
+                            
+                            model = prodotti[i][j].Split(":").Last();
+
+                        }else if(prodotti[i][j].Contains("ram")){
+
+                            int.TryParse(prodotti[i][j].Split(":").Last(), out int result);
+                        
+                            ram = result;
+                        }
+                    }
+
+                    string jsonVideoCardPath = Path.Combine(CATPATH, prodotti[i][0], videoCardFileName.ToString() + ".json");
+
+                    using (StreamWriter sw = new StreamWriter(jsonVideoCardPath)){ 
+                        sw.Write(JsonConvert.SerializeObject(new {brand, model, ram}, Formatting.Indented));
+                    }
+
+                    File.WriteAllText(Path.Combine(CATPATH, prodotti[i][0], "fileName.txt"), (videoCardFileName + 1).ToString());
+                    break;
                 default:
                     break;
                 }
@@ -659,35 +1017,57 @@ class Program{
                                 .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                                 .AddChoices(new []{"Yes","No"}));
 
-        switch(question){
-            case "Yes":
-                File.Delete(Path.Combine(CSVPATH, file));
+        switch(question){   // Una volta caricato il file .csv il programma ci chiede se vogliamo conservare il file rinominandolo e assegnandogli 
+                            // l'estensione .csv.old
+            case "Yes":     // oppure cancellarlo
+                bool goForward = true;
+                try{
+                    
+                    File.Delete(Path.Combine(CSVPATH, file));
 
-                Console.WriteLine($"{file} is been deleted\n\nPress a key...");
-                Console.ReadKey();
+                }catch(Exception e){
+                    
+                    Console.WriteLine("\nThere was a problem...\n");
+                    Console.WriteLine($"ERROR --> {e.Message}\nPress a key...");
+                    goForward = false;
+                    Console.ReadKey();
+        
+                }
+                if(goForward){
+                    Console.WriteLine($"{file} is been deleted\n\nPress a key...");
+                    Console.ReadKey();
+                }
             break;
+
             case "No":
                 bool ok = true;
                 string newFile;
+
                 while(ok){
                     Console.Clear();
                     Console.WriteLine("Please enter a filename to archive the .csv: ");
-                    newFile= Console.ReadLine();
+                    newFile = Console.ReadLine();
 
-                    try{
-                        File.Move(Path.Combine(CSVPATH, file),Path.Combine(CSVPATH, newFile) + ".csv.old", false);
+                    if(newFile != ""){
+                        try{
+                            File.Move(Path.Combine(CSVPATH, file),Path.Combine(CSVPATH, newFile) + ".csv.old", false);
 
-                        Console.WriteLine($"File successfully archived as {newFile}.csv.old");
-                        Console.ReadKey();
-                        ok = false;
+                            Console.WriteLine($"File successfully archived as {newFile}.csv.old");
+                            Console.ReadKey();
+                            ok = false;
 
-                    }catch(Exception e){
-                        Console.WriteLine("\nThere was a problem...\n");
-                        Console.WriteLine($"ERROR --> {e.Message}\nPress a key...");
+                        }catch(Exception e){
+                            Console.WriteLine("\nThere was a problem...\n");
+                            Console.WriteLine($"ERROR --> {e.Message}\nPress a key...");
+                            Console.ReadKey();
+                        }
+                    }else{
+                        Console.WriteLine("File name can't be empty...\nPress a key...");
                         Console.ReadKey();
                     }
 
                 }
+
             break;
         }
     }

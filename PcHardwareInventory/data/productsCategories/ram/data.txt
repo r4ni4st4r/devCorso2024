@@ -1,4 +1,4 @@
 brand,string
 size,int
 tipe,string
-Mhz,int
+mhz,int
