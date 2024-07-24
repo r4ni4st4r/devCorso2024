@@ -2,23 +2,27 @@
 # in questo caso di un negozio di hardware informatico
 # ma che potrà essere facilmente adattata a diversi ambiti.
 
-#
-#
 
 
-## Definizione dei Requisiti e Analisi:
+## Definizione delle funzionalità di base:
 
--   [ ] L'applicazione dovrà essere in grado di gestire il magazzino di uno store (generico)
--   [ ] Capacità di inserire, rimuovere e modificare prodotti manualmente
--   [ ] Gestire la persistenza dei dati tramite cartelle e singoli file .json
--   [ ] Possibilità di caricare prodotti tramite file .csv
--   [ ] All'aggiunta della categoria modificare i campi del .csv (Non so se è possibile)
--   [ ] I possibili utilizzatori saranno tutti i gestori di store (fisici/online)
+-   [x] L'applicazione dovrà essere in grado di gestire il magazzino di uno store (generico)
+-   [x] Capacità di inserire e rimuovere prodotti manualmente
+-   [x] Gestire la persistenza dei dati tramite cartelle e singoli file .json
+-   [x] Possibilità di caricare prodotti tramite file .csv
+-   [x] I possibili utilizzatori saranno tutti i gestori di store (fisici/online)
 
 ## Pianificazione e Design dell'Architettura:
 
--  [x] Progetta l'interfaccia utente e l'esperienza utente (UI/UX).
-    L'interfaccia è stata implementata usando Spectre Console sfruttando le funzionalità dei menù a scelta multipla e le tabelle.
+-   [x] Progetta l'interfaccia utente e l'esperienza utente (UI/UX).
+        L'interfaccia sarà implementata usando Spectre Console sfruttando le funzionalità dei menù a scelta multipla, le tabelle e il testo colorato.
+
+## TODO List
+
+-   [ ] Valutare una ridefinizione dei prodotti ad esempio usando le classi object o dynamic 
+-   [ ] Implementare le funzioni di ordinamento grazie alla migliore accessibilità dei dati 
+-   [ ] Implementare la funzione modifica
+-   [ ] Considerare la possibilita di riprogettare l'oggetto prodotto -> da differenti tipi di oggetto all'oggetto singolo
 
 ## Appunti durante la scrittura del codice:
 
@@ -30,7 +34,7 @@ cpu -> *brand , *model , *mhz
 video card -> *brand, *model, *ram
 mother board -> *brand, *model, socket
 ram -> *brand, *size, type, *mhz 
-
+`
 
 
 

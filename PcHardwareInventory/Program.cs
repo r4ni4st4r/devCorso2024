@@ -1,16 +1,13 @@
 ﻿using Spectre.Console;
 using Newtonsoft.Json;
-using System.Collections;
 using System.Runtime.InteropServices;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.VisualBasic.FileIO;
 
 class Program{
-    const string CSVPATH = @".\data\csvFiles";                                      // Path per i files .csv da importare
-    const string CATPATH = @".\data\productsCategories";                            //  Path per le cartelle corrispondenti alle varie categorie di prodotto
+    //const string CSVPATH = "C:\\Users\\francesco\\Documents\\workspace\\devCorso2024\\PcHardwareInventory\\data\\csvFiles";
+    //const string CATPATH = "C:\\Users\\francesco\\Documents\\workspace\\devCorso2024\\PcHardwareInventory\\data\\productsCategories";
+
+    const string CSVPATH = "data\\csvFiles";                                      // Path per i files .csv da importare
+    const string CATPATH = "data\\productsCategories";                            //  Path per le cartelle corrispondenti alle varie categorie di prodotto
                                                                                     //  cpu - mother board - video card - ram
     const string PROPERTIESFILE = "data.txt";                                       // file all'interno di ogni cartella categoria con le coppie proprietà/tipo di dato 
     static List<string> propertiesDataType = new List<string>();                    // Lista per i tipi di dati delle categorie
