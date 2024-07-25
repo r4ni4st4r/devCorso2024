@@ -43,11 +43,12 @@ flowchart TD
 
 ## TODO List:
 
+-   [ ] Implementare la funzione modifica
 -   [ ] Valutare una ridefinizione dei prodotti ad esempio usando le classi object o dynamic 
 -   [ ] Implementare le funzioni di ordinamento grazie alla migliore accessibilità dei dati 
--   [ ] Implementare la funzione modifica
 -   [ ] Considerare la possibilita di riprogettare l'oggetto prodotto -> da differenti tipi di oggetto all'oggetto singolo
 -   [ ] Ottimizzazione delle funzioni
+-   [ ] Rimuovere la funzionalità obsoleta della lettura delle proprietà dal file data.txt se non più necessaria
 
 ## Sviluppo dei Componenti:
 
@@ -90,7 +91,7 @@ I file.json dei prodotto sono strutturati in questo modo. Ogni file contiene un 
     Se si sceglie di caricare da un file.csv il programma legge da una cartella tutti i file .csv e 
     propone all'utente da quale caricare (singolo o multiplo inserimento a seconda del file).
 
-I file.cvs dei prodotto sono strutturati in questo modo con le prime due proprietà comuni a tutti
+I file.cvs dei prodotto sono strutturati in questo modo, con le prime due proprietà comuni a tutti
 e le altre gestite con il prefisso "nomeProprieta:".
 
 ```csv

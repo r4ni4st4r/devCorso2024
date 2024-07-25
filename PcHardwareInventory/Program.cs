@@ -30,8 +30,8 @@ class Program{
         string selection = "";
         List<string> categories = CategoryOrPropertiesList();
         
-        string[] addProductSelection = new string[] {"Insert manually", "Insert from .csv file", "Back",};              //array di tringhe con le parti fisse dei menu
-        string[] manageWarehouseSelection = new string[] {"View Products", "Add Product", "Remove Product", "Exit",};   //array di tringhe con le parti fisse dei menu
+        string[] addProductSelection = new string[] {"Insert manually", "Insert from .csv file", "Back",};                              //array di tringhe con le parti fisse dei menu
+        string[] manageWarehouseSelection = new string[] {"View Products", "Add Product", "Modify Product", "Remove Product", "Exit",}; //array di tringhe con le parti fisse dei menu
 
         while(true){
             Console.Clear();
@@ -69,7 +69,7 @@ class Program{
                     break;
 
                 case "Add Product":                                         // Selezione che permette di inserire un prodotto manualmente selezionando la categoria
-                    selection = AnsiConsole.Prompt(                         // o tramite la lettura di un file .csv
+                    selection = AnsiConsole.Prompt(                         // o tramite la lettura di un file.csv
                     new SelectionPrompt<string>()
                         .Title("\n[red]Product insertion[/]")
                         .PageSize(addProductSelection.Length + 1)
@@ -130,7 +130,49 @@ class Program{
                     }
 
                     break;
+                case "Modify Product":
+                    if(categories.Count > 0){
+                        categories.Add("Back");
+                        selection = AnsiConsole.Prompt(
+                            new SelectionPrompt<string>()
+                            .Title("\n[red]Select a product to modify[/]")
+                            .PageSize(categories.Count + 1)
+                            .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                            .AddChoices(categories));
 
+                        switch(selection){
+                            case "Back":
+                                break;
+                            default:
+                                if(categories.Count > 0){
+                                    categories.Add("Back");
+                                    selection = AnsiConsole.Prompt(
+                                                    new SelectionPrompt<string>()
+                                                    .Title("\n[red]Select a product to remove[/]")
+                                                    .PageSize(categories.Count + 1)
+                                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                                    .AddChoices(categories));
+
+                        switch(selection){
+                            case "Back":
+                                break;
+                            default:
+                                BuildRemoveOrModifyMenu(selection, false);
+                                break;
+                        }
+                    }else{
+                        Console.WriteLine("You have to add a Product Category\n\nPress a key...");
+                        Console.ReadKey();
+                    }
+                    categories.Remove("Back");
+                                break;
+                        }
+                    }else{
+                        Console.WriteLine("You have to add a Product Category\n\nPress a key...");
+                        Console.ReadKey();
+                    }
+                    categories.Remove("Back");
+                    break;
                 case "Remove Product":           // Selezione che permette di rimuovere un prodotto selezionandolo all'interno della sua categoria
                     if(categories.Count > 0){
                         categories.Add("Back");
@@ -145,7 +187,7 @@ class Program{
                             case "Back":
                                 break;
                             default:
-                                BuildDeleteMenu(selection);
+                                BuildRemoveOrModifyMenu(selection, true);
                                 break;
                         }
                     }else{
@@ -159,19 +201,6 @@ class Program{
                     return;
             }
         }
-    }
-
-    private static List<string> CsvFilesList(string path){
-        List<string> TempCsv = new List<string>(Directory.GetFiles(path)); 
-
-        if(TempCsv.Count > 0){
-            for(int i = 0; i < TempCsv.Count; i++){
-                TempCsv[i] = TempCsv[i].Remove(0,CSVPATH.Length+1);
-            }
-
-            return TempCsv;
-        }else
-            return new List<string>();
     }
 
     private static List<string> CategoryOrPropertiesList([Optional] string category){   // funzione che restituisce una lista di categorie se non è presente
@@ -348,6 +377,7 @@ class Program{
             case "video card":
                 success = true;
                 videoCardFileName = GetFileName(Path.Combine(CATPATH, item));
+
 
                 brand = "";
                 model = "";
@@ -637,7 +667,7 @@ class Program{
         return Convert.ToInt32(tmp);
     }
 
-    private static void BuildDeleteMenu(string category){                                               // deserializza i files .json e popola un menu di stringhe leggibile per selezionare il
+    private static void BuildRemoveOrModifyMenu(string category, bool delete){  // deserializza i files .json e popola un menu di stringhe leggibile per selezionare il
         List<string> filesList = new List<string>(Directory.GetFiles(Path.Combine(CATPATH, category))); // il prodotto/file da cancellare
         List<string> menuList = new List<string>();
 
