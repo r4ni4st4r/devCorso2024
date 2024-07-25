@@ -1,8 +1,29 @@
 # Semplice applicazione console per la gestione di un magazzino
-# in questo caso di un negozio di hardware informatico
-# ma che potrà essere facilmente adattata a diversi ambiti.
+### in questo caso di un negozio di hardware informatico ma che potrà essere facilmente adattata a diversi ambiti.
 
 
+## Mermaid Diagram
+
+```mermaid
+flowchart TD
+    A[Manage Warehouse] -->B{Main Menu};
+    B ----> C[View Product];
+    B ----> D[Add Product];
+    B ----> E[Remove Product];
+    B ----> F[Exit];
+    C -- products --> G[View Spectre Table];
+    C -- Back -->B{Main Menu};
+    D -- Insert Manually --> H[Select Type]; 
+    D -- Insert from .csv file --> I[Insert Product];
+    D -- Back -->B{Main Menu};
+    H -- products --> I[Insert Product];
+    H -- Back -->B{Main Menu};
+    I ---->B{Main Menu};
+    G ---->B{Main Menu};
+    E -- products --> L[Product to Remove Selection];
+    E -- Back -->B{Main Menu};
+    L ---->B{Main Menu};
+```
 
 ## Definizione delle funzionalità di base:
 
@@ -65,9 +86,9 @@ I file.json dei prodotto sono strutturati in questo modo. Ogni file contiene un 
 }
 ```
 
-Il nome del file è univoco e tiene conto delle cancellazioni.
-Se si sceglie di caricare da un file.csv il programma legge da una cartella tutti i file .csv e 
-propone all'utente da quale caricare (singolo o multiplo inserimento a seconda del file).
+    Il nome del file è univoco e tiene conto delle cancellazioni.
+    Se si sceglie di caricare da un file.csv il programma legge da una cartella tutti i file .csv e 
+    propone all'utente da quale caricare (singolo o multiplo inserimento a seconda del file).
 
 I file.cvs dei prodotto sono strutturati in questo modo con le prime due proprietà comuni a tutti
 e le altre gestite con il prefisso "nomeProprieta:".
@@ -87,11 +108,12 @@ Inizialmente l'applicazione gestisce 4 categorie di prodotti
 
 CPU - VIDEO CARD - MOTHER BOARD - RAM   Ognuno dei quali con le seguenti proprietà:
 
+```txt
 CPU -> brand , model , mhz
 MOTHER BOARD -> brand, model, socket
 RAM -> brand, size, type, mhz
 VIDEO CARD -> brand, model, ram
-
+```
  
 
 
