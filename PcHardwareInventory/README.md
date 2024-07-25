@@ -10,128 +10,91 @@
 -   [x] Capacità di inserire e rimuovere prodotti manualmente
 -   [x] Gestire la persistenza dei dati tramite cartelle e singoli file .json
 -   [x] Possibilità di caricare prodotti tramite file .csv
+-   [x] Gestione degli errori durante l'interazione con il filesystem
 -   [x] I possibili utilizzatori saranno tutti i gestori di store (fisici/online)
+
 
 ## Pianificazione e Design dell'Architettura:
 
 -   [x] Progetta l'interfaccia utente e l'esperienza utente (UI/UX).
         L'interfaccia sarà implementata usando Spectre Console sfruttando le funzionalità dei menù a scelta multipla, le tabelle e il testo colorato.
 
-## TODO List
+
+## TODO List:
 
 -   [ ] Valutare una ridefinizione dei prodotti ad esempio usando le classi object o dynamic 
 -   [ ] Implementare le funzioni di ordinamento grazie alla migliore accessibilità dei dati 
 -   [ ] Implementare la funzione modifica
 -   [ ] Considerare la possibilita di riprogettare l'oggetto prodotto -> da differenti tipi di oggetto all'oggetto singolo
-
-## Appunti durante la scrittura del codice:
-
-Inizialmente l'applicazione prevederà a gestire 4 categorie di prodotti
-
-lista prodotti -> cpu - video card - mother board - ram 
-
-cpu -> *brand , *model , *mhz
-video card -> *brand, *model, *ram
-mother board -> *brand, *model, socket
-ram -> *brand, *size, type, *mhz 
-`
-
-
+-   [ ] Ottimizzazione delle funzioni
 
 ## Sviluppo dei Componenti:
 
--  [ ] Sviluppa i modelli per la logica di business e l'accesso ai dati.
--  [ ] Crea le viste e i view model/controller per la presentazione.
--  [ ] Implementa la logica di controllo e l'integrazione tra i componenti.
+-   [x] Sviluppa i modelli per la logica di business e l'accesso ai dati.
+-   [x] Crea le viste e i view model/controller per la presentazione.
+-   [x] Implementa la logica di controllo e l'integrazione tra i componenti.
 
-## Integrazione e Middleware:
-
--  [ ] middleware per la gestione degli errori, logging, ecc.
--  [ ] Integra con database, API esterne o servizi.
 
 ## Test e Debugging:
 
--  [ ] Scrivi test unitari e test di integrazione.
--  [x] Esegui il debugging per individuare e risolvere i bug.
+-   [ ] Scrivi test unitari e test di integrazione.
+-   [x] Esegui il debugging per individuare e risolvere i bug.
 
 ## Documentazione:
 
--  [x] Documenta il codice e l'architettura.
--  [ ] Prepara manuali per gli sviluppatori e gli utenti.
-
-## Deployment e Manutenzione:
-
--  [ ] Prepara l'ambiente di produzione.
--  [ ] Effettua il deployment dell'applicazione.
--  [ ] Pianifica la manutenzione e gli aggiornamenti futuri.
-
-Ogni progetto è unico, quindi questa struttura può essere adattata in base alle specifiche esigenze del tuo progetto. Questo layout fornisce una guida generale per aiutarti a organizzare il tuo processo di sviluppo in modo più efficiente.
-
-# ESEMPIO DI PROGETTAZIONE DI UN'APPLICAZIONE CON C# E .NET
-
-Per vedere come funziona questo processo nella pratica, diamo un'occhiata a un esempio di progettazione di un'applicazione con C# e .NET.
-
-## GIOCO INDOVINA LA PAROLA
-
-In questo esempio, progetteremo un'applicazione per giocare al gioco indovina la parola.
-Indovina la parola è un gioco di indovinelli in cui un giocatore deve indovinare una parola segreta lettera per lettera.
-Il giocatore ha un numero limitato di tentativi per indovinare la parola.
-Ogni volta che il giocatore indovina una lettera corretta, la lettera viene rivelata nella parola.
-Se il giocatore indovina tutte le lettere della parola prima di esaurire i tentativi, vince. Altrimenti, perde.
-
-## DEFINIZIONE DEI REQUISITI E ANALISI
-
-Prima di iniziare a scrivere il codice, dobbiamo definire gli obiettivi dell'applicazione e le funzionalità chiave.
-In questo caso, l'obiettivo è creare un'applicazione console che consenta a un giocatore di giocare al gioco del indovina numero.
-- [x] L'applicazione deve .
-- [x] L'applicazione deve .
-- [x] L'applicazione deve .
-- [x] L'applicazione deve .
-- [x] L'applicazione deve .
-
-## PIANIFICAZIONE E DESIGN DELL'ARCHITETTURA
-
-Ora che abbiamo definito gli obiettivi e le funzionalità dell'applicazione, dobbiamo decidere come organizzare il codice.
-In questo caso, useremo un'architettura semplice senza modelli o database ma ci limiteremo ad interagire attraverso file di testo
-- [x] L'applicazione deve leggere una parola segreta da un file di testo.
-- [x] L'applicazione deve memorizzare le parole indovinate in un file di testo.
-- [x] L'applicazione deve memorizzare i tentativi rimanenti in un file di testo.
-- [x] L'applicazione deve memorizzare i tentativi falliti in un file di testo.
-- [ ] L'applicazione deve memorizzare la parola indovinata in un file di testo.
-
-## DEFINIZIONE DI STRUTTURE E CONVENZIONI
-
-Ora che abbiamo deciso come organizzare il codice, dobbiamo definire le convenzioni di codifica e i nomi standard.
-In questo caso, useremo le convenzioni di codifica di C# e .NET e i nomi standard.
-- [x] I nomi delle classi devono essere PascalCase.
-- [x] I nomi dei metodi devono essere PascalCase.
-- [x] I nomi delle variabili devono essere camelCase.
-- [x] I nomi delle costanti devono essere UPPERCASE.
-- [x] I nomi dei file devono essere lowercase.
-- [x] I nomi dei progetti devono essere PascalCase.
-- [x] I nomi dei namespace devono essere PascalCase.
+-   [x] Documenta il codice e l'architettura.
 
 
-## SVILUPPO DEI COMPONENTI
+## Funzionamento dell'applicazione:
 
-Ora che abbiamo definito le convenzioni di codifica e i nomi standard, possiamo iniziare a scrivere il codice.
-In questo caso, creeremo un progetto console per l'applicazione e un progetto di test per i test unitari.
-- [x] Creare un progetto console per l'applicazione.
-- [ ] Creare un progetto di test per i test unitari.
+L'applicazione console funziona con un semplice menu a scelta multipla. L'utente naviga tramite l'utilizzo 
+delle frecce direzionali. Dopo ogni selezione si entra nel sottomenu corrispondente dove nei campi "View Products" e "Remove Products"
+si seleziona la tipologia di prodotto.
+View Products legge dai files.json del prodotto selezionato e popola e visualizza una tabella Spectre.Console.
+"Add Product" si dovrà selezionare se si vuole inserire il prodotto
+manualmente o tramite file .csv.
 
-## TEST E DEBUGGING
+I file.json dei prodotto sono strutturati in questo modo. Ogni file contiene un prodotto.
 
-Ora che abbiamo integrato i componenti dell'applicazione, dobbiamo testarli e risolvere eventuali bug.
-In questo caso, scriveremo test unitari per i componenti dell'applicazione.
-- [ ] Scrivere test unitari per i componenti dell'applicazione.
-- [x] Eseguire il debugging per individuare e risolvere i bug.
+```json
+{
+  "property1": "string",
+  "property2": 1,
+  "property3": "string",
+  "property4": 2
+}
+```
 
-## DOCUMENTAZIONE
+Il nome del file è univoco e tiene conto delle cancellazioni.
+Se si sceglie di caricare da un file.csv il programma legge da una cartella tutti i file .csv e 
+propone all'utente da quale caricare (singolo o multiplo inserimento a seconda del file).
 
-Ora che abbiamo testato e risolto i bug dell'applicazione, dobbiamo documentare il codice e l'architettura.
-In questo caso, documenteremo il codice e l'architettura dell'applicazione.
-- [x] Documentare il codice e l'architettura dell'applicazione.
-- [ ] Documentare i test unitari.
-- [ ] Documentare la fase di Beta Testing.
+I file.cvs dei prodotto sono strutturati in questo modo con le prime due proprietà comuni a tutti
+e le altre gestite con il prefisso "nomeProprieta:".
 
-- [ ] Documentare la fase di post Beta Testing.
+```csv
+product,brand,prop1,prop2,prop3
+cpu,intel,model:i7,mhz:3500
+mother board,asus,model:xjz90,socket:m2
+ram,vdata, size:4, type:ddr3, mhz:2500
+video card,gigabyte,model:b650,ram:12
+```
+
+Finita l'operazione il file si potrà cancellare o archiviare.
+In "Remove Product" prima, tramite una funzione, viene popolato un menu con il nome del file e le proprietà del prodotto (per facilitare l'individuazione dell'elemento desiderato). In base alla selezione il file corrispondente viene cancellato. 
+
+Inizialmente l'applicazione gestisce 4 categorie di prodotti
+
+CPU - VIDEO CARD - MOTHER BOARD - RAM   Ognuno dei quali con le seguenti proprietà:
+
+CPU -> brand , model , mhz
+MOTHER BOARD -> brand, model, socket
+RAM -> brand, size, type, mhz
+VIDEO CARD -> brand, model, ram
+
+ 
+
+
+
+
+
