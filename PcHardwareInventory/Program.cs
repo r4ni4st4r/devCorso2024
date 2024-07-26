@@ -130,28 +130,15 @@ class Program{
                     }
 
                     break;
-                case "Modify Product":
+                case "Modify Product":  // Voce che permette di modificare un prodotto selezionandolo all'interno della sua categoria
                     if(categories.Count > 0){
                         categories.Add("Back");
                         selection = AnsiConsole.Prompt(
                             new SelectionPrompt<string>()
-                            .Title("\n[red]Select a product to modify[/]")
+                            .Title("\n[red]Select a product to remove[/]")
                             .PageSize(categories.Count + 1)
                             .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
                             .AddChoices(categories));
-
-                        switch(selection){
-                            case "Back":
-                                break;
-                            default:
-                                if(categories.Count > 0){
-                                    categories.Add("Back");
-                                    selection = AnsiConsole.Prompt(
-                                                    new SelectionPrompt<string>()
-                                                    .Title("\n[red]Select a product to remove[/]")
-                                                    .PageSize(categories.Count + 1)
-                                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
-                                                    .AddChoices(categories));
 
                         switch(selection){
                             case "Back":
@@ -165,15 +152,9 @@ class Program{
                         Console.ReadKey();
                     }
                     categories.Remove("Back");
-                                break;
-                        }
-                    }else{
-                        Console.WriteLine("You have to add a Product Category\n\nPress a key...");
-                        Console.ReadKey();
-                    }
-                    categories.Remove("Back");
+
                     break;
-                case "Remove Product":           // Selezione che permette di rimuovere un prodotto selezionandolo all'interno della sua categoria
+                case "Remove Product":           // Voce che permette di rimuovere un prodotto selezionandolo all'interno della sua categoria
                     if(categories.Count > 0){
                         categories.Add("Back");
                         selection = AnsiConsole.Prompt(
@@ -219,7 +200,8 @@ class Program{
 
         }else{
             List<string> properties = new List<string>();
-            string line = "";
+            
+            string line;
             
             using(StreamReader sr = new StreamReader(Path.Combine(CATPATH, category, PROPERTIESFILE))){
                 while((line = sr.ReadLine())!= null){
@@ -298,8 +280,8 @@ class Program{
 
                 File.Create(path).Close();
 
-                using (StreamWriter sw = new StreamWriter(path)){                                           // creazione del file .json e generazione di unome file
-                    sw.Write(JsonConvert.SerializeObject(new {brand, model, mhz}, Formatting.Indented));    //  numerico progressivo e univoco
+                using (StreamWriter sw = new StreamWriter(path)){                                           // creazione del file .json e generazione di un nome file
+                    sw.Write(JsonConvert.SerializeObject(new {brand, model, mhz}, Formatting.Indented));    // numerico progressivo e univoco
                 }
 
                 File.WriteAllText(Path.Combine(CATPATH, item, "fileName.txt"), (cpuFileName+1).ToString());
@@ -412,7 +394,7 @@ class Program{
                             }
                         }while(!success);
 
-                    }else if(properties[i] == "mhz"){
+                    }else if(properties[i] == "ram"){
                          do{
                             Console.Clear();
                             Console.WriteLine($"Insert an integer number for the {properties[i]} property: \n");
@@ -420,7 +402,7 @@ class Program{
                             success = int.TryParse(Console.ReadLine(), out int result);
                         
                             if(success){
-                                mhz = result;
+                                ram = result;
                             }else{
                                 Console.WriteLine("Please enter a valid integer\n\nPress a key...");
                                 Console.ReadKey();
@@ -641,7 +623,7 @@ class Program{
 
                             string brand = obj.brand;
                             string model = obj.model;
-                            string ram = obj.ram.ToString();
+                            int ram = obj.ram;
         
                             viewTable.AddRow(brand, model, ram.ToString() + " Gb");
                         }
@@ -684,13 +666,13 @@ class Program{
                         dynamic obj = JsonConvert.DeserializeObject(json);
 
                         string s1 = obj.brand;
-                        tmp += " Brand: "+s1;
+                        tmp += " [green]Brand[/]: "+s1;
 
                         string s2 = obj.model;
-                        tmp += " Model: "+s2;
+                        tmp += " [green]Model[/]: "+s2;
                         
                         string s3 = obj.mhz.ToString();
-                        tmp += " Mhz: "+s3;
+                        tmp += " [green]Mhz[/]: "+s3;
 
                         menuList.Add(tmp);
 
@@ -709,8 +691,10 @@ class Program{
                         case "Back":
                             break;
                         default:
-                            DeleteFile(selection, category);
-
+                            if(delete)
+                                DeleteFile(selection, category);
+                            else
+                                ModifyProduct(selection, category);
                             break;
                     }
                 }else{
@@ -725,19 +709,19 @@ class Program{
 
                     if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
 
-                        string tmp = Path.GetFileName(s) + "   ->  ";
+                        string tmp = Path.GetFileName(s)+"   ->  ";
                         string json = File.ReadAllText(s);
 
                         dynamic obj = JsonConvert.DeserializeObject(json);
 
                         string s1 = obj.brand;
-                        tmp += " Brand: "+s1;
+                        tmp += " [green]Brand[/]: "+s1;
                         
                         string s2 = obj.model;
-                        tmp += " Model: "+s2;
+                        tmp += " [green]Model[/]: "+s2;
                         
                         string s3 = obj.socket.ToString();
-                        tmp += " Socket: "+s3;
+                        tmp += " [green]Socket[/]: "+s3;
 
                         menuList.Add(tmp);
 
@@ -756,7 +740,10 @@ class Program{
                         case "Back":
                             break;
                         default:
-                            DeleteFile(selection, category);
+                            if(delete)
+                                DeleteFile(selection, category);
+                            else
+                                ModifyProduct(selection, category);
                             break;
                     }
                 }else{
@@ -770,22 +757,22 @@ class Program{
 
                     if(!s.Contains("data.txt")&&!s.Contains("fileName.txt")){
 
-                        string tmp = Path.GetFileName(s) + "   ->  ";
+                        string tmp = Path.GetFileName(s)+"   ->  ";
                         string json = File.ReadAllText(s);
 
                         dynamic obj = JsonConvert.DeserializeObject(json);
 
                         string s1 = obj.brand;
-                        tmp += " Brand: "+s1;
+                        tmp += " [green]Brand[/]: "+s1;
                         
                         string s2 = obj.size.ToString();
-                        tmp += " Size: "+s2+"Gb";           
+                        tmp += " [green]Size[/]: "+s2+"Gb";           
                         
                         string s3 = obj.type;
-                        tmp += " Type: "+s3;
+                        tmp += " [green]Type[/]: "+s3;
 
                         string s4 = obj.mhz.ToString();
-                        tmp += " Mhz: "+s4;
+                        tmp += " [green]Mhz[/]: "+s4;
 
                         menuList.Add(tmp);
 
@@ -804,7 +791,10 @@ class Program{
                         case "Back":
                             break;
                         default:
-                            DeleteFile(selection, category);
+                            if(delete)
+                                DeleteFile(selection, category);
+                            else
+                                ModifyProduct(selection, category);
                             break;
                     }
                 }else{
@@ -819,19 +809,19 @@ class Program{
 
                     if(!s.Contains("data.txt") && !s.Contains("fileName.txt")){
 
-                        string tmp = Path.GetFileName(s) + "   ->  ";
+                        string tmp = Path.GetFileName(s)+"   ->  ";
                         string json = File.ReadAllText(s);
 
                         dynamic obj = JsonConvert.DeserializeObject(json);
 
                         string s1 = obj.brand;
-                        tmp += " Brand: "+s1;
+                        tmp += " [green]Brand[/]: "+s1;
                         
                         string s2 = obj.model;
-                        tmp += " Model: "+s2;           
+                        tmp += " [green]Model[/]: "+s2;           
                         
-                        string s3 = obj.ram;
-                        tmp += " Ram: "+s3.ToString()+"Gb";
+                        string s3 = obj.ram.ToString();
+                        tmp += " [green]Ram[/]: "+s3+"Gb";
 
                         menuList.Add(tmp);
 
@@ -850,7 +840,10 @@ class Program{
                         case "Back":
                             break;
                         default:
-                            DeleteFile(selection, category);
+                            if(delete)
+                                DeleteFile(selection, category);
+                            else
+                                ModifyProduct(selection, category);
                             break;
                     }
                 }else{
@@ -859,6 +852,7 @@ class Program{
                 }
                 
                 menuList.Remove("Back");
+
                 break;
         }
     }
@@ -875,7 +869,7 @@ class Program{
     }
 
     private static void DeleteFile(string selection, string category){  // Rimuove il file selezionato
-                                                                        // e verifica che non ci siano errori
+        bool deleted = true;                                                      // e verifica che non ci siano errori
         string tmp = selection.Remove(9,selection.Length-9).TrimEnd();
 
         try{
@@ -883,8 +877,384 @@ class Program{
         }catch(Exception e){
             Console.WriteLine($"ERROR: {e.Message}\nPress a key...");
             Console.ReadKey();
+            deleted = false;
+        }
+
+        if(deleted){
+            Console.WriteLine("File successfully deleted!\nPress a key...");
+            Console.ReadKey();
         }
     }
+
+    private static void ModifyProduct(string selectionToModify, string category){
+        if(category == "cpu"){
+            
+            string file = selectionToModify.Remove(9,selectionToModify.Length-9).TrimEnd();
+
+            string json = File.ReadAllText(Path.Combine(CATPATH, category, file));
+
+            dynamic obj = JsonConvert.DeserializeObject(json);
+
+            List<string> propertySelection = new List<string>(new [] {"Brand","Model","Mhz","Back"});
+            
+            bool anotherOne = true;
+
+            while(anotherOne){
+                Console.Clear();
+                string selection = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Select a Property to Modify[/]")
+                                    .PageSize(propertySelection.Count + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(propertySelection));
+
+                switch(selection){
+                    case "Back":
+                        anotherOne = false;
+                        break;
+                    default:
+                        if(selection == "Brand"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.brand = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Model"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.model = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Mhz"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(Int32.TryParse(newProp, out int result)){
+                                    obj.mhz = result;
+                                }else{
+                                    Console.WriteLine("New value must be a integer!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }
+                        Console.Clear();
+                        string yesOrNot = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Do you want to modify another property?[/]")
+                                    .PageSize(2 + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(new []{"yes","no"}));
+                        switch(yesOrNot){
+                            case "yes":
+                                break;
+                            case "no":
+                                anotherOne = false;
+                                break;
+                        }
+
+                        
+                    break;
+                }
+            }
+            WriteJsonFile(obj, category, file);
+        }else if(category == "video card"){
+            string file = selectionToModify.Remove(9,selectionToModify.Length-9).TrimEnd();
+
+            string json = File.ReadAllText(Path.Combine(CATPATH, category, file));
+
+            dynamic obj = JsonConvert.DeserializeObject(json);
+
+            List<string> propertySelection = new List<string>(new [] {"Brand","Model","Ram","Back"});
+            
+            bool anotherOne = true;
+
+            while(anotherOne){
+                Console.Clear();
+                string selection = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Select a Property to Modify[/]")
+                                    .PageSize(propertySelection.Count + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(propertySelection));
+
+                switch(selection){
+                    case "Back":
+                        anotherOne = false;
+                        break;
+                    default:
+                        if(selection == "Brand"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.brand = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Model"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.model = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Ram"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(Int32.TryParse(newProp, out int result)){
+                                    obj.ram = result;
+                                }else{
+                                    Console.WriteLine("New value must be a integer!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }
+                        Console.Clear();
+                        string yesOrNot = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Do you want to modify another property?[/]")
+                                    .PageSize(2 + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(new []{"yes","no"}));
+                        switch(yesOrNot){
+                            case "yes":
+                                break;
+                            case "no":
+                                anotherOne = false;
+                                break;
+                        }
+
+                        
+                    break;
+                }
+            }
+            WriteJsonFile(obj, category, file);
+        }else if(category == "mother board"){
+
+            string file = selectionToModify.Remove(9,selectionToModify.Length-9).TrimEnd();
+
+            string json = File.ReadAllText(Path.Combine(CATPATH, category, file));
+
+            dynamic obj = JsonConvert.DeserializeObject(json);
+
+            List<string> propertySelection = new List<string>(new [] {"Brand", "Model", "Socket", "Back"});
+            
+            bool anotherOne = true;
+
+            while(anotherOne){
+                Console.Clear();
+                string selection = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Select a Property to Modify[/]")
+                                    .PageSize(propertySelection.Count + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(propertySelection));
+
+                switch(selection){
+                    case "Back":
+                        anotherOne = false;
+                        break;
+                    default:
+                        if(selection == "Brand"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.brand = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Model"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.model = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Socket"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(Int32.TryParse(newProp, out int result)){
+                                    obj.socket = result;
+                                }else{
+                                    Console.WriteLine("New value must be a integer!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }
+                        Console.Clear();
+                        string yesOrNot = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Do you want to modify another property?[/]")
+                                    .PageSize(2 + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(new []{"yes","no"}));
+                        switch(yesOrNot){
+                            case "yes":
+                                break;
+                            case "no":
+                                anotherOne = false;
+                                break;
+                        }
+
+                        
+                    break;
+                }
+            }
+
+            WriteJsonFile(obj, category, file);
+
+        }else if(category == "ram"){
+            string file = selectionToModify.Remove(9,selectionToModify.Length-9).TrimEnd();
+
+            string json = File.ReadAllText(Path.Combine(CATPATH, category, file));
+
+            dynamic obj = JsonConvert.DeserializeObject(json);
+
+            List<string> propertySelection = new List<string>(new [] {"Brand","Size","Type","Mhz","Back"});
+            
+            bool anotherOne = true;
+
+            while(anotherOne){
+                Console.Clear();
+                string selection = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Select a Property to Modify[/]")
+                                    .PageSize(propertySelection.Count + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(propertySelection));
+
+                switch(selection){
+                    case "Back":
+                        anotherOne = false;
+                        break;
+                    default:
+                        if(selection == "Brand"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.brand = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Size"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(Int32.TryParse(newProp, out int result)){
+                                    obj.size = result;
+                                }else{
+                                    Console.WriteLine("New value must be a integer!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+
+                        }else if(selection == "Type"){
+                            string newProp;
+
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(newProp!=""){
+                                    obj.type = newProp;
+                                }else{
+                                    Console.WriteLine("New value can't be empty!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }else if(selection == "Mhz"){
+                            string newProp;
+                            do{
+                                Console.WriteLine($"Please enter a new value for the {selection} property: ");
+                                newProp = Console.ReadLine();
+                                if(Int32.TryParse(newProp, out int result)){
+                                    obj.mhz = result;
+                                }else{
+                                    Console.WriteLine("New value must be a integer!\nPress a key...");
+                                    Console.ReadKey();
+                                }
+                            }while(newProp == "");
+                        }
+                        Console.Clear();
+                        string yesOrNot = AnsiConsole.Prompt(
+                                    new SelectionPrompt<string>()
+                                    .Title("\n[red]Do you want to modify another property?[/]")
+                                    .PageSize(2 + 1)
+                                    .MoreChoicesText("[grey](Move up and down to make your choice)[/]")
+                                    .AddChoices(new []{"yes","no"}));
+                        switch(yesOrNot){
+                            case "yes":
+                                break;
+                            case "no":
+                                anotherOne = false;
+                                break;
+                        }
+                    break;
+                }
+            }
+            WriteJsonFile(obj, category, file);
+        }
+    }
+
+    private static void WriteJsonFile(dynamic obj, string category, string file){
+        string jsonPath = Path.Combine(CATPATH, category, file);
+
+            bool success = true;
+
+            try{
+                using (StreamWriter sw = new StreamWriter(jsonPath)){ 
+                    sw.Write(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                }
+            }catch(Exception ex){
+                Console.WriteLine("\nThere was a problem...\n");
+                Console.WriteLine($"ERROR --> {ex.Message}\nPress a key...");
+                Console.ReadKey();
+                success = false;
+            }
+
+            if(success){
+                Console.WriteLine("Product successfully modified!\nPress a key...");
+                Console.ReadKey();
+            }
+    } 
 
     private static void InsertProductCsv(string file){          // Legge un file .csv e iserisce tutti i prodotti all'interno
                                                                 // creando per ognuno un file .json
@@ -1031,6 +1401,7 @@ class Program{
                     }
 
                     File.WriteAllText(Path.Combine(CATPATH, prodotti[i][0], "fileName.txt"), (videoCardFileName + 1).ToString());
+
                     break;
                 default:
                     break;
@@ -1083,9 +1454,9 @@ class Program{
                             Console.ReadKey();
                             ok = false;
 
-                        }catch(Exception e){
+                        }catch(Exception ex){
                             Console.WriteLine("\nThere was a problem...\n");
-                            Console.WriteLine($"ERROR --> {e.Message}\nPress a key...");
+                            Console.WriteLine($"ERROR --> {ex.Message}\nPress a key...");
                             Console.ReadKey();
                         }
                     }else{

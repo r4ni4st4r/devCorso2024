@@ -27,23 +27,24 @@ flowchart TD
 
 ## Definizione delle funzionalità di base:
 
--   [x] L'applicazione dovrà essere in grado di gestire il magazzino di uno store (generico)
--   [x] Capacità di inserire e rimuovere prodotti manualmente
--   [x] Gestire la persistenza dei dati tramite cartelle e singoli file .json
--   [x] Possibilità di caricare prodotti tramite file .csv
--   [x] Gestione degli errori durante l'interazione con il filesystem
--   [x] I possibili utilizzatori saranno tutti i gestori di store (fisici/online)
+- [x] L'applicazione dovrà essere in grado di gestire il magazzino di uno store (generico)
+- [x] Capacità di inserire e rimuovere prodotti manualmente
+- [x] Gestire la persistenza dei dati tramite cartelle e singoli file .json
+- [x] Possibilità di caricare prodotti tramite file .csv
+- [x] Gestione degli errori durante l'interazione con il filesystem
+- [x] I possibili utilizzatori saranno tutti i gestori di store (fisici/online)
 
 
 ## Pianificazione e Design dell'Architettura:
 
--   [x] Progetta l'interfaccia utente e l'esperienza utente (UI/UX).
+- [x] Progetta l'interfaccia utente e l'esperienza utente (UI/UX).
         L'interfaccia sarà implementata usando Spectre Console sfruttando le funzionalità dei menù a scelta multipla, le tabelle e il testo colorato.
 
 
 ## TODO List:
 
--   [ ] Implementare la funzione modifica
+-   [x] Implementare la funzione modifica
+-   [ ] Refactoring del codice
 -   [ ] Valutare una ridefinizione dei prodotti ad esempio usando le classi object o dynamic 
 -   [ ] Implementare le funzioni di ordinamento grazie alla migliore accessibilità dei dati 
 -   [ ] Considerare la possibilita di riprogettare l'oggetto prodotto -> da differenti tipi di oggetto all'oggetto singolo
