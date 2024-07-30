@@ -28,7 +28,7 @@ class Program{
 
     static void Main(string[] args){
         string selection = "";
-        List<string> categories = CategoryOrPropertiesList();
+        List<string> categories = CategoryList();
         
         string[] addProductSelection = new string[] {"Insert manually", "Insert from .csv file", "Back",};                              //array di tringhe con le parti fisse dei menu
         string[] manageWarehouseSelection = new string[] {"View Products", "Add Product", "Modify Product", "Remove Product", "Exit",}; //array di tringhe con le parti fisse dei menu
@@ -91,7 +91,7 @@ class Program{
                                     case "Back":
                                         break;
                                     default:
-                                        InsertProductManually(CategoryOrPropertiesList(selection), selection);
+                                        InsertProductManually(PropertiesList(selection), selection);
                                         break;
                                 }
                             }else{
@@ -117,7 +117,7 @@ class Program{
                                 switch(selection){
                                     default:
                                         InsertProductCsv(selection);
-                                        break; 
+                                        break;
                                     case "Back":
 
                                         break; 
@@ -183,11 +183,8 @@ class Program{
             }
         }
     }
-
-    private static List<string> CategoryOrPropertiesList([Optional] string category){   // funzione che restituisce una lista di categorie se non è presente
-        if(category == null){                                                           // il parametro o la liste delle proprietà se è presente il parametro category 
-
-            List<string> productsCategories = new List<string>(Directory.GetDirectories(CATPATH)); 
+    private static List<string> CategoryList(){
+        List<string> productsCategories = new List<string>(Directory.GetDirectories(CATPATH)); 
 
             if(productsCategories.Count > 0){
                 for(int i = 0; i < productsCategories.Count; i++){
@@ -197,21 +194,20 @@ class Program{
                 return productsCategories;
             }else
                 return new List<string>();
-
-        }else{
-            List<string> properties = new List<string>();
+    }
+    private static List<string> PropertiesList(string category){   // funzione che restituisce una lista di categorie se non è presente
+        List<string> properties = new List<string>();
+        string line;
             
-            string line;
-            
-            using(StreamReader sr = new StreamReader(Path.Combine(CATPATH, category, PROPERTIESFILE))){
-                while((line = sr.ReadLine())!= null){
-                    propertiesDataType.Add(line.Split(",").Last());
-                    properties.Add(line.Split(",").First());
-                }
+        using(StreamReader sr = new StreamReader(Path.Combine(CATPATH, category, PROPERTIESFILE))){
+            while((line = sr.ReadLine())!= null){
+                propertiesDataType.Add(line.Split(",").Last());
+                properties.Add(line.Split(",").First());
             }
+        }
 
             return properties;
-        }
+        
     }
 
     private static void InsertProductManually(List<string> properties, string item){    // Funzione che prende la lista delle proprietà del prodotto e la categoria 

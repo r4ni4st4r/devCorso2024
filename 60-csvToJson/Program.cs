@@ -9,7 +9,6 @@ class Program{
         for(int i = 0; i < lines.Length; i++){
             prodotti[i] = lines[i].Split(",");
         }
-
         for(int i = 0; i< prodotti.Length; i++){
             if(i!=0){
                 string path2 = @""+prodotti[i][0]+".json";
