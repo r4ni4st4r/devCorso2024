@@ -22,3 +22,9 @@ bootstrap
 
 it.z-library.rs
 
+**************** asp.net razor *******************
+
+www.w3schools.com
+
+flexbox froggy
+
