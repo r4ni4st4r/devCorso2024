@@ -30,3 +30,5 @@ flexbox froggy
 
 https://klingai.com/  -->> immagini e video intelligenza articiale
 
+
+https://colorhunt.co/  -->> colori predefiniti per fogli di stile

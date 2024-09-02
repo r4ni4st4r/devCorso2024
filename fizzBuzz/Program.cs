@@ -12,7 +12,6 @@ while(i < 101) {
     else if(i%5 == 0)
         Console.WriteLine($"{i} --> Buzz");
     else
-        Console.WriteLine($"{i}"); 
-    
+        Console.WriteLine($"{i}");
     i++;
 }
