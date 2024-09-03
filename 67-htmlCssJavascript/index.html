@@ -1,44 +1,70 @@
-<html>
-    <head>
-        <title>HTML</title>
-        <style>
-            h1{
-                color: red;
-            }
-            .p2{
-                color: purple;
-            }
-            #p1{
-                color: blue;
-            }
-        </style>
-        <!--foglio di stile esterno-->
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1 title="I'm a tooltip">CIAO</h1>
-        <p id="p1">questo è un paragrafo</p>
-        <p class="p2">questo è un altro paragrafo</p>
-        <p style="color: greenyellow">questo è un terzo paragrafo</p>
-        <!--stile esterno-->
-        <h2>CEEECCCCIOO</h2>
-        <p>questo è un quarto paragrafo</p>
-        <!--link-->
-        <a href="https://www.google.com/">POLLO</a>
-        <br>
-            <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg" width="30%" height="30%"> 
-        <br/>
-        <!--elenco ordinato con numeri-->
-        <ol>
-            <li>uno</li>
-            <li>due</li>
-            <li>tre</li>
-        </ol>
-        <!--elenco ordinato con numeri-->
-        <ul>
-            <li>uno</li>
-            <li>due</li>
-            <li>tre</li>
-        </ul>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mingzat&family=Sevillana&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>header</h1>
+    </header>
+    <nav>
+        <a href="#selection1">SEZIONE 1</a>
+        <a href="#selection2">SEZIONE 2</a>
+        <a href="#selection3">SEZIONE 3</a>
+    </nav>
+    <selection id="selection1">
+        <img src="">
+        <h2>SEZIONE 1</h2>
+        <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Rutrum hendrerit ipsum aliquam justo gravida lacinia est libero suscipit. 
+            Penatibus tristique montes fusce, proin tincidunt aenean tristique adipiscing. Quam odio dolor est sociosqu proin tortor eros volutpat. 
+            Habitasse cras neque natoque eget sagittis. Cubilia amet nullam netus aenean cubilia. Congue eros natoque amet venenatis, dictumst est curae. 
+            Penatibus ridiculus posuere felis turpis suspendisse mauris. Suspendisse mi vitae augue, cubilia ultrices augue.</p>
+            <ul>
+                <li>uno</li>
+                <li>due</li>
+                <li>tre</li>
+            </ul>
+    </selection>
+    <selection id="selection2">
+        <h2>SEZIONE 2</h2>
+        <p>Ultricies rhoncus habitant mollis eleifend quis adipiscing quis at litora. 
+            Senectus aliquam ridiculus nostra varius libero ac mollis diam. Lacinia fringilla arcu magnis dolor posuere faucibus. 
+            Pretium bibendum consequat accumsan dui convallis, tempor iaculis. Dolor mauris tortor leo mus aptent eros potenti. 
+            Consequat taciti semper elit vestibulum eleifend eget fusce. Netus pellentesque tempus ridiculus tempus imperdiet facilisis nostra. 
+            Placerat commodo phasellus conubia, tellus curabitur pellentesque ultrices.</p>
+            <ol>
+                <li>uno</li>
+                <li>due</li>
+                <li>tre</li>
+            </ol>
+    </selection>
+    <selection id="selection3">
+        <h2>SEZIONE 3</h2>
+        <p>Ut ante rutrum augue felis lobortis. Libero dictumst porta urna suspendisse congue quam mattis faucibus. 
+            Morbi pharetra ligula fringilla penatibus, adipiscing duis. Elementum id eu commodo curabitur habitant est volutpat. 
+            Ullamcorper cras vehicula dolor nascetur risus viverra nisl id. Massa eu scelerisque penatibus taciti inceptos. 
+            Mauris dis nascetur montes platea curabitur aptent. 
+            Fringilla purus rhoncus himenaeos ipsum ad? Taciti orci elit laoreet aptent ut in sed gravida pretium.</p>
+    </selection>
+    <table>
+        <tr>
+            <th>intestazione 1</th>
+            <th>intestazione 2</th>
+        </tr>
+        <tr>
+            <td>contenuto 1</td>
+            <td>contenuto 2</td>
+        </tr>
+    </table>
+    <a href="#selection1">Torna su</a>
+    <footer>
+        <h1>Footer</h1>
+    </footer>
+</body>
 </html>

@@ -7,8 +7,8 @@ class Program{
     //const string CATPATH = "C:\\Users\\francesco\\Documents\\workspace\\devCorso2024\\PcHardwareInventory\\data\\productsCategories";
 
     const string CSVPATH = @".\data\csvFiles";                                      // Path per i files .csv da importare
-    const string CATPATH = @".\data\productsCategories";                            //  Path per le cartelle corrispondenti alle varie categorie di prodotto
-                                                                                    //  cpu - mother board - video card - ram
+    const string CATPATH = @".\data\productsCategories";                            // Path per le cartelle corrispondenti alle varie categorie di prodotto
+                                                                                    // cpu - mother board - video card - ram
     const string PROPERTIESFILE = "data.txt";                                       // file all'interno di ogni cartella categoria con le coppie proprietà/tipo di dato 
     static List<string> propertiesDataType = new List<string>();                    // Lista per i tipi di dati delle categorie
     static int cpuFileName = GetFileName(Path.Combine(CATPATH, "cpu"));             // File intero con il successivo nome file per la categoria cpu
@@ -188,7 +188,7 @@ class Program{
 
             if(productsCategories.Count > 0){
                 for(int i = 0; i < productsCategories.Count; i++){
-                    productsCategories[i] = productsCategories[i].Remove(0, CATPATH.Length+1);
+                    productsCategories[i] = productsCategories[i].Remove(0, CATPATH.Length + 1);
                 }
                 
                 return productsCategories;
@@ -223,7 +223,7 @@ class Program{
 
                 for(int i = 0;i < properties.Count; i++){
                     if(properties[i] == "mhz"){
-
+                            
                         do{
                             Console.Clear();
                             Console.WriteLine($"Insert an integer number for the {properties[i]} property: \n");
