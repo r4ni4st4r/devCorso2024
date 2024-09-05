@@ -1,0 +1,36 @@
+header{
+    background-color: #E9EFEC;
+}
+
+.h-flex-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.h-flex-item{
+    font-family: "Nerko One", cursive;
+    text-align: center;
+    color: #16423C;
+    background-color: #C4DAD2;
+}
+
+#h-title{
+    font-size: xx-large;
+    height: 200px;
+    width: 200px;
+}
+
+#h-img{
+    height: 118px;
+    width: 133px;
+}
+
+#h-img img{
+    height: 100%;
+    width: 100%;
+}
+
+#h-contacts{
+    
+}

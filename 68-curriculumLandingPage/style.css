@@ -1,26 +1,93 @@
-header{
-    background-color: #E9EFEC;
+*{
+    margin: 0;
+    font-family: "Acme", sans-serif;
 }
 
-.flex-container-h{
+header {
+    background-color: #624CAB;
+    position: fixed;
+    width: 100vw;
+    margin: 0 20 20 20;
+}
+
+header h1 {
+    justify-content: center;
+    color: #C1CEFE;
+    width: 100%;
     display: flex;
     flex-direction: row;
-
-}
-
-.flex-item-h{
-    margin: 50px;
-    height: 200px;
-    width: 200px;
-    font-family: "Nerko One", cursive;
-    font-size: xx-large;
     text-align: center;
-    color: #16423C;
-    background-color: #C4DAD2;
 }
 
+header h1 p {
+    font-size: larger;
+}
 
-img{
-    height: 100%;
-    width: 100%;
+#title-center {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+header nav {
+    background-color: #758ECD;
+    text-align: center;
+    justify-content: space-around;
+    display: flex;
+}
+
+header nav a {
+    color: #C1CEFE;
+    text-decoration: none;
+    padding: 1rem;
+    font-size: large;
+}
+
+header nav a:hover {
+    background-color: #A0DDFF;
+    color: #624CAB;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #624CAB;
+    border-radius: 5px;
+    width: 85%;
+}
+
+@media screen and (min-width:320px) and (max-width: 480px) {
+    body {
+        background-color: white;
+      }
+}
+@media screen and (min-width:481px) and (max-width: 768px) {
+    body {
+        background-color: green;
+      }
+      header h1 p{
+        font-size: 40px;
+      }
+}
+@media screen and (min-width:769px) and (max-width: 1024px)  {
+    body {
+      background-color: rgb(200, 255, 0);
+    }
+    header h1 {
+        flex-direction: column;
+    }
+}
+@media screen and (min-width:1025px) and (max-width: 1200px) {
+    body {
+      background-color: red;
+    }
+    header h1 {
+        flex-direction: column;
+    }
+}
+@media screen and (min-width:1201px) {
+    body {
+      background-color: blue;
+    }
 }

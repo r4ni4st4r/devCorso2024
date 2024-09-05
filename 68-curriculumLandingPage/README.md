@@ -3,9 +3,8 @@
 ## Definizione delle funzionalita:
 
 - [X] Selezione del layout
-- [ ] Selezione della palette di colori
-- [ ] Selezione font
-- [ ] Selezione set di icone
+- [X] Selezione della palette di colori
+- [X] Selezione set di icone
 - [ ] Impostazione del layout della pagina
 - [ ] Creazione del foglio di stile
 
