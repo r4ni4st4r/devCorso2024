@@ -3,11 +3,16 @@
     font-family: "Acme", sans-serif;
 }
 
+body {
+    background-color: #cdc1ff;
+}
+
 header {
     background-color: #624CAB;
     position: fixed;
     width: 100vw;
-    margin: 0 20 20 20;
+    top: 0;
+    margin-bottom: 20px;
 }
 
 header h1 {
@@ -17,6 +22,7 @@ header h1 {
     display: flex;
     flex-direction: row;
     text-align: center;
+    
 }
 
 header h1 p {
@@ -29,17 +35,18 @@ header h1 p {
 }
 
 header nav {
+    font-size: 30px;
     background-color: #758ECD;
     text-align: center;
     justify-content: space-around;
     display: flex;
+    flex-wrap: wrap;
 }
 
 header nav a {
     color: #C1CEFE;
     text-decoration: none;
     padding: 1rem;
-    font-size: large;
 }
 
 header nav a:hover {
@@ -50,11 +57,55 @@ header nav a:hover {
 .container {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    padding: 20px;
+    /*margin-top: 220px;*/
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     border: 1px solid #624CAB;
     border-radius: 5px;
     width: 85%;
+    z-index: 3000;
+}
+
+section {
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 220px;
+    margin-top: -220px;
+}
+
+section p{
+    /*padding: 40px;*/
+}
+
+section img{
+  
+    /*padding: 20px;*/
+    margin-bottom: 50px;
+}
+
+section h2{
+    /*padding-left: 40px;*/
+}
+
+ul.school{
+    list-style-image: url('school.svg');
+}
+
+ul.work{
+    list-style-image: url('work.svg');
+}
+
+footer {
+    color: #C1CEFE;
+    background-color: #624CAB;
+    width: 100%;
+}
+
+footer p{
+    text-align: center;
 }
 
 @media screen and (min-width:320px) and (max-width: 480px) {
@@ -80,7 +131,7 @@ header nav a:hover {
 }
 @media screen and (min-width:1025px) and (max-width: 1200px) {
     body {
-      background-color: red;
+      background-color: #cdc1ff;;
     }
     header h1 {
         flex-direction: column;
