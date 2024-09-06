@@ -16,26 +16,22 @@ body {
 header {
     background-color: #624CAB;
     width: 100vw;
+    margin:0;
 }
 
 header h1 {
     justify-content: center;
     color: #C1CEFE;
     width: 100%;
-    display: flex;
-    flex-direction: row;
     text-align: center; 
     margin: 0;  
 }
 
 header h1 p {
     font-size: larger;
+    margin:0;
 }
 
-#title-center {
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 /*
 header nav {
@@ -48,13 +44,16 @@ header nav {
 }*/
 
 nav {
-    font-size: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
     text-align: center;
-    justify-content: space-around;
     position: sticky;
     top: 0;
     overflow: hidden;
     background-color: #758ECD;
+    width: 100%;
+    justify-content:space-around;
 }
 
 nav a {
@@ -79,11 +78,12 @@ header nav a:hover {
     color: #624CAB;
 }
 */
+
 .container {
     display: flex;
     flex-direction: column;
-    /*margin-top: 240px;*/
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid #624CAB;
@@ -92,36 +92,32 @@ header nav a:hover {
 }
 
 section {
-    padding: 20px;
-    margin: 10px;
+    padding: 45px;
+    /*margin: 10px;*/
     display: flex;
     flex-direction: column;
-    /*padding-top: 220px;
-    margin-top: -220px;*/
 }
 
 section p{
-    padding: 20px;
+    /*padding: 20px;*/
 }
 
 section img{
-    /*padding: 20px;*/
     width: 30%;
     height: 30%;
 }
 
 section h2{
-    margin-bottom: 20px;
-    /*padding-left: 40px;*/
+    /*margin-bottom: 20px;*/
     color: #624CAB;
 }
 
 ul.school{
-    list-style-image: url('school.svg');
+    list-style-image: url('/devCorso2024/68-curriculumLandingPage/school.svg');
 }
 
 ul.work{
-    list-style-image: url('work.svg');
+    list-style-image: url('/devCorso2024/68-curriculumLandingPage/work.svg');
 }
 
 li{
@@ -132,6 +128,10 @@ li{
 li:nth-child(odd){
     background-color: #A0DDFF;
     
+}
+
+.img-thumbnail{
+    color: #624CAB;
 }
 
 /*

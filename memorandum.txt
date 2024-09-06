@@ -36,3 +36,5 @@ https://colorhunt.co/  -->> colori predefiniti per fogli di stile
 https://pixabay.com/ -->> foto gratis
 
 https://unsplash.com/  -->>  foto gratis
+
+tailwindcss -->> alternativa a bootstrap
