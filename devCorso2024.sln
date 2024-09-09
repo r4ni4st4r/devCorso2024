@@ -59,6 +59,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "64-gestireLeDate", "64-gest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "65-mathLibrary", "65-mathLibrary\65-mathLibrary.csproj", "{CF225D32-1098-47B6-B070-C3A94EEF46E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "71-sqlitePlusCode", "71-sqlitePlusCode\71-sqlitePlusCode.csproj", "{EA0B5320-FCFB-4A68-9A40-E6A6CAB6194B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "72-sqlitePlusCode2", "72-sqlitePlusCode2\72-sqlitePlusCode2.csproj", "{EA07D392-D393-4A80-AA90-7DD9727C0139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +177,14 @@ Global
 		{CF225D32-1098-47B6-B070-C3A94EEF46E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF225D32-1098-47B6-B070-C3A94EEF46E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF225D32-1098-47B6-B070-C3A94EEF46E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA0B5320-FCFB-4A68-9A40-E6A6CAB6194B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA0B5320-FCFB-4A68-9A40-E6A6CAB6194B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA0B5320-FCFB-4A68-9A40-E6A6CAB6194B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA0B5320-FCFB-4A68-9A40-E6A6CAB6194B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA07D392-D393-4A80-AA90-7DD9727C0139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA07D392-D393-4A80-AA90-7DD9727C0139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA07D392-D393-4A80-AA90-7DD9727C0139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA07D392-D393-4A80-AA90-7DD9727C0139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
