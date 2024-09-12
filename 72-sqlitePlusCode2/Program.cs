@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System.Data;
+using System.Data.SQLite;
 
 class Program{
     static void Main(string[] args){
@@ -101,12 +102,20 @@ class Program{
     static void VisualizzaProdotti(){
         SQLiteConnection connection = new SQLiteConnection($"Data Source=database.db;version=3;");
         connection.Open();
-        string sql = $"SELECT * FROM prodotti JOIN categorie ON prodotti.id_categoria = categorie.id;";
+        string sql = @"
+                    SELECT prodotti.id, prodotti.nome, prodotti.prezzo, prodotti.quantita, categorie.nome AS nome_categoria 
+                    FROM prodotti
+                    JOIN categorie ON prodotti.id_categoria = categorie.id";
+        /*string sql = $"SELECT * FROM prodotti JOIN categorie ON prodotti.id_categoria = categorie.id;";*/
         SQLiteCommand command = new SQLiteCommand(sql, connection);
         SQLiteDataReader reader = command.ExecuteReader();
         Console.Clear();
+        int i = 1;
         while(reader.Read()){
-            Console.WriteLine($"id: {reader["id"]}, nome: {reader["nome"]}, prezzo: {reader["prezzo"]}, quantita: {reader["quantita"]}, categoria: {reader["id_categoria"]}");
+            //Console.WriteLine(" ------------- " + reader.GetName(i));
+            Console.WriteLine($"id: {reader["id"]}, nome: {reader["nome"]}, prezzo: {reader["prezzo"]}, quantita: {reader["quantita"]}, categoria: {reader["nome_categoria"]}");
+            Console.ReadKey();
+            i++;
         }
         Console.ReadKey();
         connection.Close();
@@ -120,13 +129,13 @@ class Program{
         SQLiteDataReader reader = command.ExecuteReader();
         Console.Clear();
         while(reader.Read()){
-            Console.WriteLine($"id: {reader["id"]} -- nome: {reader["nome"]}");
+            Console.WriteLine($"id: {reader["id"]} <--> nome: {reader["nome"]}");
         }
         connection.Close();
     }
     static void Elimina(int code){
         Console.Clear();
-        if(code==10){
+        if(code == 10){
             Console.WriteLine("Inserisci il nome del prodotto");
             string name = Console.ReadLine();
             SQLiteConnection connection = new SQLiteConnection($"Data Source=database.db;version=3;");

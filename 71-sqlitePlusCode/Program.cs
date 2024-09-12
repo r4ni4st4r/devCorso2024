@@ -12,7 +12,8 @@ class Program{
                         quantita INTEGER CHECK (quantita >= 0));
                         INSERT INTO prodotti (nome,prezzo,quantita) VALUES ('P1',1,10);
                         INSERT INTO prodotti (nome,prezzo,quantita) VALUES ('P2',2,20);
-                        INSERT INTO prodotti (nome,prezzo,quantita) VALUES ('P3',3,30);";
+                        INSERT INTO prodotti (nome,prezzo,quantita) VALUES ('P3',3,30);
+                        ";
             SQLiteCommand command = new SQLiteCommand(sql, connection); 
             command.ExecuteNonQuery();
             connection.Close();
@@ -41,6 +42,9 @@ class Program{
                     break;
                 case 6:
                     VisualizzaProdottoPiuCaro();
+                    break;
+                case 7:
+                    EliminaProdotto();
                     break;
                 case 8:
                     EliminaProdotto();
@@ -133,5 +137,3 @@ class Program{
         connection.Close();
     }
 }
-
-
