@@ -5,6 +5,9 @@
     box-sizing: border-box;
 }
 
+.d-flex flex-row mb-3{}
+
+
 html{
     scroll-behavior: smooth;
 }
