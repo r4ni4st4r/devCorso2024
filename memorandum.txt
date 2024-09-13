@@ -39,4 +39,6 @@ https://unsplash.com/  -->>  foto gratis
 
 tailwindcss -->> alternativa a bootstrap
 
+avaloniaui.net  -->> WPF integration
+
 http://www.iroi.it/ -->> prima azienda

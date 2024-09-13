@@ -15,48 +15,177 @@
       .btn-bg-color{
         background-color: #7f1b19;
       }
-      .lk-txt{
-        color: white
-      }
-      .h-link:link{
+      a:link {
+        color: green;
+        background-color: transparent;
         text-decoration: none;
       }
-      .h-link:visited {
+      
+
+      a:visited {
+        color: white;
+        background-color: transparent;
         text-decoration: none;
       }
-      .h-link:hover {
+      
+      .btn-dd:hover{
+        background-color: #b32624;
+      }
+
+      a:hover {
+        color: #7f1b19;
+        background-color: transparent;
         text-decoration: underline;
       }
-      .h-link:active {
+
+      a:active {
+        color: #7f1b19;
+        background-color: transparent;
         text-decoration: underline;
+      }
+      footer{
+        background-color: #b32624;
       }
     </style>
   </head>
 <body>
   <header>
-    <div class="d-flex bd-highlight mb-3 bg-color txt-color">
+    <div class="d-flex bd-highlight bg-color txt-color">
       <div class="container d-flex align-items-center">
         <div class="me-auto p-2 bd-highlight fs-6">Ente appartenenza/Owner</div>
         <div class="p-2 bd-highlight">
           <ul class="list-group list-group-horizontal">
-            <li class="list-group-item fs-6 bg-color border-0 lk-txt"><a class="h-link" href="">Link 1</a></li>
-            <li class="list-group-item fs-6 bg-color border-0"><a class="h-link" href="">Link 2 active</a></li>
+            <li class="list-group-item fs-6 text-white bg-color border-0"><a class="h-link" href="">Link 1</a></li>
+            <li class="list-group-item fs-6 text-white bg-color border-0"><a class="h-link" href="">Link 2 active</a></li>
           </ul>
         </div>
         <div class="p-2 bd-highlight d-flex">
           <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Small button
+            <button class="btn btn-secondary btn-sm btn-danger btn-bg-color dropdown-toggle btn-bg-color border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              ITA
             </button>
             <ul class="dropdown-menu">
-              ...
+              <li><a class="dropdown-item text-black" href="#">ENG</a></li>
             </ul>
           </div>
           <button type="button" class="btn btn-danger btn-bg-color border-0">Accedi</button>
         </div>
       </div>
     </div>
+    <div class="bg-color">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="d-flex">
+              <div>
+                <img src="code-slash.svg" class="img-fluid">
+              </div>
+              <div class="ms-3 txt-color">
+                <h3>Lorem Ipsum</h3>
+                <h6>Inserire qui la tagline</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto align-content-center">
+            <div class="d-flex txt-color">
+              <h6>Seguici su</h6>
+              <a class="icon-link ms-3" href="#">
+                <img src="facebook.svg" class="img-fluid" alt="facebook">
+              </a>
+              <a class="icon-link ms-3" href="#">
+                <img src="github.svg" class="img-fluid" alt="facebook">
+              </a>
+              <a class="icon-link ms-3" href="#">
+                <img src="twitter-x.svg" class="img-fluid" alt="facebook">
+              </a>
+            </div>
+          </div>
+          <div class="col col-lg-2 ms-3 align-content-center">
+            <div class="d-flex txt-color">
+              <h6>Cerca</h6>
+              <a class="icon-link ms-3" href="#">
+                <img src="search.svg" class="img-fluid" alt="facebook">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-color mt-0 mb-0">
+      <nav class="navbar navbar-expand-lg pt-0 pb-0 bg-color">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Link 1 attivo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link 2 </a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link disabled" aria-disabled="true">Link 3 disabilitato</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Esempio di Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item text-black" href="#">Action</a></li>
+                  <li><a class="dropdown-item text-black" href="#">Another action</a></li>
+                  <li><a class="dropdown-item text-black" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!--<div class="d-flex bd-highlight mb-3 bg-color txt-color">
+      <div class="container d-flex align-items-center">
+        <div >
+          <img src="code-slash.svg" class="img-fluid">
+        </div>
+        <div class="ms-3">
+          <h3>Lorem Ipsum</h3>
+          <h6>Inserire qui la tagline</h6>
+        </div>
+        <div class="d-flex">
+          <h6>Seguici su</h6>
+          <a class="icon-link ms-3" href="#">
+            <img src="facebook.svg" class="img-fluid" alt="facebook">
+          </a>
+          <a class="icon-link ms-3" href="#">
+            <img src="github.svg" class="img-fluid" alt="facebook">
+          </a>
+          <a class="icon-link ms-3" href="#">
+            <img src="twitter-x.svg" class="img-fluid" alt="facebook">
+          </a>
+        </div>
+      </div>
+    </div>-->
   </header>
+  <div class="container">
+    <div class="container row">
+      <div class="col">
+        <h2>Lorem Ipsum</h2>
+        <h6>Ipsa molestiae distinctio, illum est qui beatae fugiat nesciunt? Debitis commodi doloremque perspiciatis ipsam laborum deserunt, quis sint animi nisi repellendus deleniti!</h6>
+      </div>
+      <div class="col">
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  <div>
+  <footer class="container-fluid">
+    <div class="container-fluid bg-color">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item fs-6 border-0 bg-color"><a class="h-link" href="">Media policy</a></li>
+          <li class="list-group-item fs-6 border-0 bg-color"><a class="h-link" href="">Note legali</a></li>
+          <li class="list-group-item fs-6 border-0 bg-color"><a class="h-link" href="">Privacy policy</a></li>
+          <li class="list-group-item fs-6 border-0 bg-color"><a class="h-link" href="">Mappa del sito</a></li>
+        </ul>
+    </div>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
