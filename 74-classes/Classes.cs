@@ -1,26 +1,26 @@
 class Persona{
-    private string nome;
-    private string cognome;
-    private int eta;
+    private string _nome;
+    private string _cognome;
+    private int _eta;
 
     public string Nome{
-        get {return nome;}
-        set {nome = value;}
+        get {return _nome;}
+        set {_nome = value;}
     }
     public string Cognome{
-        get {return cognome;}
-        set {cognome = value;}
+        get {return _cognome;}
+        set {_cognome = value;}
     }public int Eta{
-        get {return eta;}
-        set {eta = value;}
+        get {return _eta;}
+        set {_eta = value;}
     }
     public Persona(string nome, string cognome, int eta){
-        this.nome = nome;
-        this.cognome = cognome;
-        this.eta = eta;
+        this._nome = nome;
+        this._cognome = cognome;
+        this._eta = eta;
     }
 
-    public void Stampa(){
+    public virtual void Stampa(){
         Console.WriteLine($"nome = {Nome}");
         Console.WriteLine($"cognome = {Cognome}");
         Console.WriteLine($"eta = {Eta}");
@@ -28,20 +28,33 @@ class Persona{
 }
 
 class Studente : Persona{
-    private string corso;
+    private string _corso;
 
     public Studente(string nome, string cognome, int eta, string corso) : base(nome, cognome, eta) {
-        this.corso = corso;
+        this._corso = corso;
     }
 
     public string Corso{
-        get{ return corso; }
-        set{ corso = value; }
+        get{ return _corso; }
+        set{ _corso = value; }
     }
 
-    public void StampaCorso(){
-        Console.WriteLine($"Corso -> {Corso}");
+    public override void Stampa(){
+        base.Stampa();/*
+        Console.WriteLine($"nome = {Nome}");
+        Console.WriteLine($"cognome = {Cognome}");
+        Console.WriteLine($"eta = {Eta}");*/
+        Console.WriteLine($"Corso = {Corso}");
+        
     }
+}
+
+// Esempio Proprietà automatiche
+
+class Cane{
+    public string Nome {get; set;} // -->> con logica
+    public string Razza {get; set;}
+    public int Eta {get; set;}
 }
 
 class Dado {
