@@ -1,12 +1,15 @@
+using System.Net.Cache;
+
 class Player{
     private string _name;
-    private List<Game> _history = new List<Game>();
+    private List<Game> _history;
 
-    public Game HistorySet{set{_history.Add(value);}}
-    public List<Game> HistoryGet{get {return _history;}}
-    public string Name{get{return _name;}set{_name = value;}}
+    public Game SetHistory{set{_history.Add(value);}}
+    public List<Game> GetHistory{get {return _history;}}
+    public string Name{get{return _name;}}
 
-    public Player(string nm){
-        Name = nm;
+    public Player(string  name){
+        _name = name;
+        _history  = new List<Game>();
     }
 }
