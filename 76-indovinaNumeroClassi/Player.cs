@@ -1,5 +1,3 @@
-using System.Net.Cache;
-
 class Player{
     private string _name;
     private List<Game> _history;

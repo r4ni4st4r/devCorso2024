@@ -21,10 +21,7 @@ do
     Console.WriteLine("9. Divisione in squadre method 3");
     Console.WriteLine("10. Esci");
     Console.Write("Scelta: ");
-
-    //squadra1.clear();
-    //squadra2.clear();
-
+    
     int ciao;
 
     scelta = Convert.ToInt32(Console.ReadLine());

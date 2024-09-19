@@ -5,13 +5,14 @@
     static bool playerExist;
     public static void Main(string[] args){
         bool menuGo;
+        
         int result;
 
         while(true){
             Console.Clear();
             Console.WriteLine("1 - New Game");
             Console.WriteLine("2 - Player Statistics");
-            Console.WriteLine("2 - Exit");
+            Console.WriteLine("3 - Exit");
             Console.WriteLine("Please make a choice");
             if(!Int32.TryParse(Console.ReadLine(),out result))
                 result = -1;
@@ -64,6 +65,7 @@
                         result = -1;
                     switch(result){
                         case 1:
+                            Console.Clear();
                             int i = 1;
                             foreach(Player ply in players){
                                 Console.WriteLine("\n"+i + " - " + ply.Name);
