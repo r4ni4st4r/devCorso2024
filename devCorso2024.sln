@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "76-indovinaNumeroClassi", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "77-mvcConsoleApp", "77-mvcConsoleApp\77-mvcConsoleApp.csproj", "{7080115F-9045-4DEB-9C93-542D9652BB99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "79-mvcEntityFramework", "79-mvcEntityFramework\79-mvcEntityFramework.csproj", "{5881AC1E-ED65-4DE8-A8B9-20077C2EF3C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +211,10 @@ Global
 		{7080115F-9045-4DEB-9C93-542D9652BB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7080115F-9045-4DEB-9C93-542D9652BB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7080115F-9045-4DEB-9C93-542D9652BB99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5881AC1E-ED65-4DE8-A8B9-20077C2EF3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5881AC1E-ED65-4DE8-A8B9-20077C2EF3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5881AC1E-ED65-4DE8-A8B9-20077C2EF3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5881AC1E-ED65-4DE8-A8B9-20077C2EF3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
