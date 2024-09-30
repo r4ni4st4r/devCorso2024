@@ -1,0 +1,32 @@
+@page
+@model ProductDetails
+@{
+    ViewData["Title"] = "ProductDetails";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Detail</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <th>@Model.ProductDet.Name</th>
+                    <th>@Model.ProductDet.Price</th>
+                    <th>@Model.ProductDet.Detail</th>
+                    <th>
+                        <img src="@Model.ProductDet.Image" alt="">   
+                    </th>
+                </tr>
+            
+        </tbody>
+    </table>
+    <a asp-page="/products">Back to products</a>
+</div>

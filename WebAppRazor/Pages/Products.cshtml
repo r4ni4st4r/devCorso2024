@@ -1,0 +1,42 @@
+@page
+@model ProductsModel
+@{
+    ViewData["Title"] = "Products page";
+}
+
+<div>
+    <form method="get">
+        <input type="text" class="form-control" name="minPrice">
+        <br>
+        <input type="text" class="form-control" name="maxPrice">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Detail</th>
+                <th>Image</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var prod in Model.AllProducts){
+                <tr>
+                    <td>@prod.Name</td>
+                    <td>@prod.Price</td>
+                    <td>@prod.Detail</td>
+                    <td>
+                        <img src="@prod.Image" alt="">
+                    </td>
+                     <td>
+                        <a  asp-page="/ProductDetails" asp-route-Id="@prod.Id" asp-route-Name="@prod.Name" asp-route-Price="@prod.Price" asp-route-Detail="@prod.Detail" asp-route-Image="@prod.Image"></a>    
+                    </td>  
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
