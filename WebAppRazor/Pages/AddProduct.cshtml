@@ -1,0 +1,20 @@
+@page
+@model AddProductModel
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form method="post">
+        <label for="minPrice">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Insert Product Name">
+        <label for="maxPrice">Price</label>
+        <input type="text" class="form-control" name="price" placeholder="Insert Product Price">
+        <label for="maxPrice">Details</label>
+        <input type="text" class="form-control" name="details" placeholder="Insert Product Details">
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

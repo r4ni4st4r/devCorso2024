@@ -4,15 +4,18 @@
     ViewData["Title"] = "Products page";
 }
 
-<div>
+<div >
     <form method="get">
-        <input type="text" class="form-control" name="minPrice">
+        <label for="minPrice">Minimun Price</label>
+        <input type="text" class="form-control" name="minPrice" placeholder="Insert Min Price">
+        <label for="maxPrice">Maximun Price</label>
+        <input type="text" class="form-control" name="maxPrice" placeholder="Insert Max Price">
         <br>
-        <input type="text" class="form-control" name="maxPrice">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br>
-    <table class="table">
+    <!-- <table class="table">
+    using System.Diagnostics;
         <thead>
             <tr>
                 <th>Name</th>
@@ -27,16 +30,54 @@
                 <tr>
                     <td>@prod.Name</td>
                     <td>@prod.Price</td>
-                    <td>@prod.Detail</td>
+                    <td>@prod.Details</td>
                     <td>
                         <img src="@prod.Image" alt="">
                     </td>
                      <td>
-                        <a  asp-page="/ProductDetails" asp-route-Id="@prod.Id" asp-route-Name="@prod.Name" asp-route-Price="@prod.Price" asp-route-Detail="@prod.Detail" asp-route-Image="@prod.Image"></a>    
+                      
+                        <a  asp-page="/ProductDetails" asp-route-Id="@prod.Id" asp-route-Name="@prod.Name" asp-route-Price="@prod.Price" asp-route-Detail="@prod.Details" asp-route-Image="@prod.Image"></a> 
                     </td>  
-                    
                 </tr>
             }
         </tbody>
-    </table>
+    </table> -->
+    
+    <div class="row">
+    @foreach(var prod in Model.AllProducts){
+        <div class="col-md-4 d-flex justify-content-center">
+            <div class="card mb-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@prod.Name</h5>
+                    @switch(prod.Price){
+                    case decimal n when n < 200:
+                        <h6 class="card-subtitle mb-2 text-warning">@prod.Price €</h6>
+                        break;
+                    case decimal n when n > 200 && n < 299:
+                        <h6 class="card-subtitle mb-2 text-secondary">@prod.Price €</h6>
+                        break;
+                    case decimal n when n >= 300:
+                        <h6 class="card-subtitle mb-2 text-danger">@prod.Price €</h6>
+                        break;
+                    default:
+                        <h6 class="card-subtitle mb-2 text-primary">@prod.Price €</h6>
+                        break;
+                    }
+                    <p class="card-text">@prod.Details</p>
+                   <a  asp-page="/ProductDetails" asp-route-Id="@prod.Id">Details</a> 
+                    <!--<a  asp-page="ProductDetails" asp-route-Id="@prod.Id" asp-route-Name="@prod.Name" asp-route-Price="@prod.Price" asp-route-Detail="@prod.Details" asp-route-Image="@prod.Image">Details</a> -->
+                    
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+    <form method="get">
+        <input type="hidden" name="minPrice" value="@Request.Query["minPrice"]">
+        <input type="hidden" name="maxPrice" value="@Request.Query["maxPrice"]">
+        @for(int i = 1; i <= Model.PageNumber; i++){
+            <button type="submit" class="btn btn-dark" name="pageIndex" value="@i">@i</button>
+        }
+    </form>
+    <a asp-page="/Index">Back To Home</a>
 </div>

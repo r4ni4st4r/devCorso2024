@@ -1,0 +1,20 @@
+@page
+@model ModifyProductModel
+@{
+    ViewData["Title"] = "ModifyProduct";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <label for="minPrice">Id</label>
+    <input type="text" class="form-control" name="id" placeholder="Insert Product Id to modify">
+    <label for="minPrice">Name</label>
+    <input type="text" class="form-control" name="name" placeholder="Insert new  Name">
+    <label for="maxPrice">Price</label>
+    <input type="text" class="form-control" name="price" placeholder="Insert new Price">
+    <label for="maxPrice">Details</label>
+    <input type="text" class="form-control" name="details" placeholder="Insert new Details">
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
