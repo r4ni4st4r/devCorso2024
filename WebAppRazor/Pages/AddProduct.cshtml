@@ -8,13 +8,32 @@
 
 <div>
     <form method="post">
-        <label for="minPrice">Name</label>
+        <label for="name">Name</label>
         <input type="text" class="form-control" name="name" placeholder="Insert Product Name">
-        <label for="maxPrice">Price</label>
+        <label for="price">Price</label>
         <input type="text" class="form-control" name="price" placeholder="Insert Product Price">
-        <label for="maxPrice">Details</label>
+        <label for="details">Details</label>
         <input type="text" class="form-control" name="details" placeholder="Insert Product Details">
+        <label for="amount">Amount</label>
+        <input type="text" class="form-control" name="amount" placeholder="Insert Product Amount">
+        <label for="category">Category</label>
+        <select class="form-control" name="category">
+            <option value="@Model.Categories[0]">Select Categories</option>
+            @foreach(string cat in Model.Categories){
+                <option value="@cat">@cat</option>
+            }
+        </select>
+        <label for="picture">Picture</label>
+        <select class="form-control" name="picture">
+            <option value="@Model.Categories[0]">Select Picture</option>
+            @foreach(string cat in Model.Categories){
+                <option value="@cat">@cat</option>
+            }
+        </select>
         <br>
+        <br>
+        <label for="password">Password</label>
+        <input type="text" class="form-control" name="psw" placeholder="Insert Password">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

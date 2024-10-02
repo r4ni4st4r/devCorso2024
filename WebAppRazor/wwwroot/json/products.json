@@ -1,93 +1,110 @@
 [
   {
-    "Id": 1,
-    "Name": "scarpe",
-    "Price": 100.0,
-    "Details": "serve per camminare",
-    "Image": "./img/scarpe.jpg"
-  },
-  {
-    "Id": 2,
-    "Name": "giacca",
-    "Price": 200.0,
-    "Details": "serve per coprirsi",
-    "Image": "./img/giacca.jpg"
-  },
-  {
     "Id": 3,
     "Name": "cappello",
     "Price": 300.0,
     "Details": "si mette sulla testa",
-    "Image": "./img/cappello.jpg"
-  },
-  {
-    "Id": 4,
-    "Name": "calze",
-    "Price": 150.0,
-    "Details": "si mette nei piedi",
-    "Image": "./img/calze.jpg"
+    "Image": "./img/cappello.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
     "Id": 5,
     "Name": "maglia",
     "Price": 250.0,
     "Details": "tiene caldo ed è figa",
-    "Image": "./img/maglia.jpg"
+    "Image": "./img/maglia.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
     "Id": 6,
     "Name": "canotta",
     "Price": 350.0,
     "Details": "non tiene caldo ed è zarra",
-    "Image": "./img/canotta.jpg"
+    "Image": "./img/canotta.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
     "Id": 7,
     "Name": "ciabatte",
     "Price": 400.0,
     "Details": "più easy delle scarpe",
-    "Image": "./img/ciabatte.jpg"
+    "Image": "./img/ciabatte.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
     "Id": 8,
     "Name": "costume",
     "Price": 600.0,
     "Details": "serve per fare il bagno",
-    "Image": "./img/costume.jpg"
+    "Image": "./img/costume.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
-    "Id": 13,
-    "Name": "mutande",
-    "Price": 50.0,
-    "Details": "si usano come indumento intimo",
-    "Image": "./img/scarpe.jpg"
-  },
-  {
-    "Id": 12,
+    "Id": 9,
     "Name": "k-way",
     "Price": 25.0,
     "Details": "serve per non bagnarsi",
-    "Image": "./img/scarpe.jpg"
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
     "Id": 10,
     "Name": "cappellino",
     "Price": 144.0,
     "Details": "serve per fare i fighi",
-    "Image": "./img/scarpe.jpg"
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
-    "Id": 9,
+    "Id": 11,
     "Name": "tuta",
     "Price": 55.0,
     "Details": "comodissima",
-    "Image": "./img/scarpe.jpg"
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": null
   },
   {
-    "Id": 14,
+    "Id": 12,
     "Name": "felpa",
     "Price": 85.0,
     "Details": "Comoda e con il cappuccio",
-    "Image": "./img/scarpe.jpg"
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": null
+  },
+  {
+    "Id": 13,
+    "Name": "leggins",
+    "Price": 55.0,
+    "Details": "Aderenti e stilosi",
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": null
+  },
+  {
+    "Id": 4,
+    "Name": "calze",
+    "Price": 155.0,
+    "Details": "si mette nei piedi",
+    "Image": "./img/calze.jpg",
+    "Amount": 5,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 14,
+    "Name": "tuta GRIGIA",
+    "Price": 5001.0,
+    "Details": "serve per fare i fighi",
+    "Image": "Clothes",
+    "Amount": 5,
+    "Category": "Clothes"
   }
 ]

@@ -14,35 +14,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br>
-    <!-- <table class="table">
-    using System.Diagnostics;
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Detail</th>
-                <th>Image</th>
-                <th>Link</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var prod in Model.AllProducts){
-                <tr>
-                    <td>@prod.Name</td>
-                    <td>@prod.Price</td>
-                    <td>@prod.Details</td>
-                    <td>
-                        <img src="@prod.Image" alt="">
-                    </td>
-                     <td>
-                      
-                        <a  asp-page="/ProductDetails" asp-route-Id="@prod.Id" asp-route-Name="@prod.Name" asp-route-Price="@prod.Price" asp-route-Detail="@prod.Details" asp-route-Image="@prod.Image"></a> 
-                    </td>  
-                </tr>
-            }
-        </tbody>
-    </table> -->
-    
     <div class="row">
     @foreach(var prod in Model.AllProducts){
         <div class="col-md-4 d-flex justify-content-center">
@@ -50,23 +21,23 @@
                 <div class="card-body">
                     <h5 class="card-title">@prod.Name</h5>
                     @switch(prod.Price){
-                    case decimal n when n < 200:
-                        <h6 class="card-subtitle mb-2 text-warning">@prod.Price €</h6>
-                        break;
-                    case decimal n when n > 200 && n < 299:
-                        <h6 class="card-subtitle mb-2 text-secondary">@prod.Price €</h6>
-                        break;
-                    case decimal n when n >= 300:
-                        <h6 class="card-subtitle mb-2 text-danger">@prod.Price €</h6>
-                        break;
-                    default:
-                        <h6 class="card-subtitle mb-2 text-primary">@prod.Price €</h6>
-                        break;
+                        case decimal n when n < 200:
+                            <h6 class="card-subtitle mb-2 text-warning">@prod.Price €</h6>
+                            break;
+                        case decimal n when n > 200 && n < 299:
+                            <h6 class="card-subtitle mb-2 text-secondary">@prod.Price €</h6>
+                            break;
+                        case decimal n when n >= 300:
+                            <h6 class="card-subtitle mb-2 text-danger">@prod.Price €</h6>
+                            break;
+                        default:
+                            <h6 class="card-subtitle mb-2 text-primary">@prod.Price €</h6>
+                            break;
                     }
-                    <p class="card-text">@prod.Details</p>
-                   <a  asp-page="/ProductDetails" asp-route-Id="@prod.Id">Details</a> 
-                    <!--<a  asp-page="ProductDetails" asp-route-Id="@prod.Id" asp-route-Name="@prod.Name" asp-route-Price="@prod.Price" asp-route-Detail="@prod.Details" asp-route-Image="@prod.Image">Details</a> -->
-                    
+                    <p class="card-text">@prod.Category</p>
+                    <a asp-page="/ProductDetails" asp-route-Id="@prod.Id">Details</a> 
+                    <a asp-page="/ModifyProduct" asp-route-Id="@prod.Id">Modify</a>
+                    <a asp-page="/DeleteProduct" asp-route-Id="@prod.Id">Delete</a> 
                 </div>
             </div>
         </div>

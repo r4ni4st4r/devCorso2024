@@ -1,0 +1,17 @@
+@page
+@model DeleteProductModel
+@{
+    ViewData["Title"] = "DeleteProduct";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form method="post">
+        <div class="form-group">
+            <p>@Model.ProductToDelete.Name</p>
+            <p>@Model.ProductToDelete.Details</p>
+        </div>
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+</div>

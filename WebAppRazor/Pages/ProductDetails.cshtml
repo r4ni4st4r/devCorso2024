@@ -4,26 +4,28 @@
     ViewData["Title"] = "ProductDetails";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>@Model.Product.Name</h1>
 
 <div>
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Detail</th>
                 <th>Image</th>
+                <th>In Stock</th>
             </tr>
         </thead>
         <tbody>
                 <tr>
-                    <th>@Model.Product.Name</th>
+                    <th>@Model.Product.Category</th>
                     <th>@Model.Product.Price €</th>
                     <th>@Model.Product.Details</th>
                     <th>
                         <img src="@Model.Product.Image" alt="">   
                     </th>
+                    <th>@Model.Product.Amount</th>
                 </tr>
             
         </tbody>

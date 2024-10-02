@@ -7,14 +7,24 @@
 <h1>@ViewData["Title"]</h1>
 
 <div>
-    <label for="minPrice">Id</label>
-    <input type="text" class="form-control" name="id" placeholder="Insert Product Id to modify">
-    <label for="minPrice">Name</label>
-    <input type="text" class="form-control" name="name" placeholder="Insert new  Name">
-    <label for="maxPrice">Price</label>
-    <input type="text" class="form-control" name="price" placeholder="Insert new Price">
-    <label for="maxPrice">Details</label>
-    <input type="text" class="form-control" name="details" placeholder="Insert new Details">
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <form method="post">
+      <!--  <label class="form-control">@Model.ProductToModify.Id</label>-->
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" value="@Model.ProductToModify.Name">
+        <label>Price</label>
+        <input type="text" class="form-control" name="price" value="@Model.ProductToModify.Price">
+        <label>Details</label>
+        <input type="text" class="form-control" name="details" value="@Model.ProductToModify.Details">
+        <label>Amount</label>
+        <input type="text" class="form-control" name="amount" value="@Model.ProductToModify.Amount">
+        <label>Category</label>
+        <select class="form-control" name="category">
+            <option value="@Model.ProductToModify.Category"></option>
+            @foreach(string cat in Model.Categories){
+                <option value="@cat">@cat</option>
+            }
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
