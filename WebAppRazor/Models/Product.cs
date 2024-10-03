@@ -1,36 +1,19 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 public class Product{
-    private int _id;
-    //private string _name;
-    private decimal _price;
-    private string _details;
-    private string _image;
-    
-    public int Id{get{return _id;}}
-    [Required(ErrorMessage = "required field")] 
+    public int Id{get;set;}
+    [BindProperty]
+    [Required(ErrorMessage ="required field!")]
+    [StringLength(50,MinimumLength =3,ErrorMessage ="Name must be between 3 and 50 chars!")]
     public string Name{get;set;}
-    public decimal Price{get{return _price;}}
-    public string Details{get{return _details;}}
-    public string Image{get{return _image;}}
+    /*[Required(ErrorMessage ="required field!")]
+    [Range(0.01,1500,ErrorMessage ="Price must be between 3 and 50 chars!")]*/
+    public decimal Price{get;set;}
+    public string Details{get;set;}
+    public string Image{get;set;}
     public int Amount{get;set;}
     public string Category{get;set;}
-
-    [JsonConstructor]
-    public Product(int id, string name, 
-                            decimal price,[StringLength(50,MinimumLength =3,ErrorMessage ="field from 3 to 50 chars")] string details, 
-                            string image, int amount, string category){
-        _id = id;
-        Name = name;
-        _price = price;
-        _details = details;
-        _image = image;
-        Amount = amount;
-        Category = category;
-    }
-    public Product(int id){
-        _id = id;
-    }
 }
 

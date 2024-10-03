@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
-namespace WebAppRazor.Pages;
-
 public class ProductsModel : PageModel
 {
     private readonly ILogger<ProductsModel> _logger;

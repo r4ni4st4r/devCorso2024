@@ -23,8 +23,8 @@
     "Price": 350.0,
     "Details": "non tiene caldo ed è zarra",
     "Image": "./img/canotta.jpg",
-    "Amount": 0,
-    "Category": null
+    "Amount": 1,
+    "Category": "Clothes"
   },
   {
     "Id": 7,
@@ -92,7 +92,7 @@
   {
     "Id": 4,
     "Name": "calze",
-    "Price": 155.0,
+    "Price": 175.0,
     "Details": "si mette nei piedi",
     "Image": "./img/calze.jpg",
     "Amount": 5,
@@ -100,11 +100,47 @@
   },
   {
     "Id": 14,
-    "Name": "tuta GRIGIA",
-    "Price": 5001.0,
-    "Details": "serve per fare i fighi",
-    "Image": "Clothes",
-    "Amount": 5,
+    "Name": "collant",
+    "Price": 0.0,
+    "Details": null,
+    "Image": null,
+    "Amount": 0,
+    "Category": null
+  },
+  {
+    "Id": 14,
+    "Name": "pippo",
+    "Price": 55.0,
+    "Details": "pippo9",
+    "Image": null,
+    "Amount": 1,
+    "Category": null
+  },
+  {
+    "Id": 14,
+    "Name": "pollo",
+    "Price": 5.0,
+    "Details": "sfevv",
+    "Image": null,
+    "Amount": 3,
+    "Category": null
+  },
+  {
+    "Id": 14,
+    "Name": "pippo",
+    "Price": 5.0,
+    "Details": "sfevv",
+    "Image": "wwwroot\\img\\calze.jpg",
+    "Amount": 1,
     "Category": "Clothes"
+  },
+  {
+    "Id": 14,
+    "Name": "pippo55",
+    "Price": 5.0,
+    "Details": "sfevv",
+    "Image": "wwwroot\\img\\ciabatte.jpg",
+    "Amount": 666,
+    "Category": "Shoes"
   }
 ]

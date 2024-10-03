@@ -32,12 +32,14 @@ public class ModifyProductModel : PageModel
         List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json);
         foreach(Product prod in products){
             if(prod.Id == id){
-                ProductToModify = prod;
-                products.Remove(prod);
+                prod.Name = name;
+                prod.Price = price;
+                prod.Details = details;
+                prod.Amount = amount;
+                prod.Category = category;
                 break;
             }
         }
-        products.Add(new Product(id, name, price, details, ProductToModify.Image, amount, category));
         System.IO.File.WriteAllText("wwwroot/json/products.json",JsonConvert.SerializeObject(products, Formatting.Indented));
         return RedirectToPage("products");
     }
