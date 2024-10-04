@@ -12,7 +12,7 @@ public class AddProductModel : PageModel
     public List<string> Categories{get;set;}
     public List<string> Pictures{get;set;}
     [BindProperty]
-    [Required(ErrorMessage = "required field")]
+    [Required(ErrorMessage = "required field!")]
     public string Psw{get;set;}
     public AddProductModel(ILogger<AddProductModel> logger){
         _logger = logger;
@@ -31,7 +31,7 @@ public class AddProductModel : PageModel
         List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json) ?? new List<Product>();
         int id = 0;
         foreach(Product prod in products){
-            if(id < prod.Id)
+            if(id <= prod.Id)
                 id = prod.Id + 1;
         }
         ProductToAdd.Id = id;

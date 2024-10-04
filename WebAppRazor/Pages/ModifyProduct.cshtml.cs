@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 public class ModifyProductModel : PageModel
 {
     private readonly ILogger<ModifyProductModel> _logger;
-
+    [BindProperty]
     public Product ProductToModify{get;set;}
     public List<string> Categories{get;set;}
 
@@ -27,16 +27,16 @@ public class ModifyProductModel : PageModel
         json = System.IO.File.ReadAllText("wwwroot/json/categories.json");
         Categories = JsonConvert.DeserializeObject<List<string>>(json);
     }
-    public IActionResult OnPost(int id, string name, decimal price, string details, int amount, string category){    
+    public IActionResult OnPost(){    
         string json = System.IO.File.ReadAllText("wwwroot/json/products.json");
         List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json);
         foreach(Product prod in products){
-            if(prod.Id == id){
-                prod.Name = name;
-                prod.Price = price;
-                prod.Details = details;
-                prod.Amount = amount;
-                prod.Category = category;
+            if(prod.Id == ProductToModify.Id){
+                prod.Name = ProductToModify.Name;
+                prod.Price = ProductToModify.Price;
+                prod.Details = ProductToModify.Details;
+                prod.Amount = ProductToModify.Amount;
+                prod.Category = ProductToModify.Category;
                 break;
             }
         }

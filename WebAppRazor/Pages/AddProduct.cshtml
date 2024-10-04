@@ -6,58 +6,74 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div>
-    <form class="row g-3 needs-validation" novalidate method="post">
-        <div class="form-group">
-            <label for="validationCustom01" asp-for="ProductToAdd.Name" class="form-label">Name</label>
-            <input type="text" id="validationCustom01" value="Mark" required asp-for="ProductToAdd.Name" class="form-control">
-            <span asp-validation-for="ProductToAdd.Name" class="text-danger"></span>
-            <div class="valid-feedback">
-                Looks good!
+<div class="container mt-5">
+    <div class="card bg-light shadow-lg border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5>@ViewData["Title"]</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="ProductToAdd.Name" class="control-label">Name</label>
+                <input asp-for="ProductToAdd.Name" class="form-control">
+                <i class="bi bi-x-lg text-danger invalid-icon" style="display: none;"></i>
+                <i class="bi bi-check text-success valid-icon" style="display: none;"></i>
+                <span asp-validation-for="ProductToAdd.Name" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductToAdd.Price" class="control-label">Price</label>
-            <input asp-for="ProductToAdd.Price" class="form-control">
-            <span asp-validation-for="ProductToAdd.Price" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductToAdd.Details" class="control-label">Details</label>
-            <input asp-for="ProductToAdd.Details" class="form-control">
-            <span asp-validation-for="ProductToAdd.Details" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProductToAdd.Amount" class="control-label">Amount</label>
-            <input asp-for="ProductToAdd.Amount" class="form-control">
-            <span asp-validation-for="ProductToAdd.Amount" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select class="form-control" asp-for="ProductToAdd.Category">
-                <option value="@Model.Categories[0]">Select Categories</option>
-                @foreach(string cat in Model.Categories){
-                    <option value="@cat">@cat</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="picture">Picture</label>
-            <select class="form-control" asp-for="ProductToAdd.Image">
-                <option value="@Model.Pictures[0]">Select Picture</option>
-                @foreach(string pict in Model.Pictures){
-                    <option value="@pict">@pict</option>
-                }
-            </select>
-        </div>
-        <br>
-        <br>
-        <div class="form-group">
-            <label asp-for="Psw">Password</label>
-            <input asp-for="Psw" class="form-control" placeholder="Insert Password">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+            <div class="form-group mb-3">
+                <label asp-for="ProductToAdd.Price" class="control-label">Price</label>
+                <input asp-for="ProductToAdd.Price" class="form-control">
+                <i class="bi bi-x-lg text-danger invalid-icon" style="display: none;"></i>
+                <i class="bi bi-check text-success valid-icon" style="display: none;"></i>
+                <span asp-validation-for="ProductToAdd.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ProductToAdd.Details" class="control-label">Details</label>
+                <input asp-for="ProductToAdd.Details" class="form-control">
+                <i class="bi bi-x-lg text-danger invalid-icon" style="display: none;"></i>
+                <i class="bi bi-check text-success valid-icon" style="display: none;"></i>
+                <span asp-validation-for="ProductToAdd.Details" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ProductToAdd.Amount" class="control-label">Amount</label>
+                <input asp-for="ProductToAdd.Amount" class="form-control">
+                <i class="bi bi-x-lg text-danger invalid-icon" style="display: none;"></i>
+                <i class="bi bi-check text-success valid-icon" style="display: none;"></i>
+                <span asp-validation-for="ProductToAdd.Amount" class="text-danger"></span>
+            </div>
+           <!-- <div class="form-group mb-3">
+                <label for="category" >Category</label>
+                <select class="form-control" asp-for="ProductToAdd.Category">
+                    <option value="@null"> Select Categories</option>
+                    @foreach(string cat in Model.Categories){
+                        <option value="@cat">@cat</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="picture">Picture</label>
+                <select class="form-control" asp-for="ProductToAdd.Image">
+                    <option value="@null" >Select Picture</option>
+                    @foreach(string pict in Model.Pictures){
+                        <option value="@pict">@pict</option>
+                    }
+                </select>
+            </div>-->
+            <br>
+            <br>
+            <div class="form-group mb-3">
+                <label asp-for="Psw" class="control-label">Password</label>
+                <input asp-for="Psw" class="form-control">
+                <i class="bi bi-x-lg text-danger invalid-icon" style="display: none;"></i>
+                <i class="bi bi-check text-success valid-icon" style="display: none;"></i>
+                <span asp-validation-for="Psw" class="text-danger"></span>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
     @section Scripts {
-        <partial name="_ValidationScriptsPartial"/>
+        <partial name="_ValidationScriptsPartial" />
     }
 </div>

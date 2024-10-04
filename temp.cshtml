@@ -1,0 +1,119 @@
+@page
+@model AddProductModel
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="container mt-5">
+    <div class="card bg-light border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" asp-antiforgery="true">
+                <div class="mb-3">
+                    <label asp-for="ProductToAdd.Name" class="form-label">Name</label>
+                    <input asp-for="ProductToAdd.Name" class="form-control" required>
+                    <span asp-validation-for="ProductToAdd.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductToAdd.Price" class="form-label">Price</label>
+                    <input asp-for="ProductToAdd.Price" class="form-control" required>
+                    <span asp-validation-for="ProductToAdd.Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductToAdd.Details" class="form-label">Details</label>
+                    <input asp-for="ProductToAdd.Details" class="form-control" required>
+                    <span asp-validation-for="ProductToAdd.Details" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductToAdd.Amount" class="form-label">Amount</label>
+                    <input asp-for="ProductToAdd.Amount" class="form-control" required>
+                    <span asp-validation-for="ProductToAdd.Amount" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductToAdd.Category" class="form-label">Category</label>
+                    <select class="form-select" asp-for="ProductToAdd.Category" required>
+                        <option value="">Select Category</option>
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <option value="@cat">@cat</option>
+                        }
+                    </select>
+                    <span asp-validation-for="ProductToAdd.Category" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductToAdd.Image" class="form-label">Picture</label>
+                    <select class="form-select" asp-for="ProductToAdd.Image" required>
+                        <option value="">Select Picture</option>
+                        @foreach (var pict in Model.Pictures)
+                        {
+                            <option value="@pict">@pict</option>
+                        }
+                    </select>
+                    <span asp-validation-for="ProductToAdd.Image" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Psw" class="form-label">Password</label>
+                    <input asp-for="Psw" class="form-control" placeholder="Insert Password" required>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Add Product
+                </button>
+                <button type="button" class="btn btn-secondary ms-2" onclick="window.location.href='@Url.Page("Index")'">
+                    <i class="bi bi-arrow-left"></i> Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial"/>
+    }
+</div>
+
+
+
+<form class="was-validated">
+  <div class="mb-3">
+    <label for="validationTextarea" class="form-label">Textarea</label>
+    <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+    <div class="invalid-feedback">
+      Please enter a message in the textarea.
+    </div>
+  </div>
+
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+    <label class="form-check-label" for="validationFormCheck1">Check this checkbox</label>
+    <div class="invalid-feedback">Example invalid feedback text</div>
+  </div>
+
+  <div class="form-check">
+    <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+    <label class="form-check-label" for="validationFormCheck2">Toggle this radio</label>
+  </div>
+  <div class="form-check mb-3">
+    <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
+    <label class="form-check-label" for="validationFormCheck3">Or toggle this other radio</label>
+    <div class="invalid-feedback">More example invalid feedback text</div>
+  </div>
+
+  <div class="mb-3">
+    <select class="form-select" required aria-label="select example">
+      <option value="">Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+    <div class="invalid-feedback">Example invalid select feedback</div>
+  </div>
+
+  <div class="mb-3">
+    <input type="file" class="form-control" aria-label="file example" required>
+    <div class="invalid-feedback">Example invalid form file feedback</div>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-primary" type="submit" disabled>Submit form</button>
+  </div>
+</form>

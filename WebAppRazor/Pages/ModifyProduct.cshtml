@@ -6,25 +6,45 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div>
-    <form method="post">
-      <!--  <label class="form-control">@Model.ProductToModify.Id</label>-->
-        <label>Name</label>
-        <input type="text" class="form-control" name="name" value="@Model.ProductToModify.Name">
-        <label>Price</label>
-        <input type="text" class="form-control" name="price" value="@Model.ProductToModify.Price">
-        <label>Details</label>
-        <input type="text" class="form-control" name="details" value="@Model.ProductToModify.Details">
-        <label>Amount</label>
-        <input type="text" class="form-control" name="amount" value="@Model.ProductToModify.Amount">
-        <label>Category</label>
+<div class="container mt-5">
+    <div class="card bg-light shadow-lg border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Name" class="control-label">@Model.ProductToModify.Name</label>
+                    <input asp-for="ProductToModify.Name" class="form-control">
+                    <span asp-validation-for="ProductToModify.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Price" class="control-label">@Model.ProductToModify.Price</label>
+                    <input asp-for="ProductToModify.Price" class="form-control">
+                    <span asp-validation-for="ProductToModify.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Details" class="control-label">@Model.ProductToModify.Details</label>
+                    <input asp-for="ProductToModify.Details" class="form-control">
+                    <span asp-validation-for="ProductToModify.Details" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Amount" class="control-label">@Model.ProductToModify.Amount</label>
+                    <input asp-for="ProductToModify.Amount" class="form-control">
+                    <span asp-validation-for="ProductToModify.Amount" class="text-danger"></span>
+                </div>
+
+                <!--<label>Category</label>
         <select class="form-control" name="category">
             <option value="@Model.ProductToModify.Category"></option>
-            @foreach(string cat in Model.Categories){
-                <option value="@cat">@cat</option>
-            }
-        </select>
-        <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                @foreach (string cat in Model.Categories)
+                {
+                    <option value="@cat">@cat</option>
+                }
+        </select>-->
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>

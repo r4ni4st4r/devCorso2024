@@ -90,7 +90,7 @@
     "Category": null
   },
   {
-    "Id": 4,
+    "Id": 14,
     "Name": "calze",
     "Price": 175.0,
     "Details": "si mette nei piedi",
@@ -99,48 +99,21 @@
     "Category": "Clothes"
   },
   {
-    "Id": 14,
-    "Name": "collant",
+    "Id": 16,
+    "Name": "DDDDD",
     "Price": 0.0,
-    "Details": null,
-    "Image": null,
-    "Amount": 0,
-    "Category": null
-  },
-  {
-    "Id": 14,
-    "Name": "pippo",
-    "Price": 55.0,
-    "Details": "pippo9",
-    "Image": null,
-    "Amount": 1,
-    "Category": null
-  },
-  {
-    "Id": 14,
-    "Name": "pollo",
-    "Price": 5.0,
-    "Details": "sfevv",
-    "Image": null,
-    "Amount": 3,
-    "Category": null
-  },
-  {
-    "Id": 14,
-    "Name": "pippo",
-    "Price": 5.0,
-    "Details": "sfevv",
-    "Image": "wwwroot\\img\\calze.jpg",
-    "Amount": 1,
+    "Details": "DDDDDDD",
+    "Image": "wwwroot\\img\\canotta.jpg",
+    "Amount": 3333,
     "Category": "Clothes"
   },
   {
-    "Id": 14,
-    "Name": "pippo55",
+    "Id": 19,
+    "Name": "pippo",
     "Price": 5.0,
-    "Details": "sfevv",
-    "Image": "wwwroot\\img\\ciabatte.jpg",
-    "Amount": 666,
-    "Category": "Shoes"
+    "Details": "fgdrgrea",
+    "Image": null,
+    "Amount": 1,
+    "Category": null
   }
 ]
