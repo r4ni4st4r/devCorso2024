@@ -1,0 +1,119 @@
+[
+  {
+    "Id": 3,
+    "Name": "cappello",
+    "Price": 300.0,
+    "Details": "si mette sulla testa",
+    "Image": "./img/cappello.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 5,
+    "Name": "maglia",
+    "Price": 250.0,
+    "Details": "tiene caldo ed è figa",
+    "Image": "./img/maglia.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 6,
+    "Name": null,
+    "Price": 0.0,
+    "Details": null,
+    "Image": "./img/canotta.jpg",
+    "Amount": 0,
+    "Category": null
+  },
+  {
+    "Id": 7,
+    "Name": "ciabatte",
+    "Price": 400.0,
+    "Details": "più easy delle scarpe",
+    "Image": "./img/ciabatte.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 8,
+    "Name": "costume",
+    "Price": 600.0,
+    "Details": "serve per fare il bagno",
+    "Image": "./img/costume.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 9,
+    "Name": "k-way",
+    "Price": 25.0,
+    "Details": "serve per non bagnarsi",
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 10,
+    "Name": "cappellino",
+    "Price": 144.0,
+    "Details": "serve per fare i fighi",
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 11,
+    "Name": "tuta",
+    "Price": 55.0,
+    "Details": "comodissima",
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 12,
+    "Name": "felpa",
+    "Price": 85.0,
+    "Details": "Comoda e con il cappuccio",
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 13,
+    "Name": "leggins",
+    "Price": 55.0,
+    "Details": "Aderenti e stilosi",
+    "Image": "./img/scarpe.jpg",
+    "Amount": 0,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 14,
+    "Name": "calze",
+    "Price": 175.0,
+    "Details": "si mette nei piedi",
+    "Image": "./img/calze.jpg",
+    "Amount": 5,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 16,
+    "Name": "DDDDD",
+    "Price": 0.0,
+    "Details": "DDDDDDD",
+    "Image": "wwwroot/img/canotta.jpg",
+    "Amount": 3333,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 19,
+    "Name": "pippo",
+    "Price": 5.0,
+    "Details": "fgdrgrea",
+    "Image": null,
+    "Amount": 1,
+    "Category": "Clothes"
+  }
+]

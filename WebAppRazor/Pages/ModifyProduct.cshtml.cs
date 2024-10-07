@@ -41,6 +41,6 @@ public class ModifyProductModel : PageModel
             }
         }
         System.IO.File.WriteAllText("wwwroot/json/products.json",JsonConvert.SerializeObject(products, Formatting.Indented));
-        return RedirectToPage("products");
+        return RedirectToAction("Index", "Products");
     }
 }

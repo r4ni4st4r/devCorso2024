@@ -1,0 +1,49 @@
+@model WebAppMvc.ViewModels.ModifyViewModel
+@{
+    ViewData["Title"] = "ModifyProduct";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-5">
+    <div class="card bg-light shadow-lg border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Name" class="control-label">Name</label>
+                    <input asp-for="ProductToModify.Name" class="form-control">
+                    <span asp-validation-for="ProductToModify.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Price" class="control-label">Price</label>
+                    <input asp-for="ProductToModify.Price" class="form-control">
+                    <span asp-validation-for="ProductToModify.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Details" class="control-label">Details</label>
+                    <input asp-for="ProductToModify.Details" class="form-control">
+                    <span asp-validation-for="ProductToModify.Details" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProductToModify.Amount" class="control-label">Amount</label>
+                    <input asp-for="ProductToModify.Amount" class="form-control">
+                    <span asp-validation-for="ProductToModify.Amount" class="text-danger"></span>
+                </div>
+
+                <!--<label>Category</label>
+        <select class="form-control" name="category">
+            <option value="@Model.ProductToModify.Category"></option>
+                @foreach (string cat in Model.Categories)
+                {
+                    <option value="@cat">@cat</option>
+                }
+        </select>-->
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
