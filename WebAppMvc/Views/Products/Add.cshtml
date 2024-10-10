@@ -1,5 +1,5 @@
-@page
-@model AddProductModel
+@model WebAppMvc.ViewModels.AddViewModel  
+
 @{
     ViewData["Title"] = "AddProduct";
 }
@@ -43,19 +43,19 @@
             </div>
             <div class="form-group mb-3">
                 <label for="category" >Category</label>
-                <select class="form-control" asp-for="@Model.ProductToAdd.Category">
-                    <option value="@null"> Select Categories</option>
+                <select class="form-control" asp-for="ProductToAdd.Category">
+                    <option value="@null" disabled selected>Select Categories</option>
                     @foreach(string cat in Model.Categories){
                         <option value="@cat">@cat</option>
                     }
                 </select>
             </div>
             <div class="form-group mb-3">
-                <label for="picture">Picture</label>
-                <select class="form-control" asp-for="@Model.ProductToAdd.Image">
-                    <option value="@null" >Select Picture</option>
-                    @foreach(string pict in Model.Pictures){
-                        <option value="@pict">@pict</option>
+                <label for="Picture" >Picture</label>
+                <select class="form-control" asp-for="ProductToAdd.Picture">
+                    <option value="@null" disabled selected>Select Picture</option>
+                    @foreach(string cat in Model.Pictures){
+                        <option value="@cat">@cat</option>
                     }
                 </select>
             </div>

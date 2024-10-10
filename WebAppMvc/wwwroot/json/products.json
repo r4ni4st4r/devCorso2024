@@ -4,7 +4,7 @@
     "Name": "cappello",
     "Price": 300.0,
     "Details": "si mette sulla testa",
-    "Image": "./img/cappello.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -13,25 +13,16 @@
     "Name": "maglia",
     "Price": 250.0,
     "Details": "tiene caldo ed è figa",
-    "Image": "./img/maglia.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
-  },
-  {
-    "Id": 6,
-    "Name": null,
-    "Price": 0.0,
-    "Details": null,
-    "Image": "./img/canotta.jpg",
-    "Amount": 0,
-    "Category": null
   },
   {
     "Id": 7,
     "Name": "ciabatte",
     "Price": 400.0,
     "Details": "più easy delle scarpe",
-    "Image": "./img/ciabatte.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -40,7 +31,7 @@
     "Name": "costume",
     "Price": 600.0,
     "Details": "serve per fare il bagno",
-    "Image": "./img/costume.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -49,7 +40,7 @@
     "Name": "k-way",
     "Price": 25.0,
     "Details": "serve per non bagnarsi",
-    "Image": "./img/scarpe.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -58,7 +49,7 @@
     "Name": "cappellino",
     "Price": 144.0,
     "Details": "serve per fare i fighi",
-    "Image": "./img/scarpe.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -67,7 +58,7 @@
     "Name": "tuta",
     "Price": 55.0,
     "Details": "comodissima",
-    "Image": "./img/scarpe.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -76,7 +67,7 @@
     "Name": "felpa",
     "Price": 85.0,
     "Details": "Comoda e con il cappuccio",
-    "Image": "./img/scarpe.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -85,35 +76,98 @@
     "Name": "leggins",
     "Price": 55.0,
     "Details": "Aderenti e stilosi",
-    "Image": "./img/scarpe.jpg",
+    "Picture": null,
     "Amount": 0,
     "Category": "Clothes"
   },
   {
     "Id": 14,
     "Name": "calze",
-    "Price": 175.0,
+    "Price": 175.00,
     "Details": "si mette nei piedi",
-    "Image": "./img/calze.jpg",
+    "Picture": "/img/calze.jpg",
     "Amount": 5,
-    "Category": "Clothes"
+    "Category": "Shoes"
   },
   {
     "Id": 16,
-    "Name": "DDDDD",
-    "Price": 0.0,
+    "Name": "prod mofic",
+    "Price": 0.00,
     "Details": "DDDDDDD",
-    "Image": "wwwroot/img/canotta.jpg",
+    "Picture": null,
     "Amount": 3333,
-    "Category": "Clothes"
+    "Category": null
   },
   {
     "Id": 19,
     "Name": "pippo",
     "Price": 5.0,
     "Details": "fgdrgrea",
-    "Image": null,
+    "Picture": null,
     "Amount": 1,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 20,
+    "Name": "scarpini",
+    "Price": 79.0,
+    "Details": "per giocare a calcio",
+    "Picture": null,
+    "Amount": 5,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 21,
+    "Name": "cuffietta",
+    "Price": 55.0,
+    "Details": "per fare la doccia",
+    "Picture": null,
+    "Amount": 3,
+    "Category": "Swimweare"
+  },
+  {
+    "Id": 22,
+    "Name": "cuffietta top",
+    "Price": 55.0,
+    "Details": "per fare la doccia top",
+    "Picture": null,
+    "Amount": 33,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 23,
+    "Name": "tuta gold plus",
+    "Price": 150.0,
+    "Details": "preziosa",
+    "Picture": null,
+    "Amount": 4,
+    "Category": "Shoes"
+  },
+  {
+    "Id": 24,
+    "Name": "cuffietta super più",
+    "Price": 55.0,
+    "Details": "per fare la doccia super piu",
+    "Picture": null,
+    "Amount": 5,
+    "Category": "Shoes"
+  },
+  {
+    "Id": 25,
+    "Name": "calze da doccia",
+    "Price": 55.0,
+    "Details": "per fare la doccia con le calze",
+    "Picture": "/img/calze.jpg",
+    "Amount": 5,
+    "Category": "Clothes"
+  },
+  {
+    "Id": 26,
+    "Name": "scarpini con img",
+    "Price": 55.0,
+    "Details": "per camminare",
+    "Picture": "/img/scarpe.jpg",
+    "Amount": 3,
     "Category": "Clothes"
   }
 ]

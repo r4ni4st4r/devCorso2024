@@ -13,36 +13,46 @@
         <div class="card-body">
             <form method="post">
                 <div class="form-group mb-3">
-                    <label asp-for="ProductToModify.Name" class="control-label">Name</label>
-                    <input asp-for="ProductToModify.Name" class="form-control">
-                    <span asp-validation-for="ProductToModify.Name" class="text-danger"></span>
+                    <label asp-for="@Model.ProductToModify.Name" class="control-label">Name</label>
+                    <input asp-for="@Model.ProductToModify.Name" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="ProductToModify.Price" class="control-label">Price</label>
-                    <input asp-for="ProductToModify.Price" class="form-control">
-                    <span asp-validation-for="ProductToModify.Price" class="text-danger"></span>
+                    <label asp-for="@Model.ProductToModify.Price" class="control-label">Price</label>
+                    <input asp-for="@Model.ProductToModify.Price" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Price" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="ProductToModify.Details" class="control-label">Details</label>
-                    <input asp-for="ProductToModify.Details" class="form-control">
-                    <span asp-validation-for="ProductToModify.Details" class="text-danger"></span>
+                    <label asp-for="@Model.ProductToModify.Details" class="control-label">Details</label>
+                    <input asp-for="@Model.ProductToModify.Details" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Details" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="ProductToModify.Amount" class="control-label">Amount</label>
-                    <input asp-for="ProductToModify.Amount" class="form-control">
-                    <span asp-validation-for="ProductToModify.Amount" class="text-danger"></span>
+                    <label asp-for="@Model.ProductToModify.Amount" class="control-label">Amount</label>
+                    <input asp-for="@Model.ProductToModify.Amount" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Amount" class="text-danger"></span>
                 </div>
 
-                <!--<label>Category</label>
-        <select class="form-control" name="category">
-            <option value="@Model.ProductToModify.Category"></option>
-                @foreach (string cat in Model.Categories)
-                {
-                    <option value="@cat">@cat</option>
-                }
-        </select>-->
+                <label>Category</label>
+                <select class="form-control" asp-for="@Model.ProductToModify.Category" >
+                    <option value="@Model.ProductToModify.Category"></option>
+                        @foreach (string cat in Model.Categories)
+                        {
+                            <option  value="@cat">@cat</option>
+                        }
+                </select>
                 <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <label>Picture</label>
+                <select class="form-control" asp-for="@Model.ProductToModify.Picture" >
+                    <option value="@Model.ProductToModify.Picture"></option>
+                        @foreach (string cat in Model.Pictures)
+                        {
+                            <option  value="@cat">@cat</option>
+                        }
+                </select>
+                <br>
+                <input type="hidden" asp-for="@Model.ProductToModify.Id"></input>
+                <button type="submit" class="btn btn-primary" >Submit</button>
             </form>
         </div>
     </div>

@@ -1,12 +1,13 @@
 [
-  "wwwroot\\img\\calze.jpg",
-  "wwwroot\\img\\canotta.jpg",
-  "wwwroot\\img\\cappello.jpg",
-  "wwwroot\\img\\ciabatte.jpg",
-  "wwwroot\\img\\costume.jpg",
-  "wwwroot\\img\\giacca.jpg",
-  "wwwroot\\img\\k-way.jpg",
-  "wwwroot\\img\\leggins.jpg",
-  "wwwroot\\img\\maglia.jpg",
-  "wwwroot\\img\\scarpe.jpg"
+  "calze.jpg",
+  "canotta.jpg",
+  "cappello.jpg",
+  "ciabatte.jpg",
+  "costume.jpg",
+  "giacca.jpg",
+  "k-way.jpg",
+  "leggins.jpg",
+  "maglia.jpg",
+  "Nuova immagine bitmap.jpg",
+  "scarpe.jpg"
 ]

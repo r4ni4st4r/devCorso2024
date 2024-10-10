@@ -3,18 +3,17 @@ using Newtonsoft.Json;
 
 namespace WebAppMvc.ViewModels
 {
-    public class DetailsViewModel
+    public class DeleteViewModel
     {
-        public Product Product{get;set;}
-        public DetailsViewModel(int id){
-            string json = System.IO.File.ReadAllText("wwwroot/json/products.json");
+        public Product ProductToDelete{get;set;}
+        public DeleteViewModel(int id){
+            string json = File.ReadAllText("wwwroot/json/products.json");
             List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json);
             foreach(Product prod in products){
                 if(prod.Id == id){
-                    Product = prod;
+                    ProductToDelete = prod;
                 }
             }
-            Console.WriteLine("picture string -> "+Product.Picture);
         }
     }
 }

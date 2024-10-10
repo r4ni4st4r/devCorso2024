@@ -15,7 +15,7 @@ namespace WebAppMvc.Models
     [Required(ErrorMessage ="not an email required field!")]
     [StringLength(50, MinimumLength =3, ErrorMessage ="Details must be between 3 and 50 chars!")]
     public string Details{get;set;}
-    public string Image{get;set;}
+    public string Picture{get;set;}
     [Required(ErrorMessage ="required field!")]
     [Range(0, 500, ErrorMessage ="Amount must be between 0 and 500!")]
     public int Amount{get;set;}
