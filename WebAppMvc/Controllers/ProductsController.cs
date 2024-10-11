@@ -2,54 +2,32 @@ using Microsoft.AspNetCore.Mvc;
 using WebAppMvc.Models;
 using WebAppMvc.ViewModels;
 using Newtonsoft.Json;
+using WebAppMvc.Services;
 
 
 namespace WebAppMvc.Controllers
 {
     public class ProductsController : Controller
     {
-        private const string PSW = "1234";
-        private const string JSONPATH = "wwwroot/json/products.json";
-        private const string CATEGORIESPATH = "wwwroot/json/categories.json";
-        private  string PICTURESPATH = "wwwroot/json/pictures.json";
-        //[BindProperty]
-        //public Product ProductToModify{get;set;}
-        //[BindProperty]
-        //public Product ProductToAdd{get;set;}
         private List<Product> _products;
+        private ProductsService _service;
         private readonly ILogger<ProductsController> _logger;
 
         public ProductsController(ILogger<ProductsController> logger)
         {
             _logger = logger;
             _products = new List<Product>();
-            WrirePicturesFromJson(PICTURESPATH);
+            _service = new ProductsService();
+            _service.WritePicturesFromJson();
         }
 
         [HttpGet]
-        public IActionResult Index(decimal? minPrice, decimal? maxPrice, int? pageIndex = 1)
+        public IActionResult Index(decimal? maxPrice, decimal? minPrice, int? pageIndex = 1)
         {
             var model = new IndexViewModel();
             model.MinPrice = minPrice;
             model.MaxPrice = maxPrice;
-            List<Product> filtredProducts = new List<Product>();
-            bool addToList;
-            if(model.AllProducts!=null){
-                foreach(Product prod in model.AllProducts){
-                    addToList = true;
-
-                    if(minPrice.HasValue && prod.Price < minPrice)
-                        addToList = false;
-                    
-                    if(maxPrice.HasValue && prod.Price > maxPrice)
-                        addToList = false;
-                    
-                    if(addToList)
-                        filtredProducts.Add(prod);
-                }
-            }
-            model.AllProducts = filtredProducts;
-
+            model.AllProducts = _service.FilterProducts(model.AllProducts, maxPrice, minPrice);
             model.AllProducts  = model.AllProducts.OrderBy(p => p.Name).ToList();
             model.PageNumber = (int)Math.Ceiling(model.AllProducts.Count / 6.0);
             model.AllProducts = model.AllProducts.Skip(((pageIndex ?? 1) - 1) * 6).Take(6).ToList();
@@ -68,21 +46,17 @@ namespace WebAppMvc.Controllers
         public IActionResult Modify(int id)
         {
             var model = new ModifyViewModel();
-            _products = ReadProductsFromJson(JSONPATH);
-            foreach(Product prod in _products){
-                if(prod.Id == id){
-                    model.ProductToModify = prod;
-                }
-            }
-            model.Categories = ReadCategoriesPicturesFromJson(CATEGORIESPATH);
-            model.Pictures = ReadCategoriesPicturesFromJson(PICTURESPATH);
+            _products = _service.ReadProductsFromJson();
+            model.ProductToModify = _service.AssignProduct(_products, id);
+            model.Categories = _service.ReadCategoriesFromJson();
+            model.Pictures = _service.ReadPicturesFromJson();
             return View(model);
         }
 
         [HttpPost, ActionName("Modify")]
         public IActionResult ModifyPost(ModifyViewModel model)
         {
-            _products = ReadProductsFromJson(JSONPATH);
+            _products = _service.ReadProductsFromJson();
             foreach(Product prod in _products){
             if(prod.Id == model.ProductToModify.Id){
                     prod.Name = model.ProductToModify.Name;
@@ -95,7 +69,7 @@ namespace WebAppMvc.Controllers
                 }
             }
             
-            WriteToJson(_products);
+            _service.WriteToJson(_products);
 
             return RedirectToAction("Index", "Products");
         }
@@ -110,14 +84,9 @@ namespace WebAppMvc.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int id)
         {
-            _products = ReadProductsFromJson(JSONPATH);
-            foreach(Product prod in _products){
-            if(prod.Id == id){
-                    _products.Remove(prod);
-                    break;
-                }
-            }
-            WriteToJson(_products);
+            _products = _service.ReadProductsFromJson();
+            _products = _service.RemoveProductFromList(_products, id);
+            _service.WriteToJson(_products);
             return RedirectToAction("Index", "Products");
         }
         
@@ -125,27 +94,23 @@ namespace WebAppMvc.Controllers
         public IActionResult Add()
         {
             AddViewModel model = new AddViewModel();
-            model.Categories = ReadCategoriesPicturesFromJson(CATEGORIESPATH);
-            model.Pictures = ReadCategoriesPicturesFromJson(PICTURESPATH);
+            model.Categories = _service.ReadCategoriesFromJson();
+            model.Pictures = _service.ReadPicturesFromJson();
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Add(AddViewModel model)
         {
-            if(model.Psw != PSW){
+
+            if(_service.CheckPassword(model.Psw)){
                 return RedirectToAction("Error", "Shared");
             }
-            _products = ReadProductsFromJson(JSONPATH);
-            int id = 0;
-            foreach(Product prod in _products){
-                if(id <= prod.Id)
-                    id = prod.Id + 1;
-            }
-            model.ProductToAdd.Id = id;
+            _products = _service.ReadProductsFromJson();
+            model.ProductToAdd.Id = _service.CalculateId(_products);
             model.ProductToAdd.Picture = "/img/" + model.ProductToAdd.Picture;
             _products.Add(model.ProductToAdd);
-            WriteToJson(_products);
+            _service.WriteToJson(_products);
             
             return RedirectToAction("Index", "Products");
         }
@@ -155,24 +120,6 @@ namespace WebAppMvc.Controllers
         {
             return View();
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private List<Product> ReadProductsFromJson(string path){
-            string json = System.IO.File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<List<Product>>(json);
-        }
-        private void WriteToJson(List<Product> listToWrite){
-            System.IO.File.WriteAllText("wwwroot/json/products.json",JsonConvert.SerializeObject(listToWrite, Formatting.Indented));
-        }
-        private List<string> ReadCategoriesPicturesFromJson(string path){
-            string json = System.IO.File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<List<string>>(json);
-        }
-        private void WrirePicturesFromJson(string path){
-            List<string?> imgFiles = Directory.GetFiles("wwwroot/img/")
-                                  .Select(Path.GetFileName) // Estrae solo il nome del file
-                                  .ToList();
-            System.IO.File.WriteAllText("wwwroot/json/pictures.json",JsonConvert.SerializeObject(imgFiles, Formatting.Indented));
         }
     }
 }

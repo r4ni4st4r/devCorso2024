@@ -20,9 +20,9 @@
   {
     "Id": 7,
     "Name": "ciabatte",
-    "Price": 400.0,
+    "Price": 400.00,
     "Details": "più easy delle scarpe",
-    "Picture": null,
+    "Picture": "/img/",
     "Amount": 0,
     "Category": "Clothes"
   },
@@ -82,10 +82,10 @@
   },
   {
     "Id": 14,
-    "Name": "calze",
+    "Name": "calze modificate",
     "Price": 175.00,
     "Details": "si mette nei piedi",
-    "Picture": "/img/calze.jpg",
+    "Picture": "/img/giacca.jpg",
     "Amount": 5,
     "Category": "Shoes"
   },
@@ -155,9 +155,9 @@
   {
     "Id": 25,
     "Name": "calze da doccia",
-    "Price": 55.0,
+    "Price": 55.00,
     "Details": "per fare la doccia con le calze",
-    "Picture": "/img/calze.jpg",
+    "Picture": "/img/Swimweare",
     "Amount": 5,
     "Category": "Clothes"
   },
