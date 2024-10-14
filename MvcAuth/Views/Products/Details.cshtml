@@ -1,0 +1,33 @@
+@model MvcAuth.ViewModels.DetailsViewModel
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div >
+    <h1>@Model.Product.Name</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Detail</th>
+                <th>Image</th>
+                <th>In Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <th>@Model.Product.Category</th>
+                    <th>@Model.Product.Price €</th>
+                    <th>@Model.Product.Details</th>
+                    <th>
+                        <img src="@Url.Content(Model.Product.Picture)"  alt="">   
+                    </th>
+                    <th>@Model.Product.Amount</th>
+                </tr>
+            
+        </tbody>
+    </table>
+    <a asp-controller="Products" asp-action="Index">Back to products</a> 
+</div>

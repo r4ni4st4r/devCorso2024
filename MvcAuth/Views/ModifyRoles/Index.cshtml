@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Modify Roles";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-5">
+    <div class="card bg-light shadow-lg border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5>@ViewData["Title"]</h5>
+    </div>
+    <div class="form-group mb-3">
+        <li>
+            <a asp-area="" asp-controller="ModifyRoles" asp-action="AddToRoleAdmin">Add To Admin Role</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="ModifyRoles" asp-action="AddToRoleUser">Add To User Role</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="ModifyRoles" asp-action="RemoveFromRoleAdmin">Remove From User Role</a>
+        </li>
+        <li>
+            <a asp-controller="ModifyRoles" asp-action="RemoveFromRoleUser">Remove From Admin Role</a>
+        </li>
+    </div>
+</div>

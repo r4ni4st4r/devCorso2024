@@ -1,0 +1,69 @@
+@model MvcAuth.ViewModels.IndexViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div >
+    <form method="get" action="@Url.Action("Index", "Products")">
+        <label for="minPrice">Minimum Price</label>
+        <input type="text" class="form-control" name="minPrice" value="@Model.MinPrice" placeholder="Insert Min Price"> 
+        <label for="maxPrice">Maximum Price</label>
+        <input type="text" class="form-control" name="maxPrice" value="@Model.MaxPrice"  placeholder="Insert Max Price">
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+    
+    @if(Model.AllProducts.Count != 0){
+        <div class="row">
+        @foreach(var prod in Model.AllProducts){
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card mb-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@prod.Name</h5>
+                        @switch(prod.Price){
+                            case decimal n when n < 200:
+                                <h6 class="card-subtitle mb-2 text-warning">@prod.Price €</h6>
+                                break;
+                            case decimal n when n > 200 && n < 299:
+                                <h6 class="card-subtitle mb-2 text-secondary">@prod.Price €</h6>
+                                break;
+                            case decimal n when n >= 300:
+                                <h6 class="card-subtitle mb-2 text-danger">@prod.Price €</h6>
+                                break;
+                            default:
+                                <h6 class="card-subtitle mb-2 text-primary">@prod.Price €</h6>
+                                break;
+                        }
+                        <p class="card-text">@prod.Category</p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@prod.Id">Details</a> 
+                            <a asp-controller="Products" asp-action="Modify" asp-route-id="@prod.Id">Modify</a>
+                            <a asp-controller="Products" asp-action="Delete" asp-route-id="@prod.Id">Delete</a>
+                        }else if(User.IsInRole("User")){
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@prod.Id">Details</a> 
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+        <form method="get" action="@Url.Action("Index", "Products")">
+            <input type="hidden" name="minPrice" value="@Model.MinPrice">
+            <input type="hidden" name="maxPrice" value="@Model.MaxPrice">
+            @for(int i = 1; i <= Model.PageNumber; i++){
+                <button type="submit" class="btn btn-dark" name="pageIndex" value="@i">@i</button>
+            }
+        </form>
+    }else{
+        <div class="row">
+            <h1>There are no products!</h1>
+        </div>
+    }
+    <a asp-controller="Home" asp-action="Index">Back To Home</a>
+</div>

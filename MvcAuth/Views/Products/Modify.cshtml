@@ -1,0 +1,59 @@
+@model MvcAuth.ViewModels.ModifyViewModel
+@{
+    ViewData["Title"] = "ModifyProduct";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-5">
+    <div class="card bg-light shadow-lg border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5>@ViewData["Title"]</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.ProductToModify.Name" class="control-label">Name</label>
+                    <input asp-for="@Model.ProductToModify.Name" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.ProductToModify.Price" class="control-label">Price</label>
+                    <input asp-for="@Model.ProductToModify.Price" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.ProductToModify.Details" class="control-label">Details</label>
+                    <input asp-for="@Model.ProductToModify.Details" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Details" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.ProductToModify.Amount" class="control-label">Amount</label>
+                    <input asp-for="@Model.ProductToModify.Amount" class="form-control">
+                    <span asp-validation-for="@Model.ProductToModify.Amount" class="text-danger"></span>
+                </div>
+
+                <label>Category</label>
+                <select class="form-control" asp-for="@Model.ProductToModify.Category" >
+                    <option value="@Model.ProductToModify.Category"></option>
+                        @foreach (string cat in Model.Categories)
+                        {
+                            <option  value="@cat">@cat</option>
+                        }
+                </select>
+                <br>
+                <label>Picture</label>
+                <select class="form-control" asp-for="@Model.ProductToModify.Picture" >
+                    <option value="@Model.ProductToModify.Picture"></option>
+                        @foreach (string cat in Model.Pictures)
+                        {
+                            <option  value="@cat">@cat</option>
+                        }
+                </select>
+                <br>
+                <input type="hidden" asp-for="@Model.ProductToModify.Id"></input>
+                <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
