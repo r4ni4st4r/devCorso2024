@@ -7,7 +7,6 @@ class Program{
         Server server = new Server();
         server.StartServer(3000);      
     }
-
     class Server{
         private TcpListener _tcpListener;
         public void StartServer(int port){
@@ -27,12 +26,12 @@ class Program{
             NetworkStream stream = client.GetStream();
             int byteCount;
 
-            while((byteCount = stream.Read(buffer, 0, buffer.Length))!=0){
+            while((byteCount = stream.Read(buffer, 0, buffer.Length)) != 0){
                 string message = Encoding.ASCII.GetString(buffer, 0, byteCount);
                 Console.WriteLine("Recived: " + message);
                 Broadcast(message);
             }
-            
+
             client.Close();
         }
         private void Broadcast(string message){

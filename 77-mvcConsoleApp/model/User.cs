@@ -1,7 +1,7 @@
 using System.ComponentModel.Design;
 
 class User{
-    private string _name = "";
+    private string _name;
     private int _id;
     private bool _status;
 

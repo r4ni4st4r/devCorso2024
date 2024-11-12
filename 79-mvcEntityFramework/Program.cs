@@ -33,7 +33,6 @@ class Database : DbContext{
     public DbSet<Transaction> Transactions{get;set;}
     protected override void OnConfiguring(DbContextOptionsBuilder options){
         options.UseSqlite("Data Source = database.db");
-        //options.UseLazyLoadingProxies();
     }
 }
 class View{
