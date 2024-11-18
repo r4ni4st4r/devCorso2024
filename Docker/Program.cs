@@ -8,7 +8,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        string filePath = Path.Combine(Directory.GetCurrentDirectory(),"attempts.json");
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "attempts.json");
         Random rnd = new Random();
         //Random rnd = new Random(Guid.NewGuid().GetHashCode());
         int num = rnd.Next(1, 101);
@@ -24,7 +24,8 @@ class Program
                 if(string.IsNullOrWhiteSpace(attemptString)){
                     attempts = JsonConvert.DeserializeObject<int>(attemptString);
                 }           
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine($"Reading file error: {ex.Message}");
             }
