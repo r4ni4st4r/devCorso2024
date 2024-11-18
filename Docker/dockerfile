@@ -1,0 +1,19 @@
+# Utilizza l'immagine base di .NET 8 SDK per il build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Copia i file del progetto e ripristina le dipendenze
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copia il resto dei file e costruisci l'applicazione
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Utilizza l'immagine runtime di .NET 8
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app/out ./
+
+# Imposta il comando di avvio dell'applicazione
+ENTRYPOINT ["dotnet", "docker.dll"]
